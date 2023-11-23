@@ -68,6 +68,23 @@ public class Utilidades {
         return numero;
     }
 
+    /**
+     * TODO: TODO: Solicita una letra repetidamente hasta que se introduzca uno correcto (dentro de los límites)
+     * @param teclado
+     * @param mensaje
+     * @param minimo el valor mínimo que se tiene que encontrar la letra
+     * @param maximo el valor máximo que se tiene que encontrar la letra
+     * @return char letra
+     */
+    public static char leerLetra(Scanner teclado, String mensaje, char minimo, char maximo) {
+        char letra;
+        do{
+            System.out.println(mensaje);
+            letra=teclado.next().charAt(0);
+        }while (!(letra<=maximo && letra>=minimo));
+        return letra;
+    }
+
 
 }
 
