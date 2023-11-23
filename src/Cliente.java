@@ -1,3 +1,5 @@
+package src;
+
 import java.util.Scanner;
 
 /**
@@ -77,7 +79,7 @@ public class Cliente {
      * @param teclado
      * @param clientes
      * @param maxEnvios
-     * @return Cliente
+     * @return src.Cliente
      */
     public static Cliente altaCliente(Scanner teclado, ListaClientes clientes, int maxEnvios) {
 
