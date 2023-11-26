@@ -18,20 +18,33 @@ public class ListaPuertosEspaciales {
      * @param capacidad
      */
     public ListaPuertosEspaciales(int capacidad) {
-
-
+    lista = new PuertoEspacial[capacidad];
     }
     // TODO: Devuelve el número de puertos espaciales que hay en la lista
     public int getOcupacion() {
-
+        int ocupacion = 0;
+    for (int i = 0; i < lista.length; i++){
+        if (lista[i] != null){
+            ocupacion++;
+        }
+    }
+    return ocupacion;
     }
     // TODO: ¿Está llena la lista?
     public boolean estaLlena() {
-
+        boolean llena = true;
+        int i = 0;
+        while (llena && (i < lista.length)) {
+            if (lista[i] == null) {
+                llena = false;
+            }
+            i++;
+        }
+        return llena;
     }
     // TODO: Devuelve un puerto espacial dado un indice
     public PuertoEspacial getPuertoEspacial(int i) {
-        return null;
+        return lista[i];
     }
 
     /**
@@ -50,8 +63,11 @@ public class ListaPuertosEspaciales {
      * @return Puerto espacial que encontramos o null si no existe
      */
     public PuertoEspacial buscarPuertoEspacial(String codigo) {
-
-        return null;
+    int i = 0;
+        while (!lista[i].getCodigo().equalsIgnoreCase(codigo)){
+            i++;
+        }
+        return lista[i];
     }
 
     /**
