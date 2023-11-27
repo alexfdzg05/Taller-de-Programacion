@@ -18,17 +18,29 @@ public class ListaPortes {
      * @param capacidad
      */
     public ListaPortes(int capacidad) {
-
-
-
+        portes = new Porte[capacidad];
     }
     // TODO: Devuelve el número de portes que hay en la lista
     public int getOcupacion() {
-
+        int ocupacion = 0;
+        for (int i = 0; i< portes.length; i++){
+            if (portes[i]!= null){
+                ocupacion++;
+            }
+        }
+        return ocupacion;
     }
     // TODO: ¿Está llena la lista?
     public boolean estaLlena() {
-
+        boolean llena = true;
+        int i = 0;
+        while (llena && (i < portes.length)) {
+            if (portes[i] == null) {
+                llena = false;
+            }
+            i++;
+        }
+        return llena;
     }
 
     //TODO: devuelve un porte dado un indice

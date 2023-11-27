@@ -20,21 +20,33 @@ public class ListaClientes {
      * @param capacidad
      */
     public ListaClientes(int capacidad) {
-
-
-
+    clientes = new Cliente[capacidad];
     }
     // TODO: Devuelve el número de clientes que hay en la lista de clientes
     public int getOcupacion() {
-
+        int ocupacion = 0;
+    for (int i = 0; i< clientes.length; i++){
+        if (clientes[i]!= null){
+            ocupacion++;
+        }
+    }
+    return ocupacion;
     }
     // TODO: ¿Está llena la lista de clientes?
     public boolean estaLlena() {
-
+        boolean llena = true;
+        int i = 0;
+        while (llena && (i < clientes.length)) {
+            if (clientes[i] == null) {
+                llena = false;
+            }
+            i++;
+        }
+        return llena;
     }
     // TODO: Devuelve el cliente dada el indice
     public Cliente getCliente(int i) {
-        return null;
+        return clientes[i];
     }
     // TODO: Inserta el cliente en la lista de clientes
     public boolean insertarCliente(Cliente cliente) {

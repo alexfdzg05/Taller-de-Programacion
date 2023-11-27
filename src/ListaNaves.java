@@ -18,21 +18,33 @@ public class ListaNaves {
      * @param capacidad
      */
     public ListaNaves(int capacidad) {
-
-
-
+    naves = new Nave[capacidad];
     }
     // TODO: Devuelve el número de naves que hay en la lista
     public int getOcupacion() {
-
+        int ocupacion = 0;
+        for (int i = 0; i< naves.length; i++){
+            if (naves[i]!= null){
+                ocupacion++;
+            }
+        }
+        return ocupacion;
     }
     // TODO: ¿Está llena la lista de naves?
     public boolean estaLlena() {
-
+        boolean llena = true;
+        int i = 0;
+        while (llena && (i < naves.length)) {
+            if (naves[i] == null) {
+                llena = false;
+            }
+            i++;
+        }
+        return llena;
     }
     // TODO: Devuelve nave dado un indice
     public Nave getNave(int posicion) {
-        return null;
+        return naves[posicion];
     }
 
     /**
