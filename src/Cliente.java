@@ -7,6 +7,9 @@ import java.util.Scanner;
  * Description of the class
  *
  * @author Taller de Programación
+ * @author Paula Cabrero Carrillo
+ * @author Alejandro Fernández Guerrero
+ *
  * @version     1.0
  */
 public class Cliente {
@@ -40,10 +43,12 @@ public class Cliente {
     public String getEmail() {
         return email;
     }
+
     // TODO: Texto que debe generar: Zapp Brannigan, zapp.brannigan@dop.gov
     public String toString() {
         return nombre + " " + apellidos + ", " + email;
     }
+
     // TODO: Devuelve un booleano que indica si se ha alcanzado el número máximo de envíos
     public boolean maxEnviosAlcanzado() {
         boolean maxAlcanzado = false;
@@ -52,6 +57,7 @@ public class Cliente {
         }
         return maxAlcanzado;
     }
+
     // TODO: Devuelve un envío en función de su posición
     public Envio getEnvio(int i) {
         return listaEnvios.getEnvio(i);
@@ -70,6 +76,7 @@ public class Cliente {
         }
         return aniadido;
     }
+
     public Envio buscarEnvio(String localizador) {
         return listaEnvios.buscarEnvio(localizador);
     }
@@ -148,6 +155,7 @@ public class Cliente {
         return correcto;
     }
 
+    //MÉTODOS AÑADIDOS
     private static boolean comprobacionLetrasValidas(String parte){
         int primeraLetra = 'a', ultimaLetra = 'z', punto = '.';
         char caracter = ' ';
