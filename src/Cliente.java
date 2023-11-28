@@ -49,11 +49,7 @@ public class Cliente {
 
     // TODO: Devuelve un booleano que indica si se ha alcanzado el número máximo de envíos
     public boolean maxEnviosAlcanzado() {
-        boolean maxAlcanzado = false;
-        if(listaEnvios.getOcupacion() == maxEnvios){
-            maxAlcanzado = true;
-        }
-        return maxAlcanzado;
+        return listaEnvios.estaLlena();
     }
 
     // TODO: Devuelve un envío en función de su posición
