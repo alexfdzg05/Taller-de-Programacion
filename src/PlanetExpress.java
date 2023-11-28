@@ -6,7 +6,7 @@ import java.util.Scanner;
 /**
  * Clase principal de Planet Express App, la práctica de Taller de Programación
  *
- * @author      Taller de Progamación
+ * @author      Taller de Programación
  * @version     1.0
  */
 public class PlanetExpress {
@@ -19,6 +19,7 @@ public class PlanetExpress {
     private ListaNaves listaNaves;
     private ListaClientes listaClientes;
     private ListaPortes listaPortes;
+    //HERE Falta envíos
 
 
     /**
@@ -31,11 +32,17 @@ public class PlanetExpress {
      * @param maxEnviosPorCliente Máximo número de envíos por cliente.
      */
     public PlanetExpress(int maxPuertosEspaciales, int maxNaves, int maxPortes, int maxClientes, int maxEnviosPorCliente) {
-
-
-
-
-
+        this.maxPuertosEspaciales = maxPuertosEspaciales;
+        this.maxNaves = maxNaves;
+        this.maxPortes = maxPortes;
+        this.maxClientes = maxClientes;
+        this.maxEnviosPorCliente = maxEnviosPorCliente;
+        //Planet Express
+        this.listaPuertosEspaciales = new ListaPuertosEspaciales(maxPuertosEspaciales);
+        this.listaNaves = new ListaNaves(maxNaves);
+        this.listaClientes = new ListaClientes(maxClientes);
+        this.listaPortes = new ListaPortes(maxPortes);
+        // HERE Falta envíos
     }
 
 
@@ -49,9 +56,19 @@ public class PlanetExpress {
      * @param ficheroEnvios
      */
     public void cargarDatos(String ficheroPuertos, String ficheroNaves, String ficheroPortes, String ficheroClientes, String ficheroEnvios) {
-
-
-
+        listaPuertosEspaciales = ListaPuertosEspaciales.leerPuertosEspacialesCsv(ficheroPuertos, maxPuertosEspaciales);
+        listaNaves = ListaNaves.leerNavesCsv(ficheroNaves, maxNaves);
+        listaPortes = ListaPortes.leerPortesCsv(ficheroPortes, maxPortes,listaPuertosEspaciales,listaNaves);
+        listaClientes = ListaClientes.leerClientesCsv(ficheroClientes,maxClientes, maxEnviosPorCliente);
+        for (int i = 0; i < listaClientes.getOcupacion(); i++){
+            Cliente cliente = listaClientes.getCliente(i);
+            if (cliente != null){
+                for(int j = 0; j < cliente.; j++){ //here
+                    listaEnvios.insertarEnvio(cliente.getEnvio(j));
+                }
+            }
+        }
+        listaEnvios = ListaEnvios.leerEnviosCsv(ficheroEnvios, listaPortes, listaClientes); //HERE Falta envíos
     }
 
 
@@ -123,7 +140,14 @@ public class PlanetExpress {
      * @return opción seleccionada
      */
     public static int menu(Scanner teclado) {
+        int opcion;
+        System.out.println("1. Alta de Porte\n2. Alta de Cliente\n3.Buscar Porte\n4. Mostrar envíos de un cliente\n5. Generar lista de envíos\n0. Salir");
+        opcion = Utilidades.leerNumero(teclado, "Seleccione opción:", 0, 5);
+        return opcion;
+    }
 
+    private void mensajeBienvenida(){
+        System.out.println("Bienvenido a Planet Express");
     }
 
     /**
@@ -149,6 +173,9 @@ public class PlanetExpress {
             System.out.println("Número de argumentos incorrecto");
             return;
         }
+        PlanetExpress planetExpress = new PlanetExpress(Integer.parseInt(args[0]), Integer.parseInt(args[1]), Integer.parseInt(args[2]),
+                Integer.parseInt(args[3]),Integer.parseInt(args[4]));
+        planetExpress.cargarDatos(args[5], args[6], args[7], args[8], args[9]);
 
 
         do {
