@@ -18,21 +18,33 @@ public class ListaNaves {
      * @param capacidad
      */
     public ListaNaves(int capacidad) {
-
-
-
+    naves = new Nave[capacidad];
     }
     // TODO: Devuelve el número de naves que hay en la lista
     public int getOcupacion() {
-
+        int ocupacion = 0;
+        for (int i = 0; i< naves.length; i++){
+            if (naves[i]!= null){
+                ocupacion++;
+            }
+        }
+        return ocupacion;
     }
     // TODO: ¿Está llena la lista de naves?
     public boolean estaLlena() {
-
+        boolean llena = true;
+        int i = 0;
+        while (llena && (i < naves.length)) {
+            if (naves[i] == null) {
+                llena = false;
+            }
+            i++;
+        }
+        return llena;
     }
     // TODO: Devuelve nave dado un indice
     public Nave getNave(int posicion) {
-        return null;
+        return naves[posicion];
     }
 
     /**
@@ -41,9 +53,15 @@ public class ListaNaves {
      * @return true en caso de que se añada correctamente, false en caso de lista llena o error
      */
     public boolean insertarNave(Nave nave) {
-
-
-        return false;
+        boolean esPosible = false;
+        int i = 0;
+        if (!estaLlena()){
+            while (i<naves.length && naves[i]!=null){
+                i++;
+            }
+            naves[i] = nave;
+        }
+        return esPosible;
     }
     /**
      * TODO: Buscamos la nave a partir de la matricula pasada como parámetro
@@ -51,12 +69,24 @@ public class ListaNaves {
      * @return la nave que encontramos o null si no existe
      */
     public Nave buscarNave(String matricula) {
-
-        return null;
+        int i = 0;
+        while (!naves[i].getMatricula().equalsIgnoreCase(matricula)&&i< naves.length){
+            i++;
+        }
+        if (naves[i].getMatricula().equalsIgnoreCase(matricula)){
+            return naves[i];
+        } else {
+            return null;
+        }
     }
     // TODO: Muestra por pantalla las naves de la lista con el formato indicado en el enunciado
     public void mostrarNaves() {
-
+        int i = 0;
+    while (naves[i]!=null && i < naves.length){
+        System.out.print(naves[i].getMarca()+";"+naves[i].getModelo()+";"+naves[i].getMatricula()
+        +";"+naves[i].getFilas()+";"+naves[i].getColumnas());
+        i++;
+    }
     }
 
 

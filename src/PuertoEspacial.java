@@ -1,5 +1,7 @@
 package src;
 
+import static java.lang.Math.*;
+
 /**
  * Description of the class
  *
@@ -62,10 +64,16 @@ public class PuertoEspacial {
      */
     public double distancia(PuertoEspacial destino) {
         // TODO: Para calcular la distancia entre dos Puertos Espaciales, se transforman sus coordenadas esféricas a cartesianas
-
-
+        double distancia = 0;
+        double x1 = getRadio() * sin(getAzimut()) * cos(getPolar());
+        double y1 = getRadio() * sin(getAzimut()) * sin(getPolar());
+        double z1 = getRadio() * cos(getAzimut());
+        double x2 = destino.getRadio() * sin(destino.getAzimut()) * cos(destino.getPolar());
+        double y2 = destino.getRadio() * sin(destino.getAzimut()) * sin(destino.getPolar());
+        double z2 = destino.getRadio() * cos(destino.getAzimut());
+        distancia = Math.sqrt(Math.pow(x2-x1,2)+Math.pow(y2-y1,2)+Math.pow(z2-z1,2));
         // TODO: Una vez se tienen las coordenadas cartesianas, basta con calcular la distancia euclídea entre ellas:
-        return ;
+        return distancia;
     }
 
     /**
@@ -73,7 +81,7 @@ public class PuertoEspacial {
      * @return ejemplo -> "Gaia Galactic Terminal(GGT), en (1.0 90.0 0.0), con 8 muelles" (Radio, Azimut, Polar)
      */
     public String toString() {
-        return " ";
+        return nombre+" ("+codigo+"), en ("+radio+" "+azimut+" "+polar+"), con "+numMuelles+" muelles (Radio, Azimut, Polar)";
     }
 
     /**
@@ -81,7 +89,7 @@ public class PuertoEspacial {
      * @return ejemplo -> "Gaia Galactic Terminal (GGT)"
      */
     public String toStringSimple() {
-        return " ";
+        return nombre+" ("+codigo+")";
     }
 }
 

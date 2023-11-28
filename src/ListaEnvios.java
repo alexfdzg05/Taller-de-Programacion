@@ -20,20 +20,33 @@ public class ListaEnvios {
      * @param capacidad
      */
     public ListaEnvios(int capacidad) {
-
-
+        envios = new Envio[capacidad];
     }
     // TODO: Devuelve el número de envíos que hay en la lista
     public int getOcupacion() {
-
+        int ocupacion = 0;
+        for (int i = 0; i < envios.length; i++){
+            if (envios[i] != null){
+                ocupacion++;
+            }
+        }
+        return ocupacion;
     }
     // TODO: ¿Está llena la lista de envíos?
     public boolean estaLlena() {
-
+        boolean llena = true;
+        int i = 0;
+    while (llena && (i< envios.length)){
+        if (envios[i]==null){
+            llena = false;
+        }
+        i++;
+    }
+    return llena;
     }
     //TODO: Devuelve el envio dado un indice
     public Envio getEnvio(int i) {
-        return null;
+        return envios[i];
     }
 
     /**
@@ -42,8 +55,15 @@ public class ListaEnvios {
      * @return true en caso de que se añada correctamente, false en caso de lista llena o error
      */
     public boolean insertarEnvio(Envio envio) {
-
-        return false;
+        boolean esPosible = false;
+        int i = 0;
+        if (!estaLlena()){
+            while (i<envios.length && envios[i]!=null){
+                i++;
+            }
+            envios[i] = envio;
+        }
+        return esPosible;
     }
 
     /**
@@ -52,9 +72,15 @@ public class ListaEnvios {
      * @return el envio que encontramos o null si no existe
      */
     public Envio buscarEnvio(String localizador) {
-
-
-        return null;
+    int i = 0;
+        while ((!envios[i].getLocalizador().equalsIgnoreCase(localizador))&&i< envios.length){
+            i++;
+        }
+        if (envios[i].getLocalizador().equalsIgnoreCase(localizador)){
+            return envios[i];
+        } else {
+            return null;
+        }
     }
 
     /**

@@ -18,20 +18,34 @@ public class ListaPuertosEspaciales {
      * @param capacidad
      */
     public ListaPuertosEspaciales(int capacidad) {
-
-
+    lista = new PuertoEspacial[capacidad];
     }
     // TODO: Devuelve el número de puertos espaciales que hay en la lista
     public int getOcupacion() {
-
+        int ocupacion = 0;
+    for (int i = 0; i < lista.length; i++){
+        if (lista[i] != null){
+            ocupacion++;
+        }
+    }
+    return ocupacion;
     }
     // TODO: ¿Está llena la lista?
     public boolean estaLlena() {
-
+        boolean llena = true;
+        int i = 0;
+        while (llena && (i < lista.length)) {
+            if (lista[i] == null) {
+                llena = false;
+            } else {
+                i++;
+            }
+        }
+        return llena;
     }
     // TODO: Devuelve un puerto espacial dado un indice
     public PuertoEspacial getPuertoEspacial(int i) {
-        return null;
+        return lista[i];
     }
 
     /**
@@ -40,8 +54,15 @@ public class ListaPuertosEspaciales {
      * @return true en caso de que se añada correctamente, false en caso de lista llena o error
      */
     public boolean insertarPuertoEspacial(PuertoEspacial puertoEspacial) {
-
-        return false;
+    boolean esPosible = false;
+    int i = 0;
+    if (!estaLlena()){
+        while (i<lista.length && lista[i]!=null){
+            i++;
+        }
+        lista[i] = puertoEspacial;
+    }
+        return esPosible;
     }
 
     /**
@@ -50,8 +71,16 @@ public class ListaPuertosEspaciales {
      * @return Puerto espacial que encontramos o null si no existe
      */
     public PuertoEspacial buscarPuertoEspacial(String codigo) {
+    int i = 0;
+        while (!lista[i].getCodigo().equalsIgnoreCase(codigo)&& i< lista.length){
+            i++;
+        }
+        if (lista[i].getCodigo().equalsIgnoreCase(codigo)){
+            return lista[i];
+        } else {
+            return null;
+        }
 
-        return null;
     }
 
     /**

@@ -18,17 +18,29 @@ public class ListaPortes {
      * @param capacidad
      */
     public ListaPortes(int capacidad) {
-
-
-
+        portes = new Porte[capacidad];
     }
     // TODO: Devuelve el número de portes que hay en la lista
     public int getOcupacion() {
-
+        int ocupacion = 0;
+        for (int i = 0; i< portes.length; i++){
+            if (portes[i]!= null){
+                ocupacion++;
+            }
+        }
+        return ocupacion;
     }
     // TODO: ¿Está llena la lista?
     public boolean estaLlena() {
-
+        boolean llena = true;
+        int i = 0;
+        while (llena && (i < portes.length)) {
+            if (portes[i] == null) {
+                llena = false;
+            }
+            i++;
+        }
+        return llena;
     }
 
     //TODO: devuelve un porte dado un indice
@@ -43,8 +55,15 @@ public class ListaPortes {
      * @return false en caso de estar llena la lista o de error
      */
     public boolean insertarPorte(Porte porte) {
-
-        return false;
+        boolean esPosible = false;
+        int i = 0;
+        if (!estaLlena()){
+            while (i<portes.length && portes[i]!=null){
+                i++;
+            }
+            portes[i] = porte;
+        }
+        return esPosible;
     }
 
 
@@ -54,8 +73,15 @@ public class ListaPortes {
      * @return el objeto Porte que encontramos o null si no existe
      */
     public Porte buscarPorte(String id) {
-
-        return null;
+        int i = 0;
+        while (!portes[i].getID().equalsIgnoreCase(id)&&i< portes.length){
+            i++;
+        }
+        if (portes[i].getID().equalsIgnoreCase(id)){
+            return portes[i];
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -76,7 +102,14 @@ public class ListaPortes {
      * TODO: Muestra por pantalla los Portes siguiendo el formato de los ejemplos del enunciado
      */
     public void listarPortes() {
-
+//Le faltan cosas, además de asegurarse que este es el formato.
+        int i = 0;
+        while (portes[i]!=null && i < portes.length){
+            System.out.print(portes[i].getNave().getMarca()+";"+portes[i].getNave().getModelo()+";"+portes[i].getNave().getMatricula()
+                    +";"+portes[i].getMuelleOrigen()+";"+portes[i].getSalida()+";"+portes[i].getDestino()+";"+portes[i].getLlegada()+
+                    ";"+portes[i].getSalida());
+            i++;
+        }
     }
 
 
