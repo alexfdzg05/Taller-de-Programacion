@@ -103,7 +103,61 @@ public class Cliente {
      * @return
      */
     public static boolean correctoEmail(String email) {
-        return false;
+        String[] partes = email.split("@");
+        String parteNombre = partes[0];
+        String parteEmail = partes[1];
+        boolean correcto = true;
+
+        //Comprobación de que el correo upm no tiene mayúsculas, y solo tiene valores de a-z o "."
+        boolean letraValidas = comprobacionLetrasValidas(parteNombre) && comprobacionLetrasValidas(parteEmail);
+
+        //Comprobación no empiece ni termine por .
+        boolean terminacionValida = comprobacionComienzoTerminacion(parteNombre);
+
+        //Comprobación de que termine en alumnos.upm.es o upm.es
+        boolean extensionValida = comprobacionExtension(parteEmail);
+
+        //Comprueba las verificaciones como conjunto
+        if(!letraValidas || !terminacionValida || !extensionValida){
+            correcto = false;
+        }
+        return correcto;
     }
 
+    //MÉTODOS AÑADIDOS
+    private static boolean comprobacionLetrasValidas(String parte){
+        int primeraLetra = 'a', ultimaLetra = 'z', punto = '.';
+        char caracter = ' ';
+        int i = 0;
+        boolean correcto = true;
+        if (parte == null || parte.isEmpty()){
+            correcto = false;
+        } else {
+            do {
+                caracter = parte.charAt(i);
+                if(!(caracter >= primeraLetra && caracter <= ultimaLetra) && caracter != punto){
+                    correcto = false;
+                }
+                i++;
+            } while(correcto == true && i < parte.length());
+        }
+        return correcto;
+    }
+
+    private static boolean comprobacionComienzoTerminacion(String parte){
+        boolean correcto = true;
+        if(parte.endsWith(".") || parte.startsWith(".")){
+            correcto = false;
+        }
+        return correcto;
+    }
+
+    private static boolean comprobacionExtension(String parte){
+        String alumnos = "alumnos.upm.es", upm = "upm.es";
+        boolean correcto = true;
+        if(!(parte.equals(alumnos) || parte.equals(upm))){
+            correcto = false;
+        }
+        return correcto;
+    }
 }
