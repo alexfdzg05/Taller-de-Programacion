@@ -37,8 +37,9 @@ public class ListaPuertosEspaciales {
         while (llena && (i < lista.length)) {
             if (lista[i] == null) {
                 llena = false;
+            } else {
+                i++;
             }
-            i++;
         }
         return llena;
     }
@@ -53,8 +54,15 @@ public class ListaPuertosEspaciales {
      * @return true en caso de que se añada correctamente, false en caso de lista llena o error
      */
     public boolean insertarPuertoEspacial(PuertoEspacial puertoEspacial) {
-
-        return false;
+    boolean esPosible = false;
+    int i = 0;
+    if (!estaLlena()){
+        while (i<lista.length && lista[i]!=null){
+            i++;
+        }
+        lista[i] = puertoEspacial;
+    }
+        return esPosible;
     }
 
     /**
@@ -64,10 +72,15 @@ public class ListaPuertosEspaciales {
      */
     public PuertoEspacial buscarPuertoEspacial(String codigo) {
     int i = 0;
-        while (!lista[i].getCodigo().equalsIgnoreCase(codigo)){
+        while (!lista[i].getCodigo().equalsIgnoreCase(codigo)&& i< lista.length){
             i++;
         }
-        return lista[i];
+        if (lista[i].getCodigo().equalsIgnoreCase(codigo)){
+            return lista[i];
+        } else {
+            return null;
+        }
+
     }
 
     /**

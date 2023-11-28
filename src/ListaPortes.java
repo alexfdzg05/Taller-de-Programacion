@@ -55,8 +55,15 @@ public class ListaPortes {
      * @return false en caso de estar llena la lista o de error
      */
     public boolean insertarPorte(Porte porte) {
-
-        return false;
+        boolean esPosible = false;
+        int i = 0;
+        if (!estaLlena()){
+            while (i<portes.length && portes[i]!=null){
+                i++;
+            }
+            portes[i] = porte;
+        }
+        return esPosible;
     }
 
 
@@ -66,8 +73,15 @@ public class ListaPortes {
      * @return el objeto Porte que encontramos o null si no existe
      */
     public Porte buscarPorte(String id) {
-
-        return null;
+        int i = 0;
+        while (!portes[i].getID().equalsIgnoreCase(id)&&i< portes.length){
+            i++;
+        }
+        if (portes[i].getID().equalsIgnoreCase(id)){
+            return portes[i];
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -88,7 +102,14 @@ public class ListaPortes {
      * TODO: Muestra por pantalla los Portes siguiendo el formato de los ejemplos del enunciado
      */
     public void listarPortes() {
-
+//Le faltan cosas, además de asegurarse que este es el formato.
+        int i = 0;
+        while (portes[i]!=null && i < portes.length){
+            System.out.print(portes[i].getNave().getMarca()+";"+portes[i].getNave().getModelo()+";"+portes[i].getNave().getMatricula()
+                    +";"+portes[i].getMuelleOrigen()+";"+portes[i].getSalida()+";"+portes[i].getDestino()+";"+portes[i].getLlegada()+
+                    ";"+portes[i].getSalida());
+            i++;
+        }
     }
 
 

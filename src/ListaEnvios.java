@@ -55,8 +55,15 @@ public class ListaEnvios {
      * @return true en caso de que se añada correctamente, false en caso de lista llena o error
      */
     public boolean insertarEnvio(Envio envio) {
-
-        return false;
+        boolean esPosible = false;
+        int i = 0;
+        if (!estaLlena()){
+            while (i<envios.length && envios[i]!=null){
+                i++;
+            }
+            envios[i] = envio;
+        }
+        return esPosible;
     }
 
     /**
@@ -69,7 +76,11 @@ public class ListaEnvios {
         while ((!envios[i].getLocalizador().equalsIgnoreCase(localizador))&&i< envios.length){
             i++;
         }
-        return envios[i];
+        if (envios[i].getLocalizador().equalsIgnoreCase(localizador)){
+            return envios[i];
+        } else {
+            return null;
+        }
     }
 
     /**

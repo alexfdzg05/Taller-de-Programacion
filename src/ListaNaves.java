@@ -53,9 +53,15 @@ public class ListaNaves {
      * @return true en caso de que se añada correctamente, false en caso de lista llena o error
      */
     public boolean insertarNave(Nave nave) {
-
-
-        return false;
+        boolean esPosible = false;
+        int i = 0;
+        if (!estaLlena()){
+            while (i<naves.length && naves[i]!=null){
+                i++;
+            }
+            naves[i] = nave;
+        }
+        return esPosible;
     }
     /**
      * TODO: Buscamos la nave a partir de la matricula pasada como parámetro
@@ -63,12 +69,24 @@ public class ListaNaves {
      * @return la nave que encontramos o null si no existe
      */
     public Nave buscarNave(String matricula) {
-
-        return null;
+        int i = 0;
+        while (!naves[i].getMatricula().equalsIgnoreCase(matricula)&&i< naves.length){
+            i++;
+        }
+        if (naves[i].getMatricula().equalsIgnoreCase(matricula)){
+            return naves[i];
+        } else {
+            return null;
+        }
     }
     // TODO: Muestra por pantalla las naves de la lista con el formato indicado en el enunciado
     public void mostrarNaves() {
-
+        int i = 0;
+    while (naves[i]!=null && i < naves.length){
+        System.out.print(naves[i].getMarca()+";"+naves[i].getModelo()+";"+naves[i].getMatricula()
+        +";"+naves[i].getFilas()+";"+naves[i].getColumnas());
+        i++;
+    }
     }
 
 
