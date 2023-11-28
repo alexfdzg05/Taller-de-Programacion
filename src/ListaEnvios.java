@@ -57,7 +57,7 @@ public class ListaEnvios {
     public boolean insertarEnvio(Envio envio) {
         boolean esPosible = false;
         int i = 0;
-        if (!estaLlena()){
+        if (!estaLlena()){ //HERE Entender??
             while (i<envios.length && envios[i]!=null){
                 i++;
             }

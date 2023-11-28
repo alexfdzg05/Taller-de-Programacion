@@ -14,6 +14,7 @@ public class Cliente {
     private final String nombre;
     private final String apellidos;
     private final String email;
+    private final int maxEnvios; //HERE maxEnvios añadido
 
     /**
      * Constructor of the class
@@ -28,6 +29,7 @@ public class Cliente {
         this.apellidos = apellidos;
         this.email = email;
         this.listaEnvios = new ListaEnvios(maxEnvios);
+        this.maxEnvios = maxEnvios;  //HERE maxEnvios añadido
     }
     public String getNombre() {
         return nombre;
@@ -40,33 +42,47 @@ public class Cliente {
     }
     // TODO: Texto que debe generar: Zapp Brannigan, zapp.brannigan@dop.gov
     public String toString() {
-
+        return nombre + " " + apellidos + ", " + email;
     }
     // TODO: Devuelve un booleano que indica si se ha alcanzado el número máximo de envíos
     public boolean maxEnviosAlcanzado() {
-
+        boolean maxAlcanzado = false;
+        if(listaEnvios.getOcupacion() == maxEnvios){
+            maxAlcanzado = true;
+        }
+        return maxAlcanzado;
     }
     // TODO: Devuelve un envío en función de su posición
     public Envio getEnvio(int i) {
-
+        return listaEnvios.getEnvio(i);
     }
+
     public ListaEnvios getListaEnvios() {
         return listaEnvios;
     }
+
     // TODO: Añade un envío al cliente
     public boolean aniadirEnvio(Envio envio) {
-
+        boolean aniadido = false;
+        if(!maxEnviosAlcanzado()){
+            listaEnvios.insertarEnvio(envio);
+            aniadido = true;
+        }
+        return aniadido;
     }
     public Envio buscarEnvio(String localizador) {
         return listaEnvios.buscarEnvio(localizador);
     }
+
     // TODO: Elimina el envío de la lista de envíos del pasajero
     public boolean cancelarEnvio(String localizador) {
-
+        return listaEnvios.eliminarEnvio(localizador);
     }
+
     public void listarEnvios() {
         listaEnvios.listarEnvios();
     }
+
     // Encapsula la funcionalidad seleccionarEnvio de ListaEnvios
     public Envio seleccionarEnvio(Scanner teclado, String mensaje) {
         return listaEnvios.seleccionarEnvio(teclado, mensaje);
