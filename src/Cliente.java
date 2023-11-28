@@ -17,7 +17,6 @@ public class Cliente {
     private final String nombre;
     private final String apellidos;
     private final String email;
-    private final int maxEnvios; //HERE maxEnvios añadido
 
     /**
      * Constructor of the class
@@ -32,7 +31,6 @@ public class Cliente {
         this.apellidos = apellidos;
         this.email = email;
         this.listaEnvios = new ListaEnvios(maxEnvios);
-        this.maxEnvios = maxEnvios;  //HERE maxEnvios añadido
     }
     public String getNombre() {
         return nombre;
