@@ -105,9 +105,9 @@ public class ListaPortes {
 //Le faltan cosas, además de asegurarse que este es el formato.
         int i = 0;
         while (portes[i]!=null && i < portes.length){
-            System.out.print(portes[i].getNave().getMarca()+";"+portes[i].getNave().getModelo()+";"+portes[i].getNave().getMatricula()
-                    +";"+portes[i].getMuelleOrigen()+";"+portes[i].getSalida()+";"+portes[i].getDestino()+";"+portes[i].getLlegada()+
-                    ";"+portes[i].getSalida());
+            System.out.print(portes[i].getID()+";"+portes[i].getNave().getModelo()+";"+portes[i].getOrigen()
+                    +";"+portes[i].getMuelleOrigen()+";"+portes[i].getSalida()+";"+portes[i].getDestino()+";"+portes[i].getMuelleDestino()+";"+portes[i].getLlegada()+
+                    ";"+portes[i].getPrecio());
             i++;
         }
     }
