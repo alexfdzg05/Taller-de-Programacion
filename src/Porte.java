@@ -191,9 +191,34 @@ public class Porte {
      *     10[ ][ ][ ]
      */
     public void imprimirMatrizHuecos() {
-        System.out.print("  ");
+        //Primera fila, letras: 		A  B  C  D  E F
+        for (int i = 0; i < nave.getColumnas(); i++) {
+            char letraComienzo = 'A';
+            System.out.print(" " + (char) (letraComienzo + i) + " ");
+        }
+        System.out.println();
 
+        //Huecos
+        for (int i = 1; i <= (nave.getFilas()); i++) {
+            for (int j = 0; j <= (nave.getColumnas()); j++) {
+                if (i < 10) {
+                    System.out.print(" " + (i));
+                } else {
+                    System.out.print(i);
+                }
+
+                if (huecoOcupado(i, j)) {
+                    System.out.print("[X]");
+                } else {
+                    System.out.print("[ ]");
+                }
+
+            }
+            System.out.println();
+        }
     }
+
+
 
     /**
      * TODO: Devuelve true si ha podido escribir en un fichero la lista de envíos del porte, siguiendo las indicaciones
