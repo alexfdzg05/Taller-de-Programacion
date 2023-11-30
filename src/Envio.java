@@ -62,7 +62,7 @@ public class Envio {
     }
     //TODO: Texto que debe generar: Envío PM1111AAAABBBBC para Porte PM0066 de GGT M5 (01/01/2023 08:15:00) a CID M1 (01/01/2024 11:00:05) en hueco 6C por 13424,56 SSD
     public String toString() {
-
+    return "Envío "+getPorte()+" para "+getPorte().toStringSimple()+" en hueco "+getFila()+" "+getColumna()+" por "+ getPrecio()+"SSD";
     }
     // TODO: Cancela este envío, eliminándolo de la lista de envíos del porte y del cliente correspondiente
     public boolean cancelar() {
