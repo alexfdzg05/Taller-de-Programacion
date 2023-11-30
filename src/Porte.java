@@ -69,15 +69,27 @@ public class Porte {
         return precio;
     }
     // TODO: Devuelve el número de huecos libres que hay en el porte
+
     public int numHuecosLibres() {
 
     }
     // TODO: ¿Están llenos todos los huecos?
     public boolean porteLleno() {
-
+        boolean lleno = false;
+        if(numHuecosLibres()==0){
+            lleno = true;
+        }
+        return lleno;
     }
-    // TODO: ¿Está ocupado el hueco consultado?
+
+    // TODO: ¿Está ocupado el hueco consultado?  //true si está ocupado, false si no
     public boolean huecoOcupado(int fila, int columna) {
+        boolean ocupado = true;
+        if (huecos [fila-1][columna-1] = false){
+            ocupado = false;
+        }
+        return ocupado;
+
 
     }
     public Envio buscarEnvio(String localizador) {
@@ -104,8 +116,17 @@ public class Porte {
      * @return
      */
     public boolean ocuparHueco(Envio envio) {
+        boolean ocupar = false;
+        if(!porteLleno()) {
+            if (!huecos[envio.getFila() - 1][envio.getColumna() - 1]) {
+                huecos[envio.getFila() - 1][envio.getColumna() - 1] = true;
+                listaEnvios.insertarEnvio(envio);
+                //HERE hay que poner numHuecosLibres++ de alguna forma;
+                ocupar = true;
+            }
+        }
+        return ocupar;
 
-        return false;
     }
 
 
@@ -115,8 +136,15 @@ public class Porte {
      * @return
      */
     public boolean desocuparHueco(String localizador) {
-
-        return false;
+        boolean desocupar = false;
+        Envio envio = listaEnvios.buscarEnvio(localizador);
+        if(envio != null){
+            huecos[envio.getFila() - 1][envio.getColumna() - 1] = true;
+            listaEnvios.eliminarEnvio(localizador);
+            //HERE hay que poner numHuecosLibres++ de alguna forma
+            desocupar = true;
+        }
+        return desocupar;
     }
 
     /**
@@ -163,9 +191,34 @@ public class Porte {
      *     10[ ][ ][ ]
      */
     public void imprimirMatrizHuecos() {
-        System.out.print("  ");
+        //Primera fila, letras: 		A  B  C  D  E F
+        for (int i = 0; i < nave.getColumnas(); i++) {
+            char letraComienzo = 'A';
+            System.out.print(" " + (char) (letraComienzo + i) + " ");
+        }
+        System.out.println();
 
+        //Huecos
+        for (int i = 1; i <= (nave.getFilas()); i++) {
+            for (int j = 0; j <= (nave.getColumnas()); j++) {
+                if (i < 10) {
+                    System.out.print(" " + (i));
+                } else {
+                    System.out.print(i);
+                }
+
+                if (huecoOcupado(i, j)) {
+                    System.out.print("[X]");
+                } else {
+                    System.out.print("[ ]");
+                }
+
+            }
+            System.out.println();
+        }
     }
+
+
 
     /**
      * TODO: Devuelve true si ha podido escribir en un fichero la lista de envíos del porte, siguiendo las indicaciones
@@ -192,7 +245,8 @@ public class Porte {
      * @return ejemplo -> "PM0123"
      */
     public static String generarID(Random rand) {
-        return "PM";
+        int numAleatorio = rand.nextInt(10000);
+        return String.format("PM%04d", numAleatorio);
     }
 
     /**

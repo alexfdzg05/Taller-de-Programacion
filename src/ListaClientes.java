@@ -1,7 +1,6 @@
 package src;
 
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.Scanner;
 
 /**
@@ -79,16 +78,23 @@ public class ListaClientes {
      * @return
      */
     public boolean escribirClientesCsv(String fichero) {
-
-
+        PrintWriter out = null;
         try {
-
-
-
+            out = new PrintWriter(fichero);
+            for (int i = 0; i < getOcupacion(); i++){
+                Cliente cliente = getCliente(i);
+                out.print(cliente.getNombre() + ";");
+                out.print(cliente.getApellidos() + ";");
+                out.print(cliente.getEmail());
+            }
         } catch (FileNotFoundException e) {
+            System.out.println("Fichero Clientes no encontrado.");
+            return false;
+        } catch (IOException ex) {
+            System.out.println("Error de escritura en fichero Clientes.");
             return false;
         } finally {
-
+            out.close();
         }
         return true;
     }
@@ -102,13 +108,37 @@ public class ListaClientes {
      * @return lista de clientes
      */
     public static ListaClientes leerClientesCsv(String fichero, int capacidad, int maxEnviosPorCliente) {
-
+        ListaClientes listaClientes = new ListaClientes(capacidad);
+        BufferedReader in = null;
+        boolean escrito = true;
         try {
+            in = new BufferedReader(new FileReader(fichero));
+            String linea;
+
+            while ((linea = in.readLine()) != null && escrito){
+                String[] datos = linea.split(";");
+                String nombre = datos[0];
+                String apellidos = datos[1];
+                String email= datos[2];
+                Cliente cliente = new Cliente(nombre, apellidos, email, maxEnviosPorCliente);
+                escrito= listaClientes.insertarCliente(cliente);
+
+            }
 
         } catch (FileNotFoundException e) {
+            System.out.println("Fichero Clientes no encontrado.");
+            return null;
+        } catch (IOException ex) {
+            System.out.println("Error de lectura en fichero Clientes.");
             return null;
         } finally {
-
+            try {
+                if(in != null){
+                    in.close();
+                }
+            } catch (IOException ex) {
+                System.out.println("Error de cierre de fichero Cliente.");
+            }
         }
         return listaClientes;
     }
