@@ -110,8 +110,16 @@ public class ListaEnvios {
      * @return True si se ha borrado correctamente, false en cualquier otro caso
      */
     public boolean eliminarEnvio(String localizador) {
-
-        return false;
+    boolean cancelado = false;
+        int i = 0;
+        while ((!envios[i].getLocalizador().equalsIgnoreCase(localizador)) && i < envios.length) {
+            i++;
+        }
+        if (envios[i].getLocalizador().equalsIgnoreCase(localizador)) {
+            envios[i] = null;
+            cancelado = true;
+        }
+        return cancelado;
     }
 
     /**
@@ -119,11 +127,11 @@ public class ListaEnvios {
      * en el enunciado
      */
     public void listarEnvios() {
-        int i = 0;
-        while (envios[i] != null && i < envios.length) {
-            System.out.print(envios[i].getLocalizador() + ";" + envios[i].getLocalizador().substring(0, 5) + ";" + envios[i].getCliente().getEmail()
-                    + ";" + envios[i].getFila() + ";" + envios[i].getColumna() + ";" + envios[i].getPrecio());
-            i++;
+        for (int i = 0; i< envios.length; i++){
+            if (envios[i]!=null) {
+                System.out.print(envios[i].getLocalizador() + ";" + envios[i].getPorte().getID() + ";" + envios[i].getCliente().getEmail()
+                        + ";" + envios[i].getFila() + ";" + envios[i].getColumna() + ";" + envios[i].getPrecio());
+            }
         }
 
         /**

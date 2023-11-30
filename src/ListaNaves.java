@@ -84,11 +84,11 @@ public class ListaNaves {
     }
     // TODO: Muestra por pantalla las naves de la lista con el formato indicado en el enunciado
     public void mostrarNaves() {
-        int i = 0;
-    while (naves[i]!=null && i < naves.length){
-        System.out.print(naves[i].getMarca()+";"+naves[i].getModelo()+";"+naves[i].getMatricula()
-        +";"+naves[i].getFilas()+";"+naves[i].getColumnas());
-        i++;
+    for (int i = 0; i < naves.length; i++){
+        if (naves[i]!=null) {
+            System.out.print(naves[i].getMarca() + ";" + naves[i].getModelo() + ";" + naves[i].getMatricula()
+                    + ";" + naves[i].getFilas() + ";" + naves[i].getColumnas());
+        }
     }
     }
 

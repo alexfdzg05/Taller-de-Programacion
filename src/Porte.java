@@ -39,7 +39,16 @@ public class Porte {
      * @param precio
      */
     public Porte(String id, Nave nave, PuertoEspacial origen, int muelleOrigen, Fecha salida, PuertoEspacial destino, int muelleDestino, Fecha llegada, double precio) {
-
+    this.id = id;
+    this.origen = origen;
+    this.nave = nave;
+    this.muelleOrigen = muelleOrigen;
+    this.salida = salida;
+    this.destino = destino;
+    this.muelleDestino = muelleDestino;
+    this.llegada = llegada;
+    this.precio = precio;
+//Le falta las listas de envio y huecoslibres
     }
     public String getID() {
         return id;
@@ -71,7 +80,16 @@ public class Porte {
     // TODO: Devuelve el número de huecos libres que hay en el porte
 
     public int numHuecosLibres() {
-
+        //si hay hueco en una posicion de la matriz: huecosLibres++
+        int huecosLibres = 0;
+    for (int i = 0; i < huecos.length; i++){
+        for (int j = 0; j < huecos.length; j++){
+            if (huecos[i][j]){
+                huecosLibres++;
+            }
+        }
+    }
+        return huecosLibres;
     }
     // TODO: ¿Están llenos todos los huecos?
     public boolean porteLleno() {
@@ -84,13 +102,8 @@ public class Porte {
 
     // TODO: ¿Está ocupado el hueco consultado?  //true si está ocupado, false si no
     public boolean huecoOcupado(int fila, int columna) {
-        boolean ocupado = true;
-        if (huecos [fila-1][columna-1] = false){
-            ocupado = false;
-        }
-        return ocupado;
-
-
+        //Si hay hueco(true), no esta ocupado(false)
+        return !huecos[fila][columna];
     }
     public Envio buscarEnvio(String localizador) {
         return listaEnvios.buscarEnvio(localizador);
@@ -153,8 +166,7 @@ public class Porte {
      *  Cidonia(CID) M1 (01/01/2024 11:00:05) en Planet Express One(EP-245732X) por 13424,56 SSD, huecos libres: 10"
      */
     public String toString() {
-        // le falta el M% antes de la fecha
-        return "Porte "+getID()+" de "+getOrigen().toStringSimple()+" "+getMuelleOrigen()+" "+getSalida()+" a "
+        return "Porte "+getID()+" de "+getOrigen().toStringSimple()+" M"+getMuelleOrigen()+" "+getSalida()+" a "
                 +getDestino().toStringSimple()+" en "+getNave().toStringSimple()+" por "+getPrecio()+" SSD, huecos libres:"+numHuecosLibres();
     }
 
@@ -165,7 +177,7 @@ public class Porte {
      */
     public String toStringSimple() {
         return "Porte "+getID()+" de "+getOrigen().toStringSimple()+" "+getMuelleOrigen()+" "+getSalida()+" a "
-        +getDestino().toStringSimple();
+                +getDestino().toStringSimple();
     }
 
 
@@ -177,7 +189,12 @@ public class Porte {
      * @return
      */
     public boolean coincide(String codigoOrigen, String codigoDestino, Fecha fecha) {
-        return ;
+        boolean coincidente = false;
+        if (getOrigen().getCodigo().equalsIgnoreCase(codigoOrigen) && getDestino().getCodigo().equalsIgnoreCase(codigoDestino)
+        && getSalida().coincide(fecha)){
+            coincidente = true;
+        }
+        return coincidente;
     }
 
 

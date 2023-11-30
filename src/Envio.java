@@ -53,26 +53,19 @@ public class Envio {
     public int getColumna() {
         return columna;
     }
-
     // TODO: Ejemplos: "1A" para el hueco con fila 1 y columna 1, "3D" para el hueco con fila 3 y columna 4
     public String getHueco() {
-        char letraColumna = ' ';
-        char [] letras = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
-        letraColumna = letras[this.columna -1];
-
-        return String.valueOf(this.fila) + letraColumna;
+        return "";
     }
     public double getPrecio() {
         return precio;
     }
     //TODO: Texto que debe generar: Envío PM1111AAAABBBBC para Porte PM0066 de GGT M5 (01/01/2023 08:15:00) a CID M1 (01/01/2024 11:00:05) en hueco 6C por 13424,56 SSD
     public String toString() {
-        return "Envio " + localizador + " para Porte " + porte.getID() + "de " + porte.getOrigen().getCodigo() + " " + porte.getMuelleOrigen() + " (" + porte.getSalida() + ") a" + porte.getDestino().getCodigo()+ " T" +porte.getMuelleDestino()+ " (" +porte.getDestino()+ ") en hueco " +getHueco()+" por " +precio+ " SSD";
+    return "Envío "+getPorte()+" para "+getPorte().toStringSimple()+" en hueco "+getFila()+" "+getColumna()+" por "+ getPrecio()+"SSD";
     }
     // TODO: Cancela este envío, eliminándolo de la lista de envíos del porte y del cliente correspondiente
     public boolean cancelar() {
-        boolean cancelado = cliente.cancelarEnvio(localizador) && porte.desocuparHueco(localizador);
-        return cancelado;
 
     }
 

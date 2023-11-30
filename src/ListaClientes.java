@@ -49,11 +49,28 @@ public class ListaClientes {
     }
     // TODO: Inserta el cliente en la lista de clientes
     public boolean insertarCliente(Cliente cliente) {
-
+    int i = 0;
+    boolean insertado = false;
+        while ((clientes[i]!=null)&&i< clientes.length){
+            i++;
+        }
+        if (clientes[i]== null){
+            clientes[i] = cliente;
+            insertado = true;
+        }
+        return insertado;
     }
     // TODO: Devuelve el cliente que coincida con el email, o null en caso de no encontrarlo
     public Cliente buscarClienteEmail(String email) {
-
+        int i = 0;
+        while ((!clientes[i].getEmail().equalsIgnoreCase(email)) && i < clientes.length) {
+            i++;
+        }
+        if (clientes[i].getEmail().equalsIgnoreCase(email)) {
+            return clientes[i];
+        } else {
+            return null;
+        }
     }
 
     /**
