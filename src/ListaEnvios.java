@@ -110,8 +110,16 @@ public class ListaEnvios {
      * @return True si se ha borrado correctamente, false en cualquier otro caso
      */
     public boolean eliminarEnvio(String localizador) {
-
-        return false;
+    boolean cancelado = false;
+        int i = 0;
+        while ((!envios[i].getLocalizador().equalsIgnoreCase(localizador)) && i < envios.length) {
+            i++;
+        }
+        if (envios[i].getLocalizador().equalsIgnoreCase(localizador)) {
+            envios[i] = null;
+            cancelado = true;
+        }
+        return cancelado;
     }
 
     /**
