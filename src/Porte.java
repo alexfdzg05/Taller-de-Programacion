@@ -189,7 +189,12 @@ public class Porte {
      * @return
      */
     public boolean coincide(String codigoOrigen, String codigoDestino, Fecha fecha) {
-        return ;
+        boolean coincidente = false;
+        if (getOrigen().getCodigo().equalsIgnoreCase(codigoOrigen) && getDestino().getCodigo().equalsIgnoreCase(codigoDestino)
+        && getSalida().coincide(fecha)){
+            coincidente = true;
+        }
+        return coincidente;
     }
 
 
