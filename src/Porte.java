@@ -154,7 +154,7 @@ public class Porte {
      */
     public String toString() {
         // le falta el M% antes de la fecha
-        return "Porte "+getID()+" de "+getOrigen().toStringSimple()+" "+getMuelleOrigen()+" "+getSalida()+" a "
+        return "Porte "+getID()+" de "+getOrigen().toStringSimple()+" M"+getMuelleOrigen()+" "+getSalida()+" a "
                 +getDestino().toStringSimple()+" en "+getNave().toStringSimple()+" por "+getPrecio()+" SSD, huecos libres:"+numHuecosLibres();
     }
 

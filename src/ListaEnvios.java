@@ -121,7 +121,7 @@ public class ListaEnvios {
     public void listarEnvios() {
         int i = 0;
         while (envios[i] != null && i < envios.length) {
-            System.out.print(envios[i].getLocalizador() + ";" + envios[i].getLocalizador().substring(0, 5) + ";" + envios[i].getCliente().getEmail()
+            System.out.print(envios[i].getLocalizador() + ";" + envios[i].getPorte().getID() + ";" + envios[i].getCliente().getEmail()
                     + ";" + envios[i].getFila() + ";" + envios[i].getColumna() + ";" + envios[i].getPrecio());
             i++;
         }
