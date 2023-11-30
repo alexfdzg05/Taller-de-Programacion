@@ -78,15 +78,16 @@ public class ListaClientes {
      * @return
      */
     public boolean escribirClientesCsv(String fichero) {
-        PrintWriter out = null;
+        PrintWriter pw = null;
         try {
-            out = new PrintWriter(fichero);
+            pw = new PrintWriter(fichero);
             for (int i = 0; i < getOcupacion(); i++){
                 Cliente cliente = getCliente(i);
-                out.print(cliente.getNombre() + ";");
-                out.print(cliente.getApellidos() + ";");
-                out.print(cliente.getEmail());
+                pw.print(cliente.getNombre() + ";");
+                pw.print(cliente.getApellidos() + ";");
+                pw.print(cliente.getEmail());
             }
+            return true;
         } catch (FileNotFoundException e) {
             System.out.println("Fichero Clientes no encontrado.");
             return false;
@@ -94,9 +95,8 @@ public class ListaClientes {
             System.out.println("Error de escritura en fichero Clientes.");
             return false;
         } finally {
-            out.close();
+            pw.close();
         }
-        return true;
     }
 
     /**
