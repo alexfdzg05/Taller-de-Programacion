@@ -1,5 +1,7 @@
 package src;
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
@@ -137,8 +139,23 @@ public class ListaPortes {
      * @return
      */
     public boolean escribirPortesCsv(String fichero) {
+        PrintWriter pw = null;
+        boolean escrito = false;
         try {
-
+            pw = new PrintWriter(fichero);
+            for(int i = 0; i < getOcupacion(); i++){
+                Porte porte = getPorte(i);
+                pw.println(porte.getID() + ";");
+                pw.println(porte.getNave() + ";");
+                pw.println(porte.getOrigen() + ";");
+                pw.println(porte.getMuelleOrigen() + ";");
+                pw.println(porte.getSalida() + ";");
+                pw.println(porte.getDestino() + ";");
+                pw.println(porte.getMuelleDestino() + ";");
+                pw.println(porte.getLlegada() + ";");
+                pw.println(porte.getPrecio());
+            }
+            pw.close();
             return true;
         } catch (FileNotFoundException e) {
             return false;
@@ -156,9 +173,27 @@ public class ListaPortes {
      */
     public static ListaPortes leerPortesCsv(String fichero, int capacidad, ListaPuertosEspaciales puertosEspaciales, ListaNaves naves) {
         ListaPortes listaPortes = new ListaPortes(capacidad);
+        BufferedReader br = null;
+        boolean escrito = true;
         try {
+            br = new BufferedReader(new FileReader(fichero));
+            String linea;
 
+            while((linea = br.readLine()) != null && escrito){
+                String[] datos = linea.split(";");
+                String ID = datos[0];
+                Nave nave = naves.buscarNave(datos[1]);
+                PuertoEspacial origen = puertosEspaciales.buscarPuertoEspacial(datos[2]);
+                Integer muelleOrigen = Integer.parseInt(datos[3]);
+                Fecha salida = ;
+                PuertoEspacial destino = puertosEspaciales.buscarPuertoEspacial(datos[5]);
+                Integer muelleDestino = Integer.parseInt(datos[6]);
+                Fecha llegada = ;
+                Double precio = Double.parseDouble(datos[8]);
+
+            }
         } catch (Exception e) {
+            System.out.println("Fichero Portes no encontrado.");
             return null;
         }
         return listaPortes;
