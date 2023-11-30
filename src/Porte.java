@@ -71,7 +71,16 @@ public class Porte {
     // TODO: Devuelve el número de huecos libres que hay en el porte
 
     public int numHuecosLibres() {
-
+        //si hay hueco en una posicion de la matriz: huecosLibres++
+        int huecosLibres = 0;
+    for (int i = 0; i < huecos.length; i++){
+        for (int j = 0; j < huecos.length; j++){
+            if (huecos[i][j]){
+                huecosLibres++;
+            }
+        }
+    }
+        return huecosLibres;
     }
     // TODO: ¿Están llenos todos los huecos?
     public boolean porteLleno() {
@@ -84,13 +93,8 @@ public class Porte {
 
     // TODO: ¿Está ocupado el hueco consultado?  //true si está ocupado, false si no
     public boolean huecoOcupado(int fila, int columna) {
-        boolean ocupado = true;
-        if (huecos [fila-1][columna-1] = false){
-            ocupado = false;
-        }
-        return ocupado;
-
-
+        //Si hay hueco(true), no esta ocupado(false)
+        return !huecos[fila][columna];
     }
     public Envio buscarEnvio(String localizador) {
         return listaEnvios.buscarEnvio(localizador);
