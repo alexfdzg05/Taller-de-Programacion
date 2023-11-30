@@ -1,4 +1,7 @@
 package src;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
@@ -106,13 +109,24 @@ public class ListaPuertosEspaciales {
     public boolean escribirPuertosEspacialesCsv(String nombre) {
         PrintWriter pw = null;
         try {
-
+            pw = new PrintWriter(nombre);
+            for (int i = 0; i < getOcupacion(); i++){
+                PuertoEspacial puertoEspacial = getPuertoEspacial(i);
+                pw.print(puertoEspacial.getNombre() + ";");
+                pw.print(puertoEspacial.getCodigo() + ";");
+                pw.print(puertoEspacial.getRadio() + ";");
+                pw.print(puertoEspacial.getAzimut() + ";");
+                pw.print(puertoEspacial.getPolar() + ";");
+                pw.print(puertoEspacial.getNombre());
+            }
             return true;
         } catch (Exception e) {
+            System.out.println("Error de escritura en fichero PuertosEspaciales.");
             return false;
         } finally {
-
+            pw.close();
         }
+        return true;
     }
 
 
@@ -126,12 +140,37 @@ public class ListaPuertosEspaciales {
     public static ListaPuertosEspaciales leerPuertosEspacialesCsv(String fichero, int capacidad) {
         ListaPuertosEspaciales listaPuertosEspaciales = new ListaPuertosEspaciales(capacidad);
         Scanner sc = null;
+        BufferedReader in = null;
+        boolean escrito = true;
         try {
+            in = new BufferedReader(new FileReader(fichero));
+            String linea;
 
+            while ((linea = in.readLine()) != null && escrito){
+                String[] datos = linea.split(";");
+                String nombre = datos[0];
+                String codigo = datos[1];
+                Double radio = Double.parseDouble(datos[2]);
+                Double azimut = Double.parseDouble(datos[3]);
+                Double polar = Double.parseDouble(datos[4]);
+                Integer numMuelles = Integer.parseInt(datos[3]);
+
+                PuertoEspacial puertoEspacial = new PuertoEspacial(nombre, codigo, radio, azimut, polar, numMuelles);
+
+                escrito= listaPuertosEspaciales.insertarPuertoEspacial(puertoEspacial);
+
+            }
         } catch (Exception e) {
+            System.out.println("Fichero Clientes no encontrado.");
             return null;
         } finally {
-
+            try {
+                if(in != null){
+                    in.close();
+                }
+            } catch (IOException ex) {
+                System.out.println("Error de cierre de fichero Cliente.");
+            }
         }
         return listaPuertosEspaciales;
     }
