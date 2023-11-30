@@ -119,11 +119,11 @@ public class ListaEnvios {
      * en el enunciado
      */
     public void listarEnvios() {
-        int i = 0;
-        while (envios[i] != null && i < envios.length) {
-            System.out.print(envios[i].getLocalizador() + ";" + envios[i].getPorte().getID() + ";" + envios[i].getCliente().getEmail()
-                    + ";" + envios[i].getFila() + ";" + envios[i].getColumna() + ";" + envios[i].getPrecio());
-            i++;
+        for (int i = 0; i< envios.length; i++){
+            if (envios[i]!=null) {
+                System.out.print(envios[i].getLocalizador() + ";" + envios[i].getPorte().getID() + ";" + envios[i].getCliente().getEmail()
+                        + ";" + envios[i].getFila() + ";" + envios[i].getColumna() + ";" + envios[i].getPrecio());
+            }
         }
 
         /**
