@@ -1,4 +1,7 @@
 package src;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
@@ -117,12 +120,21 @@ public class ListaNaves {
     public boolean escribirNavesCsv(String nombre) {
         PrintWriter pw = null;
         try {
-
+            pw = new PrintWriter(nombre);
+            for (int i = 0; i < getOcupacion(); i++){
+                Nave nave = getNave(i);
+                pw.print(nave.getMarca() + ";");
+                pw.print(nave.getModelo() + ";");
+                pw.print(nave.getMatricula() + ";");
+                pw.print(nave.getColumnas() + ";");
+                pw.print(nave.getFilas() + ";");
+                pw.print(nave.getAlcance());
+            }
             return true;
         } catch (Exception e) {
             return false;
         } finally {
-
+            pw.close();
         }
     }
 
@@ -136,12 +148,32 @@ public class ListaNaves {
     public static ListaNaves leerNavesCsv(String fichero, int capacidad) {
         ListaNaves listaNaves = new ListaNaves(capacidad);
         Scanner sc = null;
+        BufferedReader br = null;
+        boolean escrito = true;
         try {
+            br = new BufferedReader(new FileReader(fichero));
+            String linea;
 
+            while((linea = br.readLine()) != null && escrito){
+                String[] datos = linea.split(";");
+                String marca = datos[0];
+                String modelo = datos[1];
+                String matricula = datos[2];
+                Integer columnas = Integer.parseInt(datos[3]);
+                Integer filas = Integer.parseInt(datos[4]);
+                Double alcance = Double.parseDouble(datos[5]);
+            }
         } catch (Exception e) {
+            System.out.println("Fichero Clientes no encontrado.");
             return null;
         } finally {
-
+            try {
+                if(br != null){
+                    br.close();
+                }
+            } catch (IOException ex) {
+                System.out.println("Error de cierre de fichero Cliente.");
+            }
         }
         return listaNaves;
     }
