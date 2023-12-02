@@ -127,12 +127,13 @@ public class ListaEnvios {
      * en el enunciado
      */
     public void listarEnvios() {
-        for (int i = 0; i< envios.length; i++){
-            if (envios[i]!=null) {
+        for (int i = 0; i < envios.length; i++) {
+            if (envios[i] != null) {
                 System.out.print(envios[i].getLocalizador() + ";" + envios[i].getPorte().getID() + ";" + envios[i].getCliente().getEmail()
                         + ";" + envios[i].getFila() + ";" + envios[i].getColumna() + ";" + envios[i].getPrecio());
             }
         }
+    }
 
         /**
          * TODO: Permite seleccionar un Envio existente a partir de su localizador, usando el mensaje pasado como argumento
