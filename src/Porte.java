@@ -246,6 +246,23 @@ public class Porte {
     public boolean generarListaEnvios(String fichero) {
         PrintWriter pw = null;
         try {
+            pw = new PrintWriter(fichero);
+            pw.println("---------------------------------------");
+            pw.println("-------- Lista de envíos del porte "+getID()+" --------");
+            pw.println("---------------------------------------");
+            pw.println("Hueco\tCliente");
+            int i = 0;
+            int j = 0;
+            while (j<=listaEnvios.getOcupacion()){
+                if (listaEnvios.getEnvio(i)!= null) {
+                    pw.print(listaEnvios.getEnvio(i).getHueco() + "\t");
+                    pw.println(listaEnvios.getEnvio(i).getCliente().toString());
+                    j++;
+                } else {
+                    pw.println(listaEnvios.getEnvio(i).getHueco() + "\t");
+                }
+                i++;
+            }
 
             return true;
         } catch (FileNotFoundException e) {
