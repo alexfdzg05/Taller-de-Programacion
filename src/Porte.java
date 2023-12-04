@@ -300,6 +300,9 @@ public class Porte {
                                   ListaNaves naves,
                                   ListaPortes portes) {
 
+
+
+        Porte porte = new Porte();
         return null;
     }
 }
