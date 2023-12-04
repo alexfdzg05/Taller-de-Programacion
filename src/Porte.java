@@ -48,7 +48,8 @@ public class Porte {
     this.muelleDestino = muelleDestino;
     this.llegada = llegada;
     this.precio = precio;
-//Le falta las listas de envio y huecoslibres
+    huecos = new boolean[10][6];
+    listaEnvios = new ListaEnvios(6);
     }
     public String getID() {
         return id;

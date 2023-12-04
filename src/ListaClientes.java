@@ -108,11 +108,10 @@ public class ListaClientes {
         } catch (FileNotFoundException e) {
             System.out.println("Fichero Clientes no encontrado.");
             return false;
-        } catch (IOException ex) {
-            System.out.println("Error de escritura en fichero Clientes.");
-            return false;
         } finally {
-            pw.close();
+            if (pw != null) {
+                pw.close();
+            }
         }
     }
 
