@@ -98,9 +98,15 @@ public class ListaEnvios {
      * @return el envio que encontramos o null si no existe
      */
     public Envio buscarEnvio(String idPorte, int fila, int columna) {
-
-
-        return null;
+        int i = 0;
+        while (!envios[i].getPorte().getID().equalsIgnoreCase(idPorte) && (i < envios.length)){
+            i++;
+        }
+        if (envios[i].getPorte().getID().equalsIgnoreCase(idPorte)){
+            return  envios[i].getPorte().buscarEnvio(fila, columna);
+        } else {
+            return null;
+        }
     }
 
     /**
