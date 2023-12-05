@@ -92,14 +92,21 @@ public class Envio {
      *     Precio: 13424,56 SSD
      */
     public boolean generarFactura(String fichero) {
+        PrintWriter pw = null;
         try {
-
-
-
-
-
-
-
+            pw = new PrintWriter(fichero);
+            pw.println("-----------------------------------------------------");
+            pw.println("--------- Factura del envío " + getLocalizador() + " ---------");
+            pw.println("-----------------------------------------------------");
+            pw.println("Porte: " + getPorte().getID());
+            pw.println("Origen: " + getPorte().getOrigen().toString());
+            pw.println("Destino: " + getPorte().getDestino().toString());
+            pw.println("Salida: " + getPorte().getSalida().toString());
+            pw.println("Llegada: " + getPorte().getLlegada().toString());
+            pw.println("Cliente: " + getCliente().toString());
+            pw.println("Hueco: " + getFila() + getHueco());
+            pw.println("Precio: " + getPrecio() + " SSD");
+            pw.println();
 
             return true;
         } catch (FileNotFoundException e) {
@@ -119,9 +126,10 @@ public class Envio {
      */
     public static String generarLocalizador(Random rand, String idPorte) {
         StringBuilder localizador = new StringBuilder(idPorte);
-
-
-
+        for(int i = 0; i < 9; i++){
+            char randomChar = (char) (rand.nextInt(26) + 'A');
+            localizador.append(randomChar);
+        }
         return localizador.toString();
     }
 

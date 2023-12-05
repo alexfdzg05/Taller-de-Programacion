@@ -1,8 +1,5 @@
 package src;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.Scanner;
 
 /**
@@ -203,12 +200,38 @@ public class ListaEnvios {
          */
         public static void leerEnviosCsv (String ficheroEnvios, ListaPortes portes, ListaClientes clientes){
             Scanner sc = null;
+            BufferedReader br = null;
+            boolean escrito = true;
             try {
+                br = new BufferedReader(new FileReader(ficheroEnvios));
+                String linea;
 
+                while((linea = br.readLine()) != null && escrito){
+                    String[] datos = linea.split(";");
+                    String localizador = datos[0];
+                    Porte porte = portes.buscarPorte(datos[1]);
+                    Cliente cliente = clientes.buscarClienteEmail(datos[2]);
+                    Integer fila = Integer.parseInt(datos[3]);
+                    Integer columna = Integer.parseInt(datos[4]);
+                    Integer precio = Integer.parseInt(datos[5]);
+
+                    Envio envio = new Envio(localizador, porte, cliente, fila, columna, precio);
+
+                    escrito= listaEnvios  listaPuertosEspaciales.insertarPuertoEspacial(puertoEspacial);
+
+                }
             } catch (FileNotFoundException e) {
                 System.out.println("No se ha encontrado el fichero de envíos");
+            } catch (Exception e) { //HERE aniadido
+                System.out.println("Fichero Portes no encontrado.");
             } finally {
-
+                try {
+                    if (br != null) {
+                        br.close();
+                    }
+                } catch (IOException e) {
+                    System.out.println("Error de cierre de fichero Billetes.");
+                }
             }
         }
 }
