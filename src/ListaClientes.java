@@ -82,10 +82,8 @@ public class ListaClientes {
      * @return
      */
     public Cliente seleccionarCliente(Scanner teclado, String mensaje) {
-        Cliente cliente = null;
-
-
-        return cliente;
+        System.out.println(mensaje);
+            return buscarClienteEmail(teclado.nextLine());
     }
 
     /**
