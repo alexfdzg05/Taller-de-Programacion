@@ -95,8 +95,15 @@ public class ListaPortes {
      * @return
      */
     public ListaPortes buscarPortes(String codigoOrigen, String codigoDestino, Fecha fecha) {
-
-
+        ListaPortes listaPortes = new ListaPortes(portes.length);
+        int i = 0;
+        while (i< portes.length) {
+            while (!(codigoOrigen.equalsIgnoreCase(portes[i].getOrigen().getCodigo()) && (codigoDestino.equalsIgnoreCase(portes[i].getDestino().getCodigo())) &&
+                    fecha.coincide(portes[i].getSalida()))) {
+                i++;
+            }
+            listaPortes[i] = portes[i];
+    }
         return listaPortes;
     }
 
