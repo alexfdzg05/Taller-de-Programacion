@@ -169,28 +169,42 @@ public class PlanetExpress {
      * y concluirá la ejecución del mismo: `Número de argumentos incorrecto`.
      */
     public static void main(String[] args) {
-        if (args.length != 10) {
-            System.out.println("Número de argumentos incorrecto");
-            return;
-        }
         PlanetExpress planetExpress = new PlanetExpress(Integer.parseInt(args[0]), Integer.parseInt(args[1]), Integer.parseInt(args[2]),
                 Integer.parseInt(args[3]),Integer.parseInt(args[4]));
         planetExpress.cargarDatos(args[5], args[6], args[7], args[8], args[9]);
 
+        if (args.length != 10) {
+            System.out.println("Número de argumentos incorrecto");
+            return;
+        }
 
+        Random rand = new Random();
+        Scanner teclado  = new Scanner(System.in);
+
+        int opcion;
         do {
             opcion = menu(teclado);
             switch (opcion) {
                 case 1:     // TODO: Alta de Porte
-
+                    if(!planetExpress.maxPortesAlcanzado()){
+                        Porte porte = Porte.altaPorte(teclado, rand,); //here
+                        if(planetExpress.insertarPorte(porte)){
+                            System.out.println("Porte " + porte.getID() + " creado correctamente");
+                        }
+                    } else System.out.println("No se pueden dar de alta más portes");
 
                     break;
                 case 2:     // TODO: Alta de Cliente
-
+                    if(!planetExpress.maxPortesAlcanzado()){
+                        Cliente cliente = Cliente.altaCliente(teclado, rand,); //here
+                        if(planetExpress.insertarCliente(cliente)){
+                            System.out.println("Cliente con " + cliente.getEmail() + " creado correctamente");
+                        }
+                    } else System.out.println("No se pueden dar de alta más clientes");
 
                     break;
                 case 3:     // TODO: Buscar Porte
-
+                    planetExpress.buscarPorte(teclado);
 
                     break;
                 case 4:     // TODO: Listado de envíos de un cliente
