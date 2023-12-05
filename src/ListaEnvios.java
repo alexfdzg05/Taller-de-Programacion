@@ -151,8 +151,10 @@ public class ListaEnvios {
          */
         public Envio seleccionarEnvio (Scanner teclado, String mensaje){
             Envio envio = null;
-
-
+            do {
+                System.out.println(mensaje);
+                envio = buscarEnvio(teclado.nextLine());
+            }while (envio == null);
             return envio;
         }
 
