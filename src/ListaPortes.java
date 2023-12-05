@@ -128,7 +128,12 @@ public class ListaPortes {
     public Porte seleccionarPorte(Scanner teclado, String mensaje, String cancelar) {
         listarPortes();
         Porte porte = null;
-
+        String id;
+        do {
+            System.out.println(mensaje);
+            id = teclado.nextLine();
+            porte = buscarPorte(id);
+        }while (porte == null && (!id.equalsIgnoreCase(cancelar)));
         return porte;
     }
 
