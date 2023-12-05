@@ -82,9 +82,20 @@ public class Cliente {
      * @return src.Cliente
      */
     public static Cliente altaCliente(Scanner teclado, ListaClientes clientes, int maxEnvios) {
+        String nombre, apellidos, email;
+        do{
+            System.out.println("Nombre: ");
+            nombre = teclado.nextLine();
+            System.out.println("Apellidos: ");
+            apellidos = teclado.nextLine();
+            System.out.println("Email: ");
+            email = teclado.nextLine();
 
-
-
+            // Verificar si el email ya está en uso
+            if (clientes.buscarClienteEmail(email) != null) {
+                System.out.println("El email ya está en uso. Introduce otro email.");
+            }
+        } while(!correctoEmail(email));
 
         return new Cliente(nombre, apellidos, email, maxEnvios);
     }
