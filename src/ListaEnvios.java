@@ -166,12 +166,17 @@ public class ListaEnvios {
         public boolean aniadirEnviosCsv (String fichero){
             PrintWriter pw = null;
             try {
-
+                pw = new PrintWriter(fichero);
+                for (int i = 0; i < envios.length; i++){
+                    pw.
+                }
                 return true;
-            } catch (Exception e) {
+            } catch (FileNotFoundException e) {
                 return false;
             } finally {
-
+                if (pw != null) {
+                    pw.close();
+                }
             }
         }
 
