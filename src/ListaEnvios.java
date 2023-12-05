@@ -168,7 +168,22 @@ public class ListaEnvios {
             try {
                 pw = new PrintWriter(fichero);
                 for (int i = 0; i < envios.length; i++){
-                    pw.
+                    if (envios[i]!= null) {
+                        pw.print(envios[i].getLocalizador());
+                        pw.print(";");
+                        pw.print(envios[i].getPorte().getID());
+                        pw.print(";");
+                        pw.print(envios[i].getCliente().getEmail());
+                        pw.print(";");
+                        pw.print(envios[i].getFila());
+                        pw.print(";");
+                        pw.print(envios[i].getColumna());
+                        pw.print(";");
+                        pw.print(envios[i].getPrecio());
+                        pw.println();
+                    } else {
+                        pw.println();
+                    }
                 }
                 return true;
             } catch (FileNotFoundException e) {
