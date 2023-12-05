@@ -102,8 +102,8 @@ public class ListaPortes {
                     fecha.coincide(portes[i].getSalida()))) {
                 i++;
             }
-            listaPortes[i] = portes[i];
-    }
+            listaPortes.insertarPorte(portes[i]);
+        }
         return listaPortes;
     }
 
@@ -111,7 +111,7 @@ public class ListaPortes {
      * TODO: Muestra por pantalla los Portes siguiendo el formato de los ejemplos del enunciado
      */
     public void listarPortes() {
-//Le faltan cosas, además de asegurarse que este es el formato.
+    //Le faltan cosas, además de asegurarse que este es el formato.
         for (int i = 0; i < portes.length; i++) {
             if (portes[i] != null) {
                 System.out.println(portes[i].toString());
@@ -195,10 +195,10 @@ public class ListaPortes {
                 Nave nave = naves.buscarNave(datos[1]);
                 PuertoEspacial origen = puertosEspaciales.buscarPuertoEspacial(datos[2]);
                 Integer muelleOrigen = Integer.parseInt(datos[3]);
-                Fecha salida = ;
+                Fecha salida = Fecha.fromString(datos[4]);;
                 PuertoEspacial destino = puertosEspaciales.buscarPuertoEspacial(datos[5]);
                 Integer muelleDestino = Integer.parseInt(datos[6]);
-                Fecha llegada = ;
+                Fecha llegada = Fecha.fromString(datos[7]);
                 Double precio = Double.parseDouble(datos[8]);
 
             }
