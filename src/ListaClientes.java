@@ -104,7 +104,7 @@ public class ListaClientes {
                 Cliente cliente = getCliente(i);
                 pw.print(cliente.getNombre() + ";");
                 pw.print(cliente.getApellidos() + ";");
-                pw.print(cliente.getEmail());
+                pw.println(cliente.getEmail());
             }
             return true;
         } catch (FileNotFoundException e) {
