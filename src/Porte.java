@@ -118,8 +118,11 @@ public class Porte {
      * @return el objeto Envio que corresponde, o null si está libre o se excede en el límite de fila y columna
      */
     public Envio buscarEnvio(int fila, int columna) {
-
-        return null;
+        if (huecos[fila][columna] || fila > huecos.length || columna > huecos.length) {
+            return null;
+        } else {
+            return listaEnvios.getEnvio(3).getPorte().buscarEnvio(fila, columna);
+        }
     }
 
 
@@ -302,8 +305,7 @@ public class Porte {
                                   ListaPortes portes) {
 
 
-
-        Porte porte = new Porte();
+        Porte porte = porte Porte();
         return null;
     }
 }
