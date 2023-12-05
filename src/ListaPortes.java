@@ -107,9 +107,7 @@ public class ListaPortes {
 //Le faltan cosas, además de asegurarse que este es el formato.
         for (int i = 0; i < portes.length; i++) {
             if (portes[i] != null) {
-                System.out.print(portes[i].getID() + ";" + portes[i].getNave().getModelo() + ";" + portes[i].getOrigen()
-                        + ";" + portes[i].getMuelleOrigen() + ";" + portes[i].getSalida() + ";" + portes[i].getDestino() + ";" + portes[i].getMuelleDestino() + ";" + portes[i].getLlegada() +
-                        ";" + portes[i].getPrecio());
+                System.out.println(portes[i].toString());
             }
         }
     }
