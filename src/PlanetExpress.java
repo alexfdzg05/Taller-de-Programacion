@@ -82,8 +82,11 @@ public class PlanetExpress {
      * @param ficheroEnvios
      */
     public void guardarDatos(String ficheroPuertos, String ficheroNaves, String ficheroPortes, String ficheroClientes, String ficheroEnvios) {
-
-
+    listaPuertosEspaciales.escribirPuertosEspacialesCsv(ficheroPuertos);
+    listaNaves.escribirNavesCsv(ficheroNaves);
+    listaPortes.escribirPortesCsv(ficheroPortes);
+    listaClientes.escribirClientesCsv(ficheroClientes);
+    // HERE FaltaEnvíos
 
     }
     public boolean maxPortesAlcanzado() {
