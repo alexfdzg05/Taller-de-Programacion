@@ -155,14 +155,14 @@ public class ListaPortes {
             pw = new PrintWriter(fichero);
             for(int i = 0; i < getOcupacion(); i++){
                 Porte porte = getPorte(i);
-                pw.println(porte.getID() + ";");
-                pw.println(porte.getNave() + ";");
-                pw.println(porte.getOrigen() + ";");
-                pw.println(porte.getMuelleOrigen() + ";");
-                pw.println(porte.getSalida() + ";");
-                pw.println(porte.getDestino() + ";");
-                pw.println(porte.getMuelleDestino() + ";");
-                pw.println(porte.getLlegada() + ";");
+                pw.print(porte.getID() + ";");
+                pw.print(porte.getNave() + ";");
+                pw.print(porte.getOrigen() + ";");
+                pw.print(porte.getMuelleOrigen() + ";");
+                pw.print(porte.getSalida() + ";");
+                pw.print(porte.getDestino() + ";");
+                pw.print(porte.getMuelleDestino() + ";");
+                pw.print(porte.getLlegada() + ";");
                 pw.println(porte.getPrecio());
             }
             pw.close();
