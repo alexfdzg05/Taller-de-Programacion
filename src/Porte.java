@@ -48,8 +48,8 @@ public class Porte {
     this.muelleDestino = muelleDestino;
     this.llegada = llegada;
     this.precio = precio;
-    huecos = new boolean[10][6];
-    listaEnvios = new ListaEnvios(6);
+    huecos = new boolean[nave.getFilas()][nave.getColumnas()];
+    listaEnvios = new ListaEnvios(nave.getFilas() * nave.getColumnas());
     }
     public String getID() {
         return id;
