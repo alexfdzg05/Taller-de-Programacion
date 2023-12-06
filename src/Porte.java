@@ -121,6 +121,10 @@ public class Porte {
         if (huecos[fila][columna] || fila > huecos.length || columna > huecos.length) {
             return null;
         } else {
+            int i = 0;
+            while (i<listaEnvios.getLength()){
+                listaEnvios.getEnvio(i).getPorte().buscarEnvio(fila, columna);
+            }
             return listaEnvios.getEnvio(3).getPorte().buscarEnvio(fila, columna);
         }
     }

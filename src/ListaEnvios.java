@@ -31,6 +31,9 @@ public class ListaEnvios {
         }
         return ocupacion;
     }
+    public int getLength(){
+        return envios.length;
+    }
 
     // TODO: ¿Está llena la lista de envíos?
     public boolean estaLlena() {
