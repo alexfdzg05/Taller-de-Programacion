@@ -111,9 +111,11 @@ public class PlanetExpress {
      * @return
      */
     public ListaPortes buscarPorte(Scanner teclado) {
-
-
-
+    String codigoOrigen, codigoDestino;
+    Fecha fecha;
+    codigoOrigen = Utilidades.leerCadena(teclado, "Ingrese codigo de puerto Origen:");
+    codigoDestino = Utilidades.leerCadena(teclado, "Ingrese codigo de puerto Destino:");
+    fecha = Utilidades.leerFecha(teclado, "Fecha de salida:");
         return listaPortes.buscarPortes(codigoOrigen, codigoDestino, fecha);
     }
 
