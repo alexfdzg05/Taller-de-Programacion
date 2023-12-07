@@ -139,8 +139,8 @@ public class Porte {
     public boolean ocuparHueco(Envio envio) {
         boolean ocupar = false;
         if(!porteLleno()) {
-            if (!huecos[envio.getFila() - 1][envio.getColumna() - 1]) {
-                huecos[envio.getFila() - 1][envio.getColumna() - 1] = true;
+            if (huecos[envio.getFila() - 1][envio.getColumna() - 1]) {
+                huecos[envio.getFila() - 1][envio.getColumna() - 1] = false;
                 listaEnvios.insertarEnvio(envio);
                 //HERE hay que poner numHuecosLibres++ de alguna forma;
                 ocupar = true;
