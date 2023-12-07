@@ -192,16 +192,13 @@ public class PlanetExpress {
             switch (opcion) {
                 case 1:     // TODO: Alta de Porte
                     if(!planetExpress.maxPortesAlcanzado()){
-                        Porte porte = Porte.altaPorte(teclado, rand,); //here
-                        if(planetExpress.insertarPorte(porte)){
-                            System.out.println("Porte " + porte.getID() + " creado correctamente");
-                        }
+                        Porte.altaPorte(teclado, rand, planetExpress.listaPuertosEspaciales, planetExpress.listaNaves, planetExpress.listaPortes);
                     } else System.out.println("No se pueden dar de alta más portes");
 
                     break;
                 case 2:     // TODO: Alta de Cliente
                     if(!planetExpress.maxPortesAlcanzado()){
-                        Cliente cliente = Cliente.altaCliente(teclado, rand,); //here
+                        Cliente cliente = Cliente.altaCliente(teclado, planetExpress.listaClientes, planetExpress.maxEnviosPorCliente); //here
                         if(planetExpress.insertarCliente(cliente)){
                             System.out.println("Cliente con " + cliente.getEmail() + " creado correctamente");
                         }

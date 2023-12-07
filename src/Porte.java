@@ -123,9 +123,10 @@ public class Porte {
         } else {
             int i = 0;
             while (i<listaEnvios.getLength()){
-                listaEnvios.getEnvio(i).getPorte().buscarEnvio(fila, columna);
+                listaEnvios.
+                i++;
             }
-            return listaEnvios.getEnvio(3).getPorte().buscarEnvio(fila, columna);
+            return listaEnvios.
         }
     }
 
