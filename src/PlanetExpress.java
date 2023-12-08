@@ -226,6 +226,7 @@ public class PlanetExpress {
                             } else System.out.println("No se pueden dar de alta más clientes");
                         } else {
                             Cliente cliente = planetExpress.listaClientes.seleccionarCliente(teclado, "Email del cliente:" );
+                            //
                             cliente.getListaEnvios().insertarEnvio(Envio.altaEnvio(teclado,rand,porte,cliente));
                             //colocar lo mismo que lo que está entre comentarios
                         }
