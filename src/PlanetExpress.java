@@ -206,7 +206,7 @@ public class PlanetExpress {
 
                     break;
                 case 3:     // TODO: Buscar Porte
-                    planetExpress.buscarPorte(teclado);
+                    planetExpress.buscarPorte(teclado).listarPortes();
 
                     break;
                 case 4:     // TODO: Listado de envíos de un cliente

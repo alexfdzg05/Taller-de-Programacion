@@ -96,13 +96,12 @@ public class ListaPortes {
      */
     public ListaPortes buscarPortes(String codigoOrigen, String codigoDestino, Fecha fecha) {
         ListaPortes listaPortes = new ListaPortes(portes.length);
-        int i = 0;
-        while (i< portes.length) {
-            while (!(codigoOrigen.equalsIgnoreCase(portes[i].getOrigen().getCodigo()) && (codigoDestino.equalsIgnoreCase(portes[i].getDestino().getCodigo())) &&
-                    fecha.coincide(portes[i].getSalida()))) {
-                i++;
+        for (int i = 0; i < portes.length; i++){
+            if (codigoOrigen.equalsIgnoreCase(portes[i].getOrigen().toString())&&
+                    codigoDestino.equalsIgnoreCase(portes[i].getDestino().toString())&&
+                    fecha.coincide(portes[i].getSalida())) {
+                listaPortes.insertarPorte(portes[i]);
             }
-            listaPortes.insertarPorte(portes[i]);
         }
         return listaPortes;
     }
