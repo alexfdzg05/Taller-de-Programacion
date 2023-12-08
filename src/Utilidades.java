@@ -96,6 +96,17 @@ public class Utilidades {
         }while (!(letra<=maximo && letra>=minimo));
         return letra;
     }
+    public static char leerEleccion(Scanner teclado, String mensaje, char a, char b){
+        char letra;
+        do {
+            System.out.println(mensaje);
+            letra = teclado.next().charAt(0);
+            if (letra != a  && letra != b){
+                System.out.println("\t El valor de entrada debe ser '"+a+"' o '"+b+"'");
+            }
+        }while(letra != a  && letra != b);
+        return letra;
+    }
 
 
     /**
