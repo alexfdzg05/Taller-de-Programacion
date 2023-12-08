@@ -208,7 +208,8 @@ public class PlanetExpress {
                 case 3:     // TODO: Buscar Porte
                     ListaPortes portes = planetExpress.buscarPorte(teclado);
                     portes.listarPortes();
-                    if (portes.seleccionarPorte(teclado, "Seleccione un porte", "cancelar")==null){
+                    Porte porte = portes.seleccionarPorte(teclado, "Seleccione un porte", "cancelar");
+                    if (porte == null){
                         break;
                     } else {
                         //Comprar billete para un nuevo pasajero (n), o para uno ya existente (e)? El valor de entrada debe ser 'n' o 'e'
@@ -219,15 +220,14 @@ public class PlanetExpress {
                                 if(planetExpress.insertarCliente(cliente)){
                                     System.out.println("Cliente con " + cliente.getEmail() + " creado correctamente");
                                     //Hasta aquí es igual que el altaCliente
-
-
-
+                                    cliente.getListaEnvios().insertarEnvio(Envio.altaEnvio(teclado,rand,porte,cliente));
                                     //A partir de aquí es igual al altaCliente
                                 }
                             } else System.out.println("No se pueden dar de alta más clientes");
                         } else {
-                            planetExpress.listaClientes.seleccionarCliente(teclado, "Email del cliente:" );
-
+                            Cliente cliente = planetExpress.listaClientes.seleccionarCliente(teclado, "Email del cliente:" );
+                            cliente.getListaEnvios().insertarEnvio(Envio.altaEnvio(teclado,rand,porte,cliente));
+                            //colocar lo mismo que lo que está entre comentarios
                         }
                     }
 
