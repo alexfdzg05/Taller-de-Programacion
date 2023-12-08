@@ -137,6 +137,9 @@ public class ListaPortes {
             System.out.println(mensaje);
             id = teclado.nextLine();
             porte = buscarPorte(id);
+            if (porte == null){
+                System.out.println("\t Porte no encontrado.");
+            }
         }while (porte == null && (!id.equalsIgnoreCase(cancelar)));
         return porte;
     }
