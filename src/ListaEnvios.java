@@ -153,6 +153,9 @@ public class ListaEnvios {
             do {
                 System.out.println(mensaje);
                 envio = buscarEnvio(teclado.nextLine());
+                if (envio == null){
+                    System.out.println("Localizador incorrecto: ");
+                }
             }while (envio == null);
             return envio;
         }
