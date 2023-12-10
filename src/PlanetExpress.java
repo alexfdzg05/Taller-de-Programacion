@@ -60,10 +60,10 @@ public class PlanetExpress {
         listaNaves = ListaNaves.leerNavesCsv(ficheroNaves, maxNaves);
         listaPortes = ListaPortes.leerPortesCsv(ficheroPortes, maxPortes,listaPuertosEspaciales,listaNaves);
         listaClientes = ListaClientes.leerClientesCsv(ficheroClientes,maxClientes, maxEnviosPorCliente);
-        for (int i = 0; i < listaClientes.getOcupacion(); i++){
+        for (int i = 0; i < listaClientes.; i++){
             Cliente cliente = listaClientes.getCliente(i);
             if (cliente != null){
-                for(int j = 0; j < cliente.; j++){ //here
+                for(int j = 0; j < cliente.getListaEnvios().getLength(); j++){ //here
                     listaEnvios.insertarEnvio(cliente.getEnvio(j));
                 }
             }

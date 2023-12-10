@@ -97,8 +97,9 @@ public class Cliente {
             System.out.println("Email: ");
             email = teclado.nextLine();
         } while(!correctoEmail(email));
-
-        return new Cliente(nombre, apellidos, email, maxEnvios);
+        Cliente cliente = new Cliente(nombre,apellidos,email,maxEnvios);
+        clientes.insertarCliente(cliente);
+        return cliente;
     }
 
 
