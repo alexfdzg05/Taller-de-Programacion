@@ -205,6 +205,7 @@ public class ListaEnvios {
          * @param clientes
          */
         public static void leerEnviosCsv (String ficheroEnvios, ListaPortes portes, ListaClientes clientes){
+            ListaEnvios listaEnvios = new ListaEnvios(clientes.);
             Scanner sc = null;
             BufferedReader br = null;
             boolean escrito = true;
@@ -223,7 +224,7 @@ public class ListaEnvios {
 
                     Envio envio = new Envio(localizador, porte, cliente, fila, columna, precio);
 
-                    escrito= listaEnvios  listaPuertosEspaciales.insertarPuertoEspacial(puertoEspacial);
+                    escrito = listaEnvios.insertarEnvio(envio);
 
                 }
             } catch (FileNotFoundException e) {
