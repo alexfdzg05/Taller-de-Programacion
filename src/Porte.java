@@ -121,12 +121,16 @@ public class Porte {
         if (huecos[fila][columna] || fila > huecos.length || columna > huecos.length) {
             return null;
         } else {
+            boolean salir = false;
             int i = 0;
-            while (i<listaEnvios.getLength()){
-                listaEnvios.
-                i++;
+            while (i<listaEnvios.getLength() && !salir){
+                if (listaEnvios.getEnvio(i).getFila() == fila && listaEnvios.getEnvio(i).getColumna() == columna){
+                    salir = true;
+                } else {
+                    i++;
+                }
             }
-            return listaEnvios.
+            return listaEnvios.getEnvio(i);
         }
     }
 
