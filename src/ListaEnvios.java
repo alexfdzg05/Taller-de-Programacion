@@ -222,7 +222,7 @@ public class ListaEnvios {
                 }
             } catch (FileNotFoundException e) {
                 System.out.println("No se ha encontrado el fichero de envíos");
-            } catch (Exception e) { //HERE aniadido
+            } catch (Exception e) {
                 System.out.println("Fichero Portes no encontrado.");
             } finally {
                 try {
