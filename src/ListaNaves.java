@@ -154,6 +154,7 @@ public class ListaNaves {
      */
     public static ListaNaves leerNavesCsv(String fichero, int capacidad) {
         ListaNaves listaNaves = new ListaNaves(capacidad);
+        Nave nave;
         Scanner sc = null;
         BufferedReader br = null;
         boolean escrito = true;
@@ -169,6 +170,8 @@ public class ListaNaves {
                 Integer columnas = Integer.parseInt(datos[3]);
                 Integer filas = Integer.parseInt(datos[4]);
                 Double alcance = Double.parseDouble(datos[5]);
+                nave = new Nave(marca,modelo,matricula,columnas,filas,alcance);
+                escrito = listaNaves.insertarNave(nave);
             }
         } catch (Exception e) {
             System.out.println("Fichero Clientes no encontrado.");

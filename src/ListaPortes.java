@@ -185,6 +185,7 @@ public class ListaPortes {
      */
     public static ListaPortes leerPortesCsv(String fichero, int capacidad, ListaPuertosEspaciales puertosEspaciales, ListaNaves naves) {
         ListaPortes listaPortes = new ListaPortes(capacidad);
+        Porte porte = null;
         BufferedReader br = null;
         boolean escrito = true;
         try {
@@ -202,7 +203,10 @@ public class ListaPortes {
                 Integer muelleDestino = Integer.parseInt(datos[6]);
                 Fecha llegada = Fecha.fromString(datos[7]);
                 Double precio = Double.parseDouble(datos[8]);
-
+                ListaEnvios listaEnvios = new ListaEnvios(nave.getFilas() * nave.getColumnas());
+                boolean huecos[][] = new boolean[nave.getColumnas()][nave.getFilas()];
+                porte = new Porte(ID,nave,origen,muelleOrigen,salida,destino,muelleDestino,llegada,precio);
+                escrito = listaPortes.insertarPorte(porte);
             }
         } catch (Exception e) {
             System.out.println("Fichero Portes no encontrado.");
