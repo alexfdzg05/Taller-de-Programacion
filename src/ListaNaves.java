@@ -133,8 +133,8 @@ public class ListaNaves {
                 pw.print(nave.getMarca() + ";");
                 pw.print(nave.getModelo() + ";");
                 pw.print(nave.getMatricula() + ";");
-                pw.print(nave.getColumnas() + ";");
                 pw.print(nave.getFilas() + ";");
+                pw.print(nave.getColumnas() + ";");
                 pw.print(nave.getAlcance());
             }
             return true;

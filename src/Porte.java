@@ -48,8 +48,8 @@ public class Porte {
     this.muelleDestino = muelleDestino;
     this.llegada = llegada;
     this.precio = precio;
-    huecos = new boolean[10][6];
-    listaEnvios = new ListaEnvios(6);
+    huecos = new boolean[nave.getFilas()][nave.getColumnas()];
+    listaEnvios = new ListaEnvios(nave.getFilas() * nave.getColumnas());
     }
     public String getID() {
         return id;
@@ -121,7 +121,16 @@ public class Porte {
         if (huecos[fila][columna] || fila > huecos.length || columna > huecos.length) {
             return null;
         } else {
-            return listaEnvios.getEnvio(3).getPorte().buscarEnvio(fila, columna);
+            boolean salir = false;
+            int i = 0;
+            while (i<listaEnvios.getLength() && !salir){
+                if (listaEnvios.getEnvio(i).getFila() == fila && listaEnvios.getEnvio(i).getColumna() == columna){
+                    salir = true;
+                } else {
+                    i++;
+                }
+            }
+            return listaEnvios.getEnvio(i);
         }
     }
 
@@ -135,8 +144,8 @@ public class Porte {
     public boolean ocuparHueco(Envio envio) {
         boolean ocupar = false;
         if(!porteLleno()) {
-            if (!huecos[envio.getFila() - 1][envio.getColumna() - 1]) {
-                huecos[envio.getFila() - 1][envio.getColumna() - 1] = true;
+            if (huecos[envio.getFila() - 1][envio.getColumna() - 1]) {
+                huecos[envio.getFila() - 1][envio.getColumna() - 1] = false;
                 listaEnvios.insertarEnvio(envio);
                 //HERE hay que poner numHuecosLibres++ de alguna forma;
                 ocupar = true;
@@ -304,8 +313,53 @@ public class Porte {
                                   ListaNaves naves,
                                   ListaPortes portes) {
 
+            String codigoOrigen = Utilidades.leerCadena(teclado, "Ingrese código de puerto Origen:");
+            while (puertosEspaciales.buscarPuertoEspacial(codigoOrigen)==null){
+                System.out.println("\n \t Código de puerto no encontrado.");
+                codigoOrigen = Utilidades.leerCadena(teclado, "Ingrese código de puerto Origen:");
+            }
 
-        Porte porte = porte Porte();
-        return null;
+            int muelleOrigen = Utilidades.leerNumero(teclado, "Ingrese el muelle de Origen (1 - 4)", 1,4);
+
+            String codigoDestino = Utilidades.leerCadena(teclado, "Ingrese código de puerto Destino: ");
+            while (puertosEspaciales.buscarPuertoEspacial(codigoDestino)==null){
+                System.out.println("\n \t Código de puerto no encontrado.");
+                codigoDestino = Utilidades.leerCadena(teclado, "Ingrese código de puerto Origen:");
+            }
+            PuertoEspacial puertoEspacialOrigen = puertosEspaciales.buscarPuertoEspacial(codigoOrigen);
+            PuertoEspacial puertoEspacialDestino = puertosEspaciales.buscarPuertoEspacial(codigoDestino);
+            int terminalDestino = Utilidades.leerNumero(teclado, "Ingrese Terminal Destino (1 -"+puertoEspacialDestino.getMuelles()+"):", 1, puertoEspacialDestino.getMuelles());
+
+            naves.mostrarNaves();
+
+            String matriculaNave = Utilidades.leerCadena(teclado, "Ingrese matrícula de la nave: ");
+            boolean salir = false;
+            while(!salir){
+                if (naves.buscarNave(matriculaNave)== null) {
+                    System.out.println("\n\t Matrícula de nave no encontrada");
+                    matriculaNave = Utilidades.leerCadena(teclado, "Ingrese matrícula de la nave: ");
+                } else if (naves.buscarNave(matriculaNave).getAlcance() < puertoEspacialOrigen.distancia(puertoEspacialDestino)) {
+                    System.out.println("\t Nave seleccionada con alcance insuficiente");
+                    matriculaNave = Utilidades.leerCadena(teclado, "Ingrese matrícula de la nave: ");
+                }
+                if (naves.buscarNave(matriculaNave)!= null && naves.buscarNave(matriculaNave).getAlcance() > puertoEspacialOrigen.distancia(puertoEspacialDestino)){
+                    salir = true;
+                }
+            }
+            Nave nave = naves.buscarNave(matriculaNave);
+            Fecha fechaSalida = Utilidades.leerFechaHora(teclado, "Introduzca la fecha de salida:");
+            Fecha fechaLlegada = Utilidades.leerFechaHora(teclado, "Introduzca la fecha de llegada:");
+            while (fechaLlegada.anterior(fechaSalida)){
+                System.out.println("Llegada debe ser posterior a salida");
+                 fechaSalida = Utilidades.leerFechaHora(teclado, "Introduzca la fecha de salida:");
+                 fechaLlegada = Utilidades.leerFechaHora(teclado, "Introduzca la fecha de llegada:");
+            }
+            double precio = Utilidades.leerNumero(teclado, "Ingrese precio de pasaje: ", 0);
+            String id = generarID(rand);
+
+        Porte porte = new Porte(id, nave,puertoEspacialOrigen, muelleOrigen, fechaSalida, puertoEspacialDestino, terminalDestino, fechaLlegada, precio);
+        portes.insertarPorte(porte);
+        System.out.println("Porte "+porte.getID()+" creado correctamente");
+        return porte;
     }
 }

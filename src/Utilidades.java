@@ -68,6 +68,18 @@ public class Utilidades {
         return numero;
     }
 
+    public static double leerNumero(Scanner teclado, String mensaje, double minimo){
+        System.out.print(mensaje);
+        double numero = teclado.nextDouble();
+        teclado.nextLine();
+        while(numero<minimo){
+            System.out.print(mensaje);
+            numero = teclado.nextDouble();
+            teclado.nextLine();
+        }
+        return numero;
+    }
+
     /**
      * TODO: TODO: Solicita una letra repetidamente hasta que se introduzca uno correcto (dentro de los límites)
      * @param teclado
@@ -82,6 +94,17 @@ public class Utilidades {
             System.out.println(mensaje);
             letra=teclado.next().charAt(0);
         }while (!(letra<=maximo && letra>=minimo));
+        return letra;
+    }
+    public static char leerEleccion(Scanner teclado, String mensaje, char a, char b){
+        char letra;
+        do {
+            System.out.println(mensaje);
+            letra = teclado.next().charAt(0);
+            if (letra != a  && letra != b){
+                System.out.println("\t El valor de entrada debe ser '"+a+"' o '"+b+"'");
+            }
+        }while(letra != a  && letra != b);
         return letra;
     }
 

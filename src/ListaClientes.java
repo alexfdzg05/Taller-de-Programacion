@@ -86,6 +86,9 @@ public class ListaClientes {
         do {
             System.out.println(mensaje);
             cliente = buscarClienteEmail(teclado.nextLine());
+            if (cliente == null){
+                System.out.println("Email no encontrado");
+            }
         }while (cliente == null);
         return cliente;
     }

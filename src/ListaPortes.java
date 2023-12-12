@@ -96,13 +96,12 @@ public class ListaPortes {
      */
     public ListaPortes buscarPortes(String codigoOrigen, String codigoDestino, Fecha fecha) {
         ListaPortes listaPortes = new ListaPortes(portes.length);
-        int i = 0;
-        while (i< portes.length) {
-            while (!(codigoOrigen.equalsIgnoreCase(portes[i].getOrigen().getCodigo()) && (codigoDestino.equalsIgnoreCase(portes[i].getDestino().getCodigo())) &&
-                    fecha.coincide(portes[i].getSalida()))) {
-                i++;
+        for (int i = 0; i < portes.length; i++){
+            if (codigoOrigen.equalsIgnoreCase(portes[i].getOrigen().toString())&&
+                    codigoDestino.equalsIgnoreCase(portes[i].getDestino().toString())&&
+                    fecha.coincide(portes[i].getSalida())) {
+                listaPortes.insertarPorte(portes[i]);
             }
-            listaPortes.insertarPorte(portes[i]);
         }
         return listaPortes;
     }
@@ -138,6 +137,9 @@ public class ListaPortes {
             System.out.println(mensaje);
             id = teclado.nextLine();
             porte = buscarPorte(id);
+            if (porte == null){
+                System.out.println("\t Porte no encontrado.");
+            }
         }while (porte == null && (!id.equalsIgnoreCase(cancelar)));
         return porte;
     }
@@ -155,14 +157,14 @@ public class ListaPortes {
             pw = new PrintWriter(fichero);
             for(int i = 0; i < getOcupacion(); i++){
                 Porte porte = getPorte(i);
-                pw.println(porte.getID() + ";");
-                pw.println(porte.getNave() + ";");
-                pw.println(porte.getOrigen() + ";");
-                pw.println(porte.getMuelleOrigen() + ";");
-                pw.println(porte.getSalida() + ";");
-                pw.println(porte.getDestino() + ";");
-                pw.println(porte.getMuelleDestino() + ";");
-                pw.println(porte.getLlegada() + ";");
+                pw.print(porte.getID() + ";");
+                pw.print(porte.getNave() + ";");
+                pw.print(porte.getOrigen() + ";");
+                pw.print(porte.getMuelleOrigen() + ";");
+                pw.print(porte.getSalida() + ";");
+                pw.print(porte.getDestino() + ";");
+                pw.print(porte.getMuelleDestino() + ";");
+                pw.print(porte.getLlegada() + ";");
                 pw.println(porte.getPrecio());
             }
             pw.close();
