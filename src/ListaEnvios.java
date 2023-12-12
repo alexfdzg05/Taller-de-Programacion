@@ -205,7 +205,7 @@ public class ListaEnvios {
          * @param clientes
          */
         public static void leerEnviosCsv (String ficheroEnvios, ListaPortes portes, ListaClientes clientes){
-            ListaEnvios listaEnvios = new ListaEnvios(clientes.);
+            ListaEnvios listaEnvios = new ListaEnvios(clientes.getLength());
             Scanner sc = null;
             BufferedReader br = null;
             boolean escrito = true;
@@ -223,7 +223,15 @@ public class ListaEnvios {
                     Integer precio = Integer.parseInt(datos[5]);
 
                     Envio envio = new Envio(localizador, porte, cliente, fila, columna, precio);
+                    if (portes.buscarPorte(porte.getID()) != null) {
+                        portes.buscarPorte(porte.getID()).desocuparHueco(localizador);
+                    }
+                    portes.buscarPorte(porte.getID()).ocuparHueco(envio);
 
+                    if (clientes.buscarClienteEmail(cliente.getEmail()) != null){
+                        clientes.buscarClienteEmail(cliente.getEmail()).cancelarEnvio(localizador);
+                    }
+                    clientes.buscarClienteEmail(cliente.getEmail()).aniadirEnvio(envio);
                     escrito = listaEnvios.insertarEnvio(envio);
 
                 }
