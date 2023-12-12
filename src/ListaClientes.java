@@ -47,6 +47,9 @@ public class ListaClientes {
     public Cliente getCliente(int i) {
         return clientes[i];
     }
+    public int getLength(){
+        return clientes.length;
+    }
     // TODO: Inserta el cliente en la lista de clientes
     public boolean insertarCliente(Cliente cliente) {
     int i = 0;
