@@ -60,7 +60,8 @@ public class PlanetExpress {
         listaNaves = ListaNaves.leerNavesCsv(ficheroNaves, maxNaves);
         listaPortes = ListaPortes.leerPortesCsv(ficheroPortes, maxPortes,listaPuertosEspaciales,listaNaves);
         listaClientes = ListaClientes.leerClientesCsv(ficheroClientes,maxClientes, maxEnviosPorCliente);
-        for (int i = 0; i < listaClientes.; i++){
+        ListaEnvios listaEnvios = new ListaEnvios(maxClientes * maxEnviosPorCliente);
+        for (int i = 0; i < listaClientes.getLength(); i++){
             Cliente cliente = listaClientes.getCliente(i);
             if (cliente != null){
                 for(int j = 0; j < cliente.getListaEnvios().getLength(); j++){ //here
@@ -68,7 +69,7 @@ public class PlanetExpress {
                 }
             }
         }
-        listaEnvios = ListaEnvios.leerEnviosCsv(ficheroEnvios, listaPortes, listaClientes); //HERE Falta envíos
+        ListaEnvios.leerEnviosCsv(ficheroEnvios, listaPortes, listaClientes); //HERE Falta envíos
     }
 
 
@@ -86,6 +87,11 @@ public class PlanetExpress {
     listaNaves.escribirNavesCsv(ficheroNaves);
     listaPortes.escribirPortesCsv(ficheroPortes);
     listaClientes.escribirClientesCsv(ficheroClientes);
+    for (int i = 0 ; i < listaClientes.getLength(); i++){
+        for (int j = 0; j < listaClientes.getCliente(i).getListaEnvios().getLength(); j++) {
+            listaClientes.getCliente(i).getEnvio(j).
+        }
+    }
     // HERE FaltaEnvíos
 
     }
