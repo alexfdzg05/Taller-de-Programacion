@@ -225,14 +225,14 @@ public class PlanetExpress {
                                 if(planetExpress.insertarCliente(cliente)){
                                     System.out.println("Cliente con " + cliente.getEmail() + " creado correctamente");
                                     //Hasta aquí es igual que el altaCliente
-                                    cliente.getListaEnvios().insertarEnvio(Envio.altaEnvio(teclado,rand,porte,cliente));
+                                    porte.ocuparHueco(Envio.altaEnvio(teclado,rand,porte,cliente));
                                     //A partir de aquí es igual al altaCliente
                                 }
                             } else System.out.println("No se pueden dar de alta más clientes");
                         } else {
                             Cliente cliente = planetExpress.listaClientes.seleccionarCliente(teclado, "Email del cliente:" );
                             //
-                            cliente.getListaEnvios().insertarEnvio(Envio.altaEnvio(teclado,rand,porte,cliente));
+                            porte.ocuparHueco(Envio.altaEnvio(teclado,rand,porte,cliente));
                             //colocar lo mismo que lo que está entre comentarios
                         }
                     }
