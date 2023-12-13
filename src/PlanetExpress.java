@@ -255,8 +255,9 @@ public class PlanetExpress {
                     planetExpress.listaPortes.listarPortes();
                     Porte porte1 = planetExpress.listaPortes.seleccionarPorte(teclado, "Seleccione un porte: ", "cancelar");
                     String nombreFichero = Utilidades.leerCadena(teclado, "Nombre del fichero: ");
-                    porte1.generarListaEnvios(nombreFichero);
-                    System.out.println("\n\t Fichero creado correctamente");
+                    if (porte1.generarListaEnvios(nombreFichero)) {
+                        System.out.println("\n\t Fichero creado correctamente");
+                    }
                     break;
             }
         } while (opcion != 0);
