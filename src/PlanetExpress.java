@@ -232,7 +232,9 @@ public class PlanetExpress {
                         } else {
                             Cliente cliente = planetExpress.listaClientes.seleccionarCliente(teclado, "Email del cliente:" );
                             //
-                            porte.ocuparHueco(Envio.altaEnvio(teclado,rand,porte,cliente));
+                            if (cliente != null) {
+                                porte.ocuparHueco(Envio.altaEnvio(teclado, rand, porte, cliente));
+                            }
                             //colocar lo mismo que lo que está entre comentarios
                         }
                     }
