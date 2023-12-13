@@ -224,25 +224,19 @@ public class Porte {
         //Primera fila, letras: 		A  B  C  D  E F
         for (int i = 0; i < nave.getColumnas(); i++) {
             char letraComienzo = 'A';
-            System.out.print(" " + (char) (letraComienzo + i) + " ");
+            System.out.print(" " + (char) (letraComienzo + i));
         }
         System.out.println();
 
         //Huecos
         for (int i = 1; i <= (nave.getFilas()); i++) {
+            System.out.print(i);
             for (int j = 0; j <= (nave.getColumnas()); j++) {
-                if (i < 10) {
-                    System.out.print(" " + (i));
-                } else {
-                    System.out.print(i);
-                }
-
                 if (huecoOcupado(i, j)) {
-                    System.out.print("[X]");
+                    System.out.print(" [X]");
                 } else {
-                    System.out.print("[ ]");
+                    System.out.print(" [ ]");
                 }
-
             }
             System.out.println();
         }
