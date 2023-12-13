@@ -124,10 +124,21 @@ public class PlanetExpress {
      */
     public void contratarEnvio(Scanner teclado, Random rand, Porte porte) {
         if (porte != null) {
+            Cliente cliente;
+            char opcion;
+            opcion = Utilidades.leerEleccion(teclado,  "(1) Contratar el Envío como un Cliente ya registrado +" +
+                    "\n (2) contratar el Envío como un nuevo Cliente", '1','2');
 
+            if (opcion == '1'){
+                cliente = listaClientes.seleccionarCliente(teclado, "Email del cliente: ");
+            } else {
+                cliente = Cliente.altaCliente(teclado,listaClientes,maxEnviosPorCliente);
+            }
 
-
-
+            porte.imprimirMatrizHuecos();
+            if (cliente != null) {
+                Envio.altaEnvio(teclado, rand, porte, cliente);
+            }
         }
     }
 
