@@ -90,9 +90,11 @@ public class ListaClientes {
         do {
             System.out.println(mensaje);
             email = teclado.nextLine();
-            cliente = buscarClienteEmail(email);
-            if (cliente == null){
-                System.out.println("Email no encontrado");
+            if (!email.equalsIgnoreCase("cancelar")) {
+                cliente = buscarClienteEmail(email);
+                if (cliente == null) {
+                    System.out.println("Email no encontrado");
+                }
             }
         }while (cliente == null && !email.equalsIgnoreCase("cancelar"));
         return cliente;

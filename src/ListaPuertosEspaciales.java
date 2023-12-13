@@ -96,10 +96,14 @@ public class ListaPuertosEspaciales {
      */
     public PuertoEspacial seleccionarPuertoEspacial(Scanner teclado, String mensaje) {
         PuertoEspacial puertoEspacial = null;
+        String codigo;
         do {
             System.out.println(mensaje);
-            puertoEspacial = buscarPuertoEspacial(teclado.nextLine());
-        }while (puertoEspacial == null);
+            codigo = teclado.nextLine();
+            if (!codigo.equalsIgnoreCase("cancelar")) {
+                puertoEspacial = buscarPuertoEspacial(codigo);
+            }
+        }while (puertoEspacial == null && !codigo.equalsIgnoreCase("cancelar"));
         return puertoEspacial;
     }
 

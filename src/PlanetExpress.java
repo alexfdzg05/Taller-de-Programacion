@@ -243,13 +243,15 @@ public class PlanetExpress {
                 case 4:     // TODO: Listado de envíos de un cliente
                     Cliente cliente = planetExpress.listaClientes.seleccionarCliente(teclado, "Email del cliente: ");
                     Envio envio = cliente.seleccionarEnvio(teclado, "Seleccione un envío: ");
-                    char accion = Utilidades.leerEleccion(teclado, "¿Cancelar envío (c), o generar factura (f)?", 'c', 'f');
-                    if (accion == 'c'){
-                        envio.cancelar();
-                    } else {
-                        String nombreFichero = Utilidades.leerCadena(teclado, "Nombre del fichero: ");
-                        if (envio.generarFactura(nombreFichero)) {
-                            System.out.println("\n \t Factura generada correctamente");
+                    if (cliente != null && envio != null) {
+                        char accion = Utilidades.leerEleccion(teclado, "¿Cancelar envío (c), o generar factura (f)?", 'c', 'f');
+                        if (accion == 'c') {
+                            envio.cancelar();
+                        } else {
+                            String nombreFichero = Utilidades.leerCadena(teclado, "Nombre del fichero: ");
+                            if (envio.generarFactura(nombreFichero)) {
+                                System.out.println("\n \t Factura generada correctamente");
+                            }
                         }
                     }
                     break;

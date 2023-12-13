@@ -150,13 +150,17 @@ public class ListaEnvios {
          */
         public Envio seleccionarEnvio (Scanner teclado, String mensaje){
             Envio envio = null;
+            String localizador;
             do {
                 System.out.println(mensaje);
-                envio = buscarEnvio(teclado.nextLine());
-                if (envio == null){
-                    System.out.println("Localizador incorrecto: ");
+                localizador = teclado.nextLine();
+                if (!localizador.equalsIgnoreCase("cancelar")) {
+                    envio = buscarEnvio(localizador);
+                    if (envio == null) {
+                        System.out.println("Localizador incorrecto: ");
+                    }
                 }
-            }while (envio == null);
+            }while (envio == null && !localizador.equalsIgnoreCase("cancelar"));
             return envio;
         }
 

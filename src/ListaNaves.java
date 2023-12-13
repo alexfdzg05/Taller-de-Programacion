@@ -108,11 +108,13 @@ public class ListaNaves {
         Nave nave = null;
         System.out.println(mensaje+":");
         String matricula = teclado.nextLine();
-        if (buscarNave(matricula).getAlcance() >= alcance){
-            System.out.println("Nave seleccionada con alcance suficiente");
-            nave = buscarNave(matricula);
-        } else{
-            System.out.println("Nave seleccionada con alcance insuficiente");
+        if (!matricula.equalsIgnoreCase("cancelar")) {
+            if (buscarNave(matricula).getAlcance() >= alcance) {
+                System.out.println("Nave seleccionada con alcance suficiente");
+                nave = buscarNave(matricula);
+            } else {
+                System.out.println("Nave seleccionada con alcance insuficiente");
+            }
         }
 
         return nave;
