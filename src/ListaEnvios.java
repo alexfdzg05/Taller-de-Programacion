@@ -232,7 +232,7 @@ public class ListaEnvios {
                         clientes.buscarClienteEmail(cliente.getEmail()).cancelarEnvio(localizador);
                     }
                     clientes.buscarClienteEmail(cliente.getEmail()).aniadirEnvio(envio);
-                    escrito = listaEnvios.insertarEnvio(envio);
+                    escrito = listaEnvios.insertarEnvio(envio);//HERE revisar el ocuparHueco
 
                 }
             } catch (FileNotFoundException e) {
