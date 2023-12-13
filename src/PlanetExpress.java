@@ -243,11 +243,12 @@ public class PlanetExpress {
                     Envio envio = cliente.seleccionarEnvio(teclado, "Seleccione un envío: ");
                     char accion = Utilidades.leerEleccion(teclado, "¿Cancelar envío (c), o generar factura (f)?", 'c', 'f');
                     if (accion == 'c'){
-                        break;
+                        envio.cancelar();
                     } else {
                         String nombreFichero = Utilidades.leerCadena(teclado, "Nombre del fichero: ");
-                        envio.generarFactura(nombreFichero);
-                        System.out.println("\n \t Factura generada correctamente");
+                        if (envio.generarFactura(nombreFichero)) {
+                            System.out.println("\n \t Factura generada correctamente");
+                        }
                     }
                     break;
                 case 5:     // TODO: Lista de envíos de un porte
