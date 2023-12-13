@@ -176,7 +176,7 @@ public class ListaNaves {
                 escrito = listaNaves.insertarNave(nave);
             }
         } catch (Exception e) {
-            System.out.println("Fichero Clientes no encontrado.");
+            System.out.println("Fichero Naves no encontrado.");
             return null;
         } finally {
             try {

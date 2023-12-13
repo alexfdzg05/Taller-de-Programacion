@@ -166,7 +166,7 @@ public class ListaPuertosEspaciales {
 
             }
         } catch (Exception e) {
-            System.out.println("Fichero Clientes no encontrado.");
+            System.out.println("Fichero PuertosEspaciales no encontrado.");
             return null;
         } finally {
             try {
