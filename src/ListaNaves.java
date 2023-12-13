@@ -169,9 +169,9 @@ public class ListaNaves {
                 String marca = datos[0];
                 String modelo = datos[1];
                 String matricula = datos[2];
-                Integer columnas = Integer.parseInt(datos[3]);
-                Integer filas = Integer.parseInt(datos[4]);
-                Double alcance = Double.parseDouble(datos[5]);
+                int columnas = Integer.parseInt(datos[3]);
+                int filas = Integer.parseInt(datos[4]);
+                double alcance = Double.parseDouble(datos[5]);
                 nave = new Nave(marca,modelo,matricula,columnas,filas,alcance);
                 escrito = listaNaves.insertarNave(nave);
             }

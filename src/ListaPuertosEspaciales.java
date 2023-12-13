@@ -155,10 +155,10 @@ public class ListaPuertosEspaciales {
                 String[] datos = linea.split(";");
                 String nombre = datos[0];
                 String codigo = datos[1];
-                Double radio = Double.parseDouble(datos[2]);
-                Double azimut = Double.parseDouble(datos[3]);
-                Double polar = Double.parseDouble(datos[4]);
-                Integer numMuelles = Integer.parseInt(datos[3]);
+                double radio = Double.parseDouble(datos[2]);
+                double azimut = Double.parseDouble(datos[3]);
+                double polar = Double.parseDouble(datos[4]);
+                int numMuelles = Integer.parseInt(datos[3]);
 
                 PuertoEspacial puertoEspacial = new PuertoEspacial(nombre, codigo, radio, azimut, polar, numMuelles);
 
