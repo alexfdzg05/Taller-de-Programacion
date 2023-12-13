@@ -199,12 +199,12 @@ public class ListaPortes {
                 String ID = datos[0];
                 Nave nave = naves.buscarNave(datos[1]);
                 PuertoEspacial origen = puertosEspaciales.buscarPuertoEspacial(datos[2]);
-                Integer muelleOrigen = Integer.parseInt(datos[3]);
+                int muelleOrigen = Integer.parseInt(datos[3]);
                 Fecha salida = Fecha.fromString(datos[4]);;
                 PuertoEspacial destino = puertosEspaciales.buscarPuertoEspacial(datos[5]);
-                Integer muelleDestino = Integer.parseInt(datos[6]);
+                int muelleDestino = Integer.parseInt(datos[6]);
                 Fecha llegada = Fecha.fromString(datos[7]);
-                Double precio = Double.parseDouble(datos[8]);
+                double precio = Double.parseDouble(datos[8]);
                 porte = new Porte(ID,nave,origen,muelleOrigen,salida,destino,muelleDestino,llegada,precio);
                 escrito = listaPortes.insertarPorte(porte);
             }
