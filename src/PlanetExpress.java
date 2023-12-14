@@ -243,7 +243,6 @@ public class PlanetExpress {
                 case 4:     // TODO: Listado de envíos de un cliente
                     Cliente cliente = planetExpress.listaClientes.seleccionarCliente(teclado, "Email del cliente: ");
                     Envio envio = cliente.seleccionarEnvio(teclado, "Seleccione un envío: ");
-                    if (cliente != null && envio != null) {
                         char accion = Utilidades.leerEleccion(teclado, "¿Cancelar envío (c), o generar factura (f)?", 'c', 'f');
                         if (accion == 'c') {
                             envio.cancelar();
@@ -253,7 +252,7 @@ public class PlanetExpress {
                                 System.out.println("\n \t Factura generada correctamente");
                             }
                         }
-                    }
+
                     break;
                 case 5:     // TODO: Lista de envíos de un porte
                     planetExpress.listaPortes.listarPortes();
