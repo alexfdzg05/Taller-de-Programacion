@@ -67,6 +67,7 @@ public class ListaEnvios {
                 i++;
             }
             envios[i] = envio;
+            esPosible = true;
         }
         return esPosible;
     }
@@ -227,15 +228,16 @@ public class ListaEnvios {
                     double precio = Double.parseDouble(datos[5]);
 
                     Envio envio = new Envio(localizador, porte, cliente, fila, columna, precio);
-                    if (portes.buscarPorte(porte.getID()) != null) {
-                        portes.buscarPorte(porte.getID()).desocuparHueco(localizador);
+                    if (porte != null) {
+                        porte.desocuparHueco(localizador);
+                        porte.ocuparHueco(envio);
                     }
-                    portes.buscarPorte(porte.getID()).ocuparHueco(envio);
 
-                    if (clientes.buscarClienteEmail(cliente.getEmail()) != null) {
-                        clientes.buscarClienteEmail(cliente.getEmail()).cancelarEnvio(localizador);
+                    if (cliente != null) {
+                        cliente.cancelarEnvio(localizador);
+                        cliente.aniadirEnvio(envio);
+
                     }
-                    clientes.buscarClienteEmail(cliente.getEmail()).aniadirEnvio(envio);
                     escrito = listaEnvios.insertarEnvio(envio);//HERE revisar el ocuparHueco
 
                 }
