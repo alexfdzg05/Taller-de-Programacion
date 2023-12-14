@@ -155,7 +155,7 @@ public class Envio {
         String id = generarLocalizador(rand, porte.getID());
         System.out.println("\t Envío "+id+" creado correctamente");
         Envio envio = new Envio(id, porte, cliente, fila, columna, precio);
-        cliente.getListaEnvios().insertarEnvio(envio);
+        porte.ocuparHueco(envio);
         return envio;
     }
 }

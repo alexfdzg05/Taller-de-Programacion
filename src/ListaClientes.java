@@ -47,6 +47,9 @@ public class ListaClientes {
     public Cliente getCliente(int i) {
         return clientes[i];
     }
+    public int getLength(){
+        return clientes.length;
+    }
     // TODO: Inserta el cliente en la lista de clientes
     public boolean insertarCliente(Cliente cliente) {
     int i = 0;
@@ -83,13 +86,17 @@ public class ListaClientes {
      */
     public Cliente seleccionarCliente(Scanner teclado, String mensaje) {
         Cliente cliente = null;
+        String email;
         do {
             System.out.println(mensaje);
-            cliente = buscarClienteEmail(teclado.nextLine());
-            if (cliente == null){
-                System.out.println("Email no encontrado");
+            email = teclado.nextLine();
+            if (!email.equalsIgnoreCase("cancelar")) {
+                cliente = buscarClienteEmail(email);
+                if (cliente == null) {
+                    System.out.println("Email no encontrado");
+                }
             }
-        }while (cliente == null);
+        }while (cliente == null && !email.equalsIgnoreCase("cancelar"));
         return cliente;
     }
 

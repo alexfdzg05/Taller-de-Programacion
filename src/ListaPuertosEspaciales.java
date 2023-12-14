@@ -96,10 +96,14 @@ public class ListaPuertosEspaciales {
      */
     public PuertoEspacial seleccionarPuertoEspacial(Scanner teclado, String mensaje) {
         PuertoEspacial puertoEspacial = null;
+        String codigo;
         do {
             System.out.println(mensaje);
-            puertoEspacial = buscarPuertoEspacial(teclado.nextLine());
-        }while (puertoEspacial == null);
+            codigo = teclado.nextLine();
+            if (!codigo.equalsIgnoreCase("cancelar")) {
+                puertoEspacial = buscarPuertoEspacial(codigo);
+            }
+        }while (puertoEspacial == null && !codigo.equalsIgnoreCase("cancelar"));
         return puertoEspacial;
     }
 
@@ -151,10 +155,10 @@ public class ListaPuertosEspaciales {
                 String[] datos = linea.split(";");
                 String nombre = datos[0];
                 String codigo = datos[1];
-                Double radio = Double.parseDouble(datos[2]);
-                Double azimut = Double.parseDouble(datos[3]);
-                Double polar = Double.parseDouble(datos[4]);
-                Integer numMuelles = Integer.parseInt(datos[3]);
+                double radio = Double.parseDouble(datos[2]);
+                double azimut = Double.parseDouble(datos[3]);
+                double polar = Double.parseDouble(datos[4]);
+                int numMuelles = Integer.parseInt(datos[3]);
 
                 PuertoEspacial puertoEspacial = new PuertoEspacial(nombre, codigo, radio, azimut, polar, numMuelles);
 
@@ -162,7 +166,7 @@ public class ListaPuertosEspaciales {
 
             }
         } catch (Exception e) {
-            System.out.println("Fichero Clientes no encontrado.");
+            System.out.println("Fichero PuertosEspaciales no encontrado.");
             return null;
         } finally {
             try {

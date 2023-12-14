@@ -136,9 +136,11 @@ public class ListaPortes {
         do {
             System.out.println(mensaje);
             id = teclado.nextLine();
-            porte = buscarPorte(id);
-            if (porte == null){
-                System.out.println("\t Porte no encontrado.");
+            if (!id.equalsIgnoreCase("cancelar")){
+                porte = buscarPorte(id);
+                if (porte == null) {
+                    System.out.println("\t Porte no encontrado.");
+                }
             }
         }while (porte == null && (!id.equalsIgnoreCase(cancelar)));
         return porte;
@@ -185,6 +187,7 @@ public class ListaPortes {
      */
     public static ListaPortes leerPortesCsv(String fichero, int capacidad, ListaPuertosEspaciales puertosEspaciales, ListaNaves naves) {
         ListaPortes listaPortes = new ListaPortes(capacidad);
+        Porte porte = null;
         BufferedReader br = null;
         boolean escrito = true;
         try {
@@ -196,13 +199,14 @@ public class ListaPortes {
                 String ID = datos[0];
                 Nave nave = naves.buscarNave(datos[1]);
                 PuertoEspacial origen = puertosEspaciales.buscarPuertoEspacial(datos[2]);
-                Integer muelleOrigen = Integer.parseInt(datos[3]);
+                int muelleOrigen = Integer.parseInt(datos[3]);
                 Fecha salida = Fecha.fromString(datos[4]);;
                 PuertoEspacial destino = puertosEspaciales.buscarPuertoEspacial(datos[5]);
-                Integer muelleDestino = Integer.parseInt(datos[6]);
+                int muelleDestino = Integer.parseInt(datos[6]);
                 Fecha llegada = Fecha.fromString(datos[7]);
-                Double precio = Double.parseDouble(datos[8]);
-
+                double precio = Double.parseDouble(datos[8]);
+                porte = new Porte(ID,nave,origen,muelleOrigen,salida,destino,muelleDestino,llegada,precio);
+                escrito = listaPortes.insertarPorte(porte);
             }
         } catch (Exception e) {
             System.out.println("Fichero Portes no encontrado.");

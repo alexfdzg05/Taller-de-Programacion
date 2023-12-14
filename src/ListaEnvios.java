@@ -150,13 +150,17 @@ public class ListaEnvios {
          */
         public Envio seleccionarEnvio (Scanner teclado, String mensaje){
             Envio envio = null;
+            String localizador;
             do {
                 System.out.println(mensaje);
-                envio = buscarEnvio(teclado.nextLine());
-                if (envio == null){
-                    System.out.println("Localizador incorrecto: ");
+                localizador = teclado.nextLine();
+                if (!localizador.equalsIgnoreCase("cancelar")) {
+                    envio = buscarEnvio(localizador);
+                    if (envio == null) {
+                        System.out.println("Localizador incorrecto: ");
+                    }
                 }
-            }while (envio == null);
+            }while (envio == null && !localizador.equalsIgnoreCase("cancelar"));
             return envio;
         }
 
@@ -205,7 +209,7 @@ public class ListaEnvios {
          * @param clientes
          */
         public static void leerEnviosCsv (String ficheroEnvios, ListaPortes portes, ListaClientes clientes){
-            ListaEnvios listaEnvios = new ListaEnvios(clientes.);
+            ListaEnvios listaEnvios = new ListaEnvios(clientes.getLength());
             Scanner sc = null;
             BufferedReader br = null;
             boolean escrito = true;
@@ -223,14 +227,22 @@ public class ListaEnvios {
                     Integer precio = Integer.parseInt(datos[5]);
 
                     Envio envio = new Envio(localizador, porte, cliente, fila, columna, precio);
+                    if (portes.buscarPorte(porte.getID()) != null) {
+                        portes.buscarPorte(porte.getID()).desocuparHueco(localizador);
+                    }
+                    portes.buscarPorte(porte.getID()).ocuparHueco(envio);
 
-                    escrito = listaEnvios.insertarEnvio(envio);
+                    if (clientes.buscarClienteEmail(cliente.getEmail()) != null){
+                        clientes.buscarClienteEmail(cliente.getEmail()).cancelarEnvio(localizador);
+                    }
+                    clientes.buscarClienteEmail(cliente.getEmail()).aniadirEnvio(envio);
+                    escrito = listaEnvios.insertarEnvio(envio);//HERE revisar el ocuparHueco
 
                 }
             } catch (FileNotFoundException e) {
                 System.out.println("No se ha encontrado el fichero de envíos");
-            } catch (Exception e) {
-                System.out.println("Fichero Portes no encontrado.");
+            } catch (Exception e) { //HERE aniadido
+                System.out.println("Fichero Envios no encontrado.");
             } finally {
                 try {
                     if (br != null) {

@@ -108,11 +108,13 @@ public class ListaNaves {
         Nave nave = null;
         System.out.println(mensaje+":");
         String matricula = teclado.nextLine();
-        if (buscarNave(matricula).getAlcance() >= alcance){
-            System.out.println("Nave seleccionada con alcance suficiente");
-            nave = buscarNave(matricula);
-        } else{
-            System.out.println("Nave seleccionada con alcance insuficiente");
+        if (!matricula.equalsIgnoreCase("cancelar")) {
+            if (buscarNave(matricula).getAlcance() >= alcance) {
+                System.out.println("Nave seleccionada con alcance suficiente");
+                nave = buscarNave(matricula);
+            } else {
+                System.out.println("Nave seleccionada con alcance insuficiente");
+            }
         }
 
         return nave;
@@ -154,6 +156,7 @@ public class ListaNaves {
      */
     public static ListaNaves leerNavesCsv(String fichero, int capacidad) {
         ListaNaves listaNaves = new ListaNaves(capacidad);
+        Nave nave;
         Scanner sc = null;
         BufferedReader br = null;
         boolean escrito = true;
@@ -166,12 +169,14 @@ public class ListaNaves {
                 String marca = datos[0];
                 String modelo = datos[1];
                 String matricula = datos[2];
-                Integer columnas = Integer.parseInt(datos[3]);
-                Integer filas = Integer.parseInt(datos[4]);
-                Double alcance = Double.parseDouble(datos[5]);
+                int filas = Integer.parseInt(datos[3]);
+                int columnas = Integer.parseInt(datos[4]);
+                double alcance = Double.parseDouble(datos[5]);
+                nave = new Nave(marca,modelo,matricula,columnas,filas,alcance);
+                escrito = listaNaves.insertarNave(nave);
             }
         } catch (Exception e) {
-            System.out.println("Fichero Clientes no encontrado.");
+            System.out.println("Fichero Naves no encontrado.");
             return null;
         } finally {
             try {
