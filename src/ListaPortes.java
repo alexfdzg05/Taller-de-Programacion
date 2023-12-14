@@ -39,8 +39,9 @@ public class ListaPortes {
         while (llena && (i < portes.length)) {
             if (portes[i] == null) {
                 llena = false;
+            } else {
+                i++;
             }
-            i++;
         }
         return llena;
     }
@@ -64,6 +65,7 @@ public class ListaPortes {
                 i++;
             }
             portes[i] = porte;
+            esPosible = true;
         }
         return esPosible;
     }
