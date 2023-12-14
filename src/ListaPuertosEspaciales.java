@@ -68,6 +68,7 @@ public class ListaPuertosEspaciales {
                 i++;
             }
             lista[i] = puertoEspacial;
+            esPosible = true;
         }
         return esPosible;
     }
