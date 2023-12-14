@@ -63,6 +63,7 @@ public class ListaNaves {
                 i++;
             }
             naves[i] = nave;
+            esPosible = true;
         }
         return esPosible;
     }
