@@ -188,13 +188,14 @@ public class ListaPortes {
     public static ListaPortes leerPortesCsv(String fichero, int capacidad, ListaPuertosEspaciales puertosEspaciales, ListaNaves naves) {
         ListaPortes listaPortes = new ListaPortes(capacidad);
         Porte porte = null;
-        BufferedReader br = null;
+        Scanner sc = null;
         boolean escrito = true;
         try {
-            br = new BufferedReader(new FileReader(fichero));
+            sc = new Scanner(new FileReader(fichero));
             String linea;
 
-            while((linea = br.readLine()) != null && escrito){
+            while(sc.hasNextLine() && escrito){
+                linea = sc.nextLine();
                 String[] datos = linea.split(";");
                 String ID = datos[0];
                 Nave nave = naves.buscarNave(datos[1]);

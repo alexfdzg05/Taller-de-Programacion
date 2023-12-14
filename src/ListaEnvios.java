@@ -208,16 +208,16 @@ public class ListaEnvios {
          * @param portes
          * @param clientes
          */
-        public static void leerEnviosCsv (String ficheroEnvios, ListaPortes portes, ListaClientes clientes){
+        public static void leerEnviosCsv (String ficheroEnvios, ListaPortes portes, ListaClientes clientes) {
             ListaEnvios listaEnvios = new ListaEnvios(clientes.getLength());
             Scanner sc = null;
-            BufferedReader br = null;
             boolean escrito = true;
             try {
-                br = new BufferedReader(new FileReader(ficheroEnvios));
+                sc = new Scanner(new FileReader(ficheroEnvios));
                 String linea;
 
-                while((linea = br.readLine()) != null && escrito){
+                while (sc.hasNextLine() && escrito) {
+                    linea = sc.nextLine();
                     String[] datos = linea.split(";");
                     String localizador = datos[0];
                     Porte porte = portes.buscarPorte(datos[1]);
@@ -232,7 +232,7 @@ public class ListaEnvios {
                     }
                     portes.buscarPorte(porte.getID()).ocuparHueco(envio);
 
-                    if (clientes.buscarClienteEmail(cliente.getEmail()) != null){
+                    if (clientes.buscarClienteEmail(cliente.getEmail()) != null) {
                         clientes.buscarClienteEmail(cliente.getEmail()).cancelarEnvio(localizador);
                     }
                     clientes.buscarClienteEmail(cliente.getEmail()).aniadirEnvio(envio);
@@ -244,12 +244,8 @@ public class ListaEnvios {
             } catch (Exception e) { //HERE aniadido
                 System.out.println("Fichero Envios no encontrado.");
             } finally {
-                try {
-                    if (br != null) {
-                        br.close();
-                    }
-                } catch (IOException e) {
-                    System.out.println("Error de cierre de fichero Billetes.");
+                if (sc != null) {
+                    sc.close();
                 }
             }
         }

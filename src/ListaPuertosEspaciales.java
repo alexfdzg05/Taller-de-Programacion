@@ -21,18 +21,20 @@ public class ListaPuertosEspaciales {
      * @param capacidad
      */
     public ListaPuertosEspaciales(int capacidad) {
-    lista = new PuertoEspacial[capacidad];
+        lista = new PuertoEspacial[capacidad];
     }
+
     // TODO: Devuelve el número de puertos espaciales que hay en la lista
     public int getOcupacion() {
         int ocupacion = 0;
-    for (int i = 0; i < lista.length; i++){
-        if (lista[i] != null){
-            ocupacion++;
+        for (int i = 0; i < lista.length; i++) {
+            if (lista[i] != null) {
+                ocupacion++;
+            }
         }
+        return ocupacion;
     }
-    return ocupacion;
-    }
+
     // TODO: ¿Está llena la lista?
     public boolean estaLlena() {
         boolean llena = true;
@@ -46,6 +48,7 @@ public class ListaPuertosEspaciales {
         }
         return llena;
     }
+
     // TODO: Devuelve un puerto espacial dado un indice
     public PuertoEspacial getPuertoEspacial(int i) {
         return lista[i];
@@ -53,32 +56,34 @@ public class ListaPuertosEspaciales {
 
     /**
      * TODO: insertamos un Puerto espacial nuevo en la lista
+     *
      * @param puertoEspacial
      * @return true en caso de que se añada correctamente, false en caso de lista llena o error
      */
     public boolean insertarPuertoEspacial(PuertoEspacial puertoEspacial) {
-    boolean esPosible = false;
-    int i = 0;
-    if (!estaLlena()){
-        while (i<lista.length && lista[i]!=null){
-            i++;
+        boolean esPosible = false;
+        int i = 0;
+        if (!estaLlena()) {
+            while (i < lista.length && lista[i] != null) {
+                i++;
+            }
+            lista[i] = puertoEspacial;
         }
-        lista[i] = puertoEspacial;
-    }
         return esPosible;
     }
 
     /**
      * TODO: Buscamos un Puerto espacial a partir del codigo pasado como parámetro
+     *
      * @param codigo
      * @return Puerto espacial que encontramos o null si no existe
      */
     public PuertoEspacial buscarPuertoEspacial(String codigo) {
-    int i = 0;
-        while (!lista[i].getCodigo().equalsIgnoreCase(codigo)&& i< lista.length){
+        int i = 0;
+        while (!lista[i].getCodigo().equalsIgnoreCase(codigo) && i < lista.length) {
             i++;
         }
-        if (lista[i].getCodigo().equalsIgnoreCase(codigo)){
+        if (lista[i].getCodigo().equalsIgnoreCase(codigo)) {
             return lista[i];
         } else {
             return null;
@@ -90,6 +95,7 @@ public class ListaPuertosEspaciales {
      * TODO: Permite seleccionar un puerto espacial existente a partir de su código, usando el mensaje pasado como
      *  argumento para la solicitud y siguiendo el orden y los textos mostrados en el enunciado.
      *  La función solicita repetidamente el código hasta que se introduzca uno correcto
+     *
      * @param teclado
      * @param mensaje
      * @return
@@ -103,12 +109,13 @@ public class ListaPuertosEspaciales {
             if (!codigo.equalsIgnoreCase("cancelar")) {
                 puertoEspacial = buscarPuertoEspacial(codigo);
             }
-        }while (puertoEspacial == null && !codigo.equalsIgnoreCase("cancelar"));
+        } while (puertoEspacial == null && !codigo.equalsIgnoreCase("cancelar"));
         return puertoEspacial;
     }
 
     /**
      * TODO: Genera un fichero CSV con la lista de puertos espaciales, SOBREESCRIBIENDOLO
+     *
      * @param nombre
      * @return
      */
@@ -116,7 +123,7 @@ public class ListaPuertosEspaciales {
         PrintWriter pw = null;
         try {
             pw = new PrintWriter(nombre);
-            for (int i = 0; i < getOcupacion(); i++){
+            for (int i = 0; i < getOcupacion(); i++) {
                 PuertoEspacial puertoEspacial = getPuertoEspacial(i);
                 pw.print(puertoEspacial.getNombre() + ";");
                 pw.print(puertoEspacial.getCodigo() + ";");
@@ -138,6 +145,7 @@ public class ListaPuertosEspaciales {
     /**
      * TODO: Genera una lista de PuertosEspaciales a partir del fichero CSV, usando el argumento como capacidad máxima
      *  de la lista
+     *
      * @param fichero
      * @param capacidad
      * @return
@@ -145,13 +153,13 @@ public class ListaPuertosEspaciales {
     public static ListaPuertosEspaciales leerPuertosEspacialesCsv(String fichero, int capacidad) {
         ListaPuertosEspaciales listaPuertosEspaciales = new ListaPuertosEspaciales(capacidad);
         Scanner sc = null;
-        BufferedReader in = null;
         boolean escrito = true;
         try {
-            in = new BufferedReader(new FileReader(fichero));
+            sc = new Scanner(new FileReader(fichero));
             String linea;
 
-            while ((linea = in.readLine()) != null && escrito){
+            while (sc.hasNextLine() && escrito) {
+                linea = sc.nextLine();
                 String[] datos = linea.split(";");
                 String nombre = datos[0];
                 String codigo = datos[1];
@@ -162,22 +170,17 @@ public class ListaPuertosEspaciales {
 
                 PuertoEspacial puertoEspacial = new PuertoEspacial(nombre, codigo, radio, azimut, polar, numMuelles);
 
-                escrito= listaPuertosEspaciales.insertarPuertoEspacial(puertoEspacial);
+                escrito = listaPuertosEspaciales.insertarPuertoEspacial(puertoEspacial);
 
             }
         } catch (Exception e) {
             System.out.println("Fichero PuertosEspaciales no encontrado.");
             return null;
         } finally {
-            try {
-                if(in != null){
-                    in.close();
-                }
-            } catch (IOException ex) {
-                System.out.println("Error de cierre de fichero Cliente.");
+            if (sc != null) {
+                sc.close();
             }
         }
         return listaPuertosEspaciales;
     }
 }
-
