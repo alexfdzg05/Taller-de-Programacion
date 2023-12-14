@@ -224,7 +224,7 @@ public class ListaEnvios {
                     Cliente cliente = clientes.buscarClienteEmail(datos[2]);
                     int fila = Integer.parseInt(datos[3]);
                     int columna = Integer.parseInt(datos[4]);
-                    int precio = Integer.parseInt(datos[5]);
+                    double precio = Double.parseDouble(datos[5]);
 
                     Envio envio = new Envio(localizador, porte, cliente, fila, columna, precio);
                     if (portes.buscarPorte(porte.getID()) != null) {
