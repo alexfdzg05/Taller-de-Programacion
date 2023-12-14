@@ -229,14 +229,11 @@ public class ListaEnvios {
 
                     Envio envio = new Envio(localizador, porte, cliente, fila, columna, precio);
                     if (porte != null) {
-                        porte.desocuparHueco(localizador);
                         porte.ocuparHueco(envio);
                     }
 
                     if (cliente != null) {
-                        cliente.cancelarEnvio(localizador);
                         cliente.aniadirEnvio(envio);
-
                     }
                     escrito = listaEnvios.insertarEnvio(envio);//HERE revisar el ocuparHueco
 
