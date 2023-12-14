@@ -157,14 +157,13 @@ public class ListaNaves {
     public static ListaNaves leerNavesCsv(String fichero, int capacidad) {
         ListaNaves listaNaves = new ListaNaves(capacidad);
         Nave nave;
-        Scanner sc = null;
-        BufferedReader br = null;
         boolean escrito = true;
+        Scanner sc = null;
         try {
-            br = new BufferedReader(new FileReader(fichero));
+            sc = new Scanner(new FileReader(fichero));
             String linea;
-
-            while((linea = br.readLine()) != null && escrito){
+            while(sc.hasNextLine() && escrito){
+                linea = sc.nextLine();
                 String[] datos = linea.split(";");
                 String marca = datos[0];
                 String modelo = datos[1];
@@ -179,13 +178,9 @@ public class ListaNaves {
             System.out.println("Fichero Naves no encontrado.");
             return null;
         } finally {
-            try {
-                if(br != null){
-                    br.close();
+                if(sc != null){
+                    sc.close();
                 }
-            } catch (IOException ex) {
-                System.out.println("Error de cierre de fichero Cliente.");
-            }
         }
         return listaNaves;
     }
