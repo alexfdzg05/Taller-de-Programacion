@@ -166,7 +166,7 @@ public class ListaPuertosEspaciales {
                 double radio = Double.parseDouble(datos[2]);
                 double azimut = Double.parseDouble(datos[3]);
                 double polar = Double.parseDouble(datos[4]);
-                int numMuelles = Integer.parseInt(datos[3]);
+                int numMuelles = Integer.parseInt(datos[5]);
 
                 PuertoEspacial puertoEspacial = new PuertoEspacial(nombre, codigo, radio, azimut, polar, numMuelles);
 

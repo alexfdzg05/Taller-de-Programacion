@@ -222,9 +222,9 @@ public class ListaEnvios {
                     String localizador = datos[0];
                     Porte porte = portes.buscarPorte(datos[1]);
                     Cliente cliente = clientes.buscarClienteEmail(datos[2]);
-                    Integer fila = Integer.parseInt(datos[3]);
-                    Integer columna = Integer.parseInt(datos[4]);
-                    Integer precio = Integer.parseInt(datos[5]);
+                    int fila = Integer.parseInt(datos[3]);
+                    int columna = Integer.parseInt(datos[4]);
+                    int precio = Integer.parseInt(datos[5]);
 
                     Envio envio = new Envio(localizador, porte, cliente, fila, columna, precio);
                     if (portes.buscarPorte(porte.getID()) != null) {
