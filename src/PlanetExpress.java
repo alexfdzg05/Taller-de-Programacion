@@ -202,7 +202,7 @@ public class PlanetExpress {
 
                     break;
                 case 2:     // TODO: Alta de Cliente
-                    if(!planetExpress.maxPortesAlcanzado()){
+                    if(!planetExpress.maxClientesAlcanzado()){
                         Cliente cliente = Cliente.altaCliente(teclado, planetExpress.listaClientes, planetExpress.maxEnviosPorCliente); //here
                         if(planetExpress.insertarCliente(cliente)){
                             System.out.println("Cliente con " + cliente.getEmail() + " creado correctamente");
