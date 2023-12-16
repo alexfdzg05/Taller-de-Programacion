@@ -151,7 +151,7 @@ public class PlanetExpress {
      */
     public static int menu(Scanner teclado) {
         int opcion;
-        System.out.println("1. Alta de Porte\n2. Alta de Cliente\n3.Buscar Porte\n4. Mostrar envíos de un cliente\n5. Generar lista de envíos\n0. Salir");
+        System.out.println("1. Alta de Porte\n2. Alta de Cliente\n3. Buscar Porte\n4. Mostrar envíos de un cliente\n5. Generar lista de envíos\n0. Salir");
         opcion = Utilidades.leerNumero(teclado, "Seleccione opción:", 0, 5);
         return opcion;
     }
@@ -266,6 +266,7 @@ public class PlanetExpress {
                     break;
             }
         } while (opcion != 0);
+        //Aquí habría que poner un guardarDatos al final, cuando sepamos que todo funciona correctamente
 
 
     }
