@@ -73,15 +73,15 @@ public class ListaNaves {
      * @return la nave que encontramos o null si no existe
      */
     public Nave buscarNave(String matricula) {
-        int i = 0;
-        while (!naves[i].getMatricula().equalsIgnoreCase(matricula)&&i< naves.length){
-            i++;
+        Nave nave = null;
+        for (int i = 0; i < naves.length; i++){
+            if (naves[i]!=null){
+                if (naves[i].getMatricula().equalsIgnoreCase(matricula)){
+                    nave = naves[i];
+                }
+            }
         }
-        if (naves[i].getMatricula().equalsIgnoreCase(matricula)){
-            return naves[i];
-        } else {
-            return null;
-        }
+        return nave;
     }
     // TODO: Muestra por pantalla las naves de la lista con el formato indicado en el enunciado
     public void mostrarNaves() {

@@ -80,16 +80,15 @@ public class ListaPuertosEspaciales {
      * @return Puerto espacial que encontramos o null si no existe
      */
     public PuertoEspacial buscarPuertoEspacial(String codigo) {
-        int i = 0;
-        while (!lista[i].getCodigo().equalsIgnoreCase(codigo) && i < lista.length) {
-            i++;
+        PuertoEspacial puerto = null;
+        for (int i = 0; i < lista.length; i++){
+            if (lista[i]!=null){
+                if (lista[i].getCodigo().equalsIgnoreCase(codigo)){
+                    puerto = lista[i];
+                }
+            }
         }
-        if (lista[i].getCodigo().equalsIgnoreCase(codigo)) {
-            return lista[i];
-        } else {
-            return null;
-        }
-
+        return puerto;
     }
 
     /**

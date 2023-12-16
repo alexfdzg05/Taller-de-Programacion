@@ -77,15 +77,15 @@ public class ListaPortes {
      * @return el objeto Porte que encontramos o null si no existe
      */
     public Porte buscarPorte(String id) {
-        int i = 0;
-        while (!portes[i].getID().equalsIgnoreCase(id)&&i< portes.length){
-            i++;
-        }
-        if (portes[i].getID().equalsIgnoreCase(id)){
-            return portes[i];
-        } else {
-            return null;
-        }
+       Porte porte = null;
+       for (int i = 0; i < portes.length; i++){
+           if (portes[i]!=null){
+               if (portes[i].getID().equalsIgnoreCase(id)){
+                   porte = portes[i];
+               }
+           }
+       }
+       return porte;
     }
 
     /**
@@ -99,10 +99,12 @@ public class ListaPortes {
     public ListaPortes buscarPortes(String codigoOrigen, String codigoDestino, Fecha fecha) {
         ListaPortes listaPortes = new ListaPortes(portes.length);
         for (int i = 0; i < portes.length; i++){
-            if (codigoOrigen.equalsIgnoreCase(portes[i].getOrigen().toString())&&
+            if (portes[i]!= null){
+             if (codigoOrigen.equalsIgnoreCase(portes[i].getOrigen().toString())&&
                     codigoDestino.equalsIgnoreCase(portes[i].getDestino().toString())&&
                     fecha.coincide(portes[i].getSalida())) {
-                listaPortes.insertarPorte(portes[i]);
+                 listaPortes.insertarPorte(portes[i]);
+            }
             }
         }
         return listaPortes;
@@ -136,8 +138,7 @@ public class ListaPortes {
         Porte porte = null;
         String id;
         do {
-            System.out.println(mensaje);
-            id = teclado.nextLine();
+            id = Utilidades.leerCadena(teclado, mensaje);
             if (!id.equalsIgnoreCase("cancelar")){
                 porte = buscarPorte(id);
                 if (porte == null) {
