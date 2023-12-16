@@ -67,6 +67,7 @@ public class ListaEnvios {
                 i++;
             }
             envios[i] = envio;
+            esPosible = true;
         }
         return esPosible;
     }
@@ -78,15 +79,15 @@ public class ListaEnvios {
      * @return el envio que encontramos o null si no existe
      */
     public Envio buscarEnvio(String localizador) {
-        int i = 0;
-        while ((!envios[i].getLocalizador().equalsIgnoreCase(localizador)) && i < envios.length) {
-            i++;
+        Envio envio = null;
+        for (int i = 0; i < envios.length; i++){
+            if (envios[i]!=null){
+                if (envios[i].getLocalizador().equalsIgnoreCase(localizador)){
+                    envio = envios[i];
+                }
+            }
         }
-        if (envios[i].getLocalizador().equalsIgnoreCase(localizador)) {
-            return envios[i];
-        } else {
-            return null;
-        }
+        return envio;
     }
 
     /**
@@ -98,15 +99,19 @@ public class ListaEnvios {
      * @return el envio que encontramos o null si no existe
      */
     public Envio buscarEnvio(String idPorte, int fila, int columna) {
-        int i = 0;
-        while (!envios[i].getPorte().getID().equalsIgnoreCase(idPorte) && (i < envios.length)){
-            i++;
+        Porte porte = null;
+        Envio envio = null;
+        for (int i = 0; i < envios.length; i++){
+            if (envios[i].getPorte() != null){
+                if (envios[i].getPorte().getID().equalsIgnoreCase(idPorte)){
+                    porte = envios[i].getPorte();
+                }
+            }
         }
-        if (envios[i].getPorte().getID().equalsIgnoreCase(idPorte)){
-            return  envios[i].getPorte().buscarEnvio(fila, columna);
-        } else {
-            return null;
+        if (porte != null){
+            envio = porte.buscarEnvio(fila, columna);
         }
+        return envio;
     }
 
     /**
@@ -152,8 +157,7 @@ public class ListaEnvios {
             Envio envio = null;
             String localizador;
             do {
-                System.out.println(mensaje);
-                localizador = teclado.nextLine();
+                localizador = Utilidades.leerCadena(teclado, mensaje);
                 if (!localizador.equalsIgnoreCase("cancelar")) {
                     envio = buscarEnvio(localizador);
                     if (envio == null) {
@@ -222,20 +226,18 @@ public class ListaEnvios {
                     String localizador = datos[0];
                     Porte porte = portes.buscarPorte(datos[1]);
                     Cliente cliente = clientes.buscarClienteEmail(datos[2]);
-                    Integer fila = Integer.parseInt(datos[3]);
-                    Integer columna = Integer.parseInt(datos[4]);
-                    Integer precio = Integer.parseInt(datos[5]);
+                    int fila = Integer.parseInt(datos[3]);
+                    int columna = Integer.parseInt(datos[4]);
+                    double precio = Double.parseDouble(datos[5]);
 
                     Envio envio = new Envio(localizador, porte, cliente, fila, columna, precio);
-                    if (portes.buscarPorte(porte.getID()) != null) {
-                        portes.buscarPorte(porte.getID()).desocuparHueco(localizador);
+                    if (porte != null) {
+                        porte.ocuparHueco(envio);
                     }
-                    portes.buscarPorte(porte.getID()).ocuparHueco(envio);
 
-                    if (clientes.buscarClienteEmail(cliente.getEmail()) != null) {
-                        clientes.buscarClienteEmail(cliente.getEmail()).cancelarEnvio(localizador);
+                    if (cliente != null) {
+                        cliente.aniadirEnvio(envio);
                     }
-                    clientes.buscarClienteEmail(cliente.getEmail()).aniadirEnvio(envio);
                     escrito = listaEnvios.insertarEnvio(envio);//HERE revisar el ocuparHueco
 
                 }

@@ -128,6 +128,7 @@ public class Utilidades {
             String mensajeAnio = "Ingrese año: ";
             anio = leerNumero(teclado, mensajeAnio, Fecha.PRIMER_ANIO, Fecha.ULTIMO_ANIO);
             if(Fecha.comprobarFecha(dia,mes,anio)){
+                fecha = new Fecha(dia,mes,anio);
                 correcto=true;
             }else {
                 System.out.println("Fecha introducida incorrecta.");

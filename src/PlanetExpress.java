@@ -151,7 +151,7 @@ public class PlanetExpress {
      */
     public static int menu(Scanner teclado) {
         int opcion;
-        System.out.println("1. Alta de Porte\n2. Alta de Cliente\n3.Buscar Porte\n4. Mostrar envíos de un cliente\n5. Generar lista de envíos\n0. Salir");
+        System.out.println("1. Alta de Porte\n2. Alta de Cliente\n3. Buscar Porte\n4. Mostrar envíos de un cliente\n5. Generar lista de envíos\n0. Salir");
         opcion = Utilidades.leerNumero(teclado, "Seleccione opción:", 0, 5);
         return opcion;
     }
@@ -243,13 +243,13 @@ public class PlanetExpress {
                 case 4:     // TODO: Listado de envíos de un cliente
                     Cliente cliente = planetExpress.listaClientes.seleccionarCliente(teclado, "Email del cliente: ");
                     Envio envio = cliente.seleccionarEnvio(teclado, "Seleccione un envío: ");
-                    if (cliente != null && envio != null) {
+                    if (envio != null) {
                         char accion = Utilidades.leerEleccion(teclado, "¿Cancelar envío (c), o generar factura (f)?", 'c', 'f');
                         if (accion == 'c') {
                             envio.cancelar();
                         } else {
                             String nombreFichero = Utilidades.leerCadena(teclado, "Nombre del fichero: ");
-                            if (envio.generarFactura(nombreFichero)) {
+                            if (envio.generarFactura(nombreFichero)) { //HERE no funciona
                                 System.out.println("\n \t Factura generada correctamente");
                             }
                         }
@@ -260,13 +260,14 @@ public class PlanetExpress {
                     Porte porte1 = planetExpress.listaPortes.seleccionarPorte(teclado, "Seleccione un porte: ", "cancelar");
                     if (porte1 != null) {
                         String nombreFichero = Utilidades.leerCadena(teclado, "Nombre del fichero: ");
-                        if (porte1.generarListaEnvios(nombreFichero)) {
+                        if (porte1.generarListaEnvios(nombreFichero)) { //HERE no funciona
                             System.out.println("\n\t Fichero creado correctamente");
                         }
                     }
                     break;
             }
         } while (opcion != 0);
+        //Aquí habría que poner un guardarDatos al final, cuando sepamos que todo funciona correctamente
 
 
     }

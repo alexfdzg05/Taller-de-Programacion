@@ -65,15 +65,15 @@ public class ListaClientes {
     }
     // TODO: Devuelve el cliente que coincida con el email, o null en caso de no encontrarlo
     public Cliente buscarClienteEmail(String email) {
-        int i = 0;
-        while ((!clientes[i].getEmail().equalsIgnoreCase(email)) && i < clientes.length) {
-            i++;
+        Cliente cliente = null;
+        for (int i = 0; i < clientes.length; i++){
+            if (clientes[i] != null){
+                if (clientes[i].getEmail().equalsIgnoreCase(email)){
+                    cliente = clientes[i];
+                }
+            }
         }
-        if (clientes[i].getEmail().equalsIgnoreCase(email)) {
-            return clientes[i];
-        } else {
-            return null;
-        }
+        return cliente;
     }
 
     /**
@@ -88,8 +88,7 @@ public class ListaClientes {
         Cliente cliente = null;
         String email;
         do {
-            System.out.println(mensaje);
-            email = teclado.nextLine();
+            email = Utilidades.leerCadena(teclado, mensaje);
             if (!email.equalsIgnoreCase("cancelar")) {
                 cliente = buscarClienteEmail(email);
                 if (cliente == null) {

@@ -68,6 +68,7 @@ public class ListaPuertosEspaciales {
                 i++;
             }
             lista[i] = puertoEspacial;
+            esPosible = true;
         }
         return esPosible;
     }
@@ -79,16 +80,15 @@ public class ListaPuertosEspaciales {
      * @return Puerto espacial que encontramos o null si no existe
      */
     public PuertoEspacial buscarPuertoEspacial(String codigo) {
-        int i = 0;
-        while (!lista[i].getCodigo().equalsIgnoreCase(codigo) && i < lista.length) {
-            i++;
+        PuertoEspacial puerto = null;
+        for (int i = 0; i < lista.length; i++){
+            if (lista[i]!=null){
+                if (lista[i].getCodigo().equalsIgnoreCase(codigo)){
+                    puerto = lista[i];
+                }
+            }
         }
-        if (lista[i].getCodigo().equalsIgnoreCase(codigo)) {
-            return lista[i];
-        } else {
-            return null;
-        }
-
+        return puerto;
     }
 
     /**
@@ -166,7 +166,7 @@ public class ListaPuertosEspaciales {
                 double radio = Double.parseDouble(datos[2]);
                 double azimut = Double.parseDouble(datos[3]);
                 double polar = Double.parseDouble(datos[4]);
-                int numMuelles = Integer.parseInt(datos[3]);
+                int numMuelles = Integer.parseInt(datos[5]);
 
                 PuertoEspacial puertoEspacial = new PuertoEspacial(nombre, codigo, radio, azimut, polar, numMuelles);
 
