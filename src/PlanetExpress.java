@@ -249,7 +249,7 @@ public class PlanetExpress {
                             envio.cancelar();
                         } else {
                             String nombreFichero = Utilidades.leerCadena(teclado, "Nombre del fichero: ");
-                            if (envio.generarFactura(nombreFichero)) {
+                            if (envio.generarFactura(nombreFichero)) { //HERE no funciona
                                 System.out.println("\n \t Factura generada correctamente");
                             }
                         }
