@@ -157,8 +157,7 @@ public class ListaEnvios {
             Envio envio = null;
             String localizador;
             do {
-                System.out.println(mensaje);
-                localizador = teclado.nextLine();
+                localizador = Utilidades.leerCadena(teclado, mensaje);
                 if (!localizador.equalsIgnoreCase("cancelar")) {
                     envio = buscarEnvio(localizador);
                     if (envio == null) {

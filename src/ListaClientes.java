@@ -88,8 +88,7 @@ public class ListaClientes {
         Cliente cliente = null;
         String email;
         do {
-            System.out.print("\n"+mensaje);
-            email = teclado.nextLine(); //HERE No lee correctamente el email, se queda colgado esperando un párrafo
+            email = Utilidades.leerCadena(teclado, mensaje);
             if (!email.equalsIgnoreCase("cancelar")) {
                 cliente = buscarClienteEmail(email);
                 if (cliente == null) {
