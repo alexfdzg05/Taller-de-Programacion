@@ -79,15 +79,15 @@ public class ListaEnvios {
      * @return el envio que encontramos o null si no existe
      */
     public Envio buscarEnvio(String localizador) {
-        int i = 0;
-        while ((!envios[i].getLocalizador().equalsIgnoreCase(localizador)) && i < envios.length) {
-            i++;
+        Envio envio = null;
+        for (int i = 0; i < envios.length; i++){
+            if (envios[i]!=null){
+                if (envios[i].getLocalizador().equalsIgnoreCase(localizador)){
+                    envio = envios[i];
+                }
+            }
         }
-        if (envios[i].getLocalizador().equalsIgnoreCase(localizador)) {
-            return envios[i];
-        } else {
-            return null;
-        }
+        return envio;
     }
 
     /**
@@ -99,15 +99,19 @@ public class ListaEnvios {
      * @return el envio que encontramos o null si no existe
      */
     public Envio buscarEnvio(String idPorte, int fila, int columna) {
-        int i = 0;
-        while (!envios[i].getPorte().getID().equalsIgnoreCase(idPorte) && (i < envios.length)){
-            i++;
+        Porte porte = null;
+        Envio envio = null;
+        for (int i = 0; i < envios.length; i++){
+            if (envios[i].getPorte() != null){
+                if (envios[i].getPorte().getID().equalsIgnoreCase(idPorte)){
+                    porte = envios[i].getPorte();
+                }
+            }
         }
-        if (envios[i].getPorte().getID().equalsIgnoreCase(idPorte)){
-            return  envios[i].getPorte().buscarEnvio(fila, columna);
-        } else {
-            return null;
+        if (porte != null){
+            envio = porte.buscarEnvio(fila, columna);
         }
+        return envio;
     }
 
     /**
