@@ -22,7 +22,7 @@ public class Utilidades {
     public static int leerNumero(Scanner teclado, String mensaje, int minimo, int maximo) {
         int numero;
         do{
-            System.out.println(mensaje);
+            System.out.print(mensaje);
             numero=teclado.nextInt();
         }while (!(numero >= minimo && numero <= maximo));
         return numero;
