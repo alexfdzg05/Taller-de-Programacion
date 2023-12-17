@@ -212,11 +212,9 @@ public class PlanetExpress {
                     break;
                 case 3:     // TODO: Buscar Porte
                     ListaPortes portes = planetExpress.buscarPorte(teclado);
-                    portes.listarPortes();
-                    Porte porte = portes.seleccionarPorte(teclado, "Seleccione un porte", "cancelar");
-                    if (porte == null){
-                        break;
-                    } else {
+                    portes.listarPortes(); //HERE
+                    Porte porte = portes.seleccionarPorte(teclado, "Seleccione un porte: ", "cancelar");
+                    if (porte != null){
                         //Comprar billete para un nuevo pasajero (n), o para uno ya existente (e)? El valor de entrada debe ser 'n' o 'e'
                         char comprarBillete = Utilidades.leerEleccion(teclado, "¿Comprar billete para un nuevo pasajero (n), o para uno ya existente (e)?", 'n' , 'e');
                         if (comprarBillete == 'n'){
@@ -238,7 +236,6 @@ public class PlanetExpress {
                             //colocar lo mismo que lo que está entre comentarios
                         }
                     }
-
                     break;
                 case 4:     // TODO: Listado de envíos de un cliente
                     Cliente cliente = planetExpress.listaClientes.seleccionarCliente(teclado, "Email del cliente: ");
