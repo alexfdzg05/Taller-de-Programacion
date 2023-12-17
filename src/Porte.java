@@ -338,17 +338,16 @@ public class Porte {
                 System.out.println("\n \t Código de puerto no encontrado.");
                 codigoOrigen = Utilidades.leerCadena(teclado, "Ingrese código de puerto Origen:");
             }
-
-            int muelleOrigen = Utilidades.leerNumero(teclado, "Ingrese el muelle de Origen (1 - 4)", 1,4);
+            PuertoEspacial puertoEspacialOrigen = puertosEspaciales.buscarPuertoEspacial(codigoOrigen);
+            int muelleOrigen = Utilidades.leerNumero(teclado, "Ingrese el muelle de Origen (1 - "+puertoEspacialOrigen.getMuelles()+"): ", 1,puertoEspacialOrigen.getMuelles());
 
             String codigoDestino = Utilidades.leerCadena(teclado, "Ingrese código de puerto Destino: ");
             while (puertosEspaciales.buscarPuertoEspacial(codigoDestino)==null){
                 System.out.println("\n \t Código de puerto no encontrado.");
                 codigoDestino = Utilidades.leerCadena(teclado, "Ingrese código de puerto Origen:");
             }
-            PuertoEspacial puertoEspacialOrigen = puertosEspaciales.buscarPuertoEspacial(codigoOrigen);
             PuertoEspacial puertoEspacialDestino = puertosEspaciales.buscarPuertoEspacial(codigoDestino);
-            int terminalDestino = Utilidades.leerNumero(teclado, "Ingrese Terminal Destino (1 -"+puertoEspacialDestino.getMuelles()+"):", 1, puertoEspacialDestino.getMuelles());
+            int terminalDestino = Utilidades.leerNumero(teclado, "Ingrese Terminal Destino (1 - "+puertoEspacialDestino.getMuelles()+"): ", 1, puertoEspacialDestino.getMuelles());
 
             naves.mostrarNaves();
 
