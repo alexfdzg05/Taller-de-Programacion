@@ -100,12 +100,13 @@ public class ListaPortes {
         ListaPortes listaPortes = new ListaPortes(portes.length);
         for (int i = 0; i < portes.length; i++){
             if (portes[i]!= null){
-             if (codigoOrigen.equalsIgnoreCase(portes[i].getOrigen().toString())&&
-                    codigoDestino.equalsIgnoreCase(portes[i].getDestino().toString())&&
-                    fecha.coincide(portes[i].getSalida())) {
-                 listaPortes.insertarPorte(portes[i]);
+                if (portes[i].coincide(codigoOrigen,codigoDestino,fecha)) {
+                    listaPortes.insertarPorte(portes[i]);
+                }
             }
-            }
+        }
+        if (listaPortes.getOcupacion() == 0){
+            System.out.println("No hay portes con esos parámetros");
         }
         return listaPortes;
     }
