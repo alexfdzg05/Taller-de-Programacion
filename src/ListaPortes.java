@@ -107,6 +107,7 @@ public class ListaPortes {
         }
         if (listaPortes.getOcupacion() == 0){
             System.out.println("No hay portes con esos parámetros");
+            listaPortes = null;
         }
         return listaPortes;
     }
@@ -138,15 +139,17 @@ public class ListaPortes {
         listarPortes();
         Porte porte = null;
         String id;
-        do {
-            id = Utilidades.leerCadena(teclado, mensaje);
-            if (!id.equalsIgnoreCase("cancelar")){
-                porte = buscarPorte(id);
-                if (porte == null) {
-                    System.out.println("\t Porte no encontrado.");
+        if (portes != null) {
+            do {
+                id = Utilidades.leerCadena(teclado, mensaje);
+                if (!id.equalsIgnoreCase("cancelar")) {
+                    porte = buscarPorte(id);
+                    if (porte == null) {
+                        System.out.println("\t Porte no encontrado.");
+                    }
                 }
-            }
-        }while (porte == null && (!id.equalsIgnoreCase(cancelar)));
+            } while (porte == null && (!id.equalsIgnoreCase(cancelar)));
+        }
         return porte;
     }
 
