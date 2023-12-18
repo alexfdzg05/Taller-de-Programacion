@@ -114,9 +114,9 @@ public class ListaNaves {
                 matricula = Utilidades.leerCadena(teclado, mensaje);
             }else {
                 if (nave.getAlcance() >= alcance){
-                    System.out.println("Nave seleccionada con alcance suficiente");
+                    System.out.println("\t Nave seleccionada con alcance suficiente");
                 } else {
-                    System.out.println("Nave seleccionada con alcance insuficiente");
+                    System.out.println("\t Nave seleccionada con alcance insuficiente");
                     nave = null;
                     matricula = Utilidades.leerCadena(teclado, mensaje);
                 }

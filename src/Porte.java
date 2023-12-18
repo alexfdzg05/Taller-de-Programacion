@@ -335,7 +335,7 @@ public class Porte {
 
             String codigoOrigen = Utilidades.leerCadena(teclado, "Ingrese código de puerto Origen:");
             while (puertosEspaciales.buscarPuertoEspacial(codigoOrigen)==null){
-                System.out.println("\n \t Código de puerto no encontrado.");
+                System.out.println("\t Código de puerto no encontrado.");
                 codigoOrigen = Utilidades.leerCadena(teclado, "Ingrese código de puerto Origen:");
             }
             PuertoEspacial puertoEspacialOrigen = puertosEspaciales.buscarPuertoEspacial(codigoOrigen);
@@ -343,7 +343,7 @@ public class Porte {
 
             String codigoDestino = Utilidades.leerCadena(teclado, "Ingrese código de puerto Destino: ");
             while (puertosEspaciales.buscarPuertoEspacial(codigoDestino)==null){
-                System.out.println("\n \t Código de puerto no encontrado.");
+                System.out.println("\t Código de puerto no encontrado.");
                 codigoDestino = Utilidades.leerCadena(teclado, "Ingrese código de puerto Origen:");
             }
             PuertoEspacial puertoEspacialDestino = puertosEspaciales.buscarPuertoEspacial(codigoDestino);
