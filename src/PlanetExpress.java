@@ -218,14 +218,12 @@ public class PlanetExpress {
                         //Comprar billete para un nuevo pasajero (n), o para uno ya existente (e)? El valor de entrada debe ser 'n' o 'e'
                         char comprarBillete = Utilidades.leerEleccion(teclado, "¿Comprar billete para un nuevo pasajero (n), o para uno ya existente (e)?", 'n', 'e');
                         if (comprarBillete == 'n') {
-                            if (!planetExpress.maxPortesAlcanzado()) {
+                            if (!planetExpress.maxClientesAlcanzado()) {
                                 Cliente cliente = Cliente.altaCliente(teclado, planetExpress.listaClientes, planetExpress.maxEnviosPorCliente); //here
-                                if (planetExpress.insertarCliente(cliente)) {
                                     System.out.println("Cliente con " + cliente.getEmail() + " creado correctamente");
                                     //Hasta aquí es igual que el altaCliente
                                     porte.ocuparHueco(Envio.altaEnvio(teclado, rand, porte, cliente));
                                     //A partir de aquí es igual al altaCliente
-                                }
                             } else System.out.println("No se pueden dar de alta más clientes");
                         } else {
                             Cliente cliente = planetExpress.listaClientes.seleccionarCliente(teclado, "Email del cliente:");
