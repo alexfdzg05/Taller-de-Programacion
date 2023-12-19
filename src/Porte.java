@@ -85,7 +85,7 @@ public class Porte {
         int huecosLibres = 0;
     for (int i = 0; i < huecos.length; i++){
         for (int j = 0; j < huecos.length; j++){
-            if (huecos[i][j]){
+            if (huecos[i][j]){ //HEREhuecos Colocar lo contrario (!)
                 huecosLibres++;
             }
         }
@@ -104,7 +104,7 @@ public class Porte {
     // TODO: ¿Está ocupado el hueco consultado?  //true si está ocupado, false si no
     public boolean huecoOcupado(int fila, int columna) {
         //Si hay hueco(true), no esta ocupado(false)
-        return !huecos[fila][columna];
+        return !huecos[fila][columna]; //HEREhuecos Quitar lo contrario (!)
     }
     public Envio buscarEnvio(String localizador) {
         return listaEnvios.buscarEnvio(localizador);

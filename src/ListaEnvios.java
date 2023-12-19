@@ -230,7 +230,7 @@ public class ListaEnvios {
                     int fila = Integer.parseInt(datos[3]);
                     int columna = Integer.parseInt(datos[4]);
                     double precio = Double.parseDouble(datos[5]);
-
+//HERE Error de la lista
                     Envio envio = new Envio(localizador, porte, cliente, fila, columna, precio);
                     if (porte != null) {
                         porte.ocuparHueco(envio);
