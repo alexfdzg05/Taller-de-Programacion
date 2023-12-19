@@ -102,8 +102,8 @@ public class Envio {
             pw.println("--------- Factura del envío " + getLocalizador() + " ---------");
             pw.println("-----------------------------------------------------");
             pw.println("Porte: " + getPorte().getID());
-            pw.println("Origen: " + getPorte().getOrigen().toString());
-            pw.println("Destino: " + getPorte().getDestino().toString());
+            pw.println("Origen: " + getPorte().getOrigen().toStringSimple());
+            pw.println("Destino: " + getPorte().getDestino().toStringSimple());
             pw.println("Salida: " + getPorte().getSalida().toString());
             pw.println("Llegada: " + getPorte().getLlegada().toString());
             pw.println("Cliente: " + getCliente().toString());
