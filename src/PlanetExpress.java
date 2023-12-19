@@ -198,16 +198,13 @@ public class PlanetExpress {
                 case 1:     // TODO: Alta de Porte
                     if(!planetExpress.maxPortesAlcanzado()){
                         Porte.altaPorte(teclado, rand, planetExpress.listaPuertosEspaciales, planetExpress.listaNaves, planetExpress.listaPortes);
-                    } else System.out.println("No se pueden dar de alta más portes");
+                    } else System.out.println("\t No se pueden dar de alta más portes");
 
                     break;
                 case 2:     // TODO: Alta de Cliente
                     if(!planetExpress.maxClientesAlcanzado()){
-                        Cliente cliente = Cliente.altaCliente(teclado, planetExpress.listaClientes, planetExpress.maxEnviosPorCliente); //here
-                        if(planetExpress.insertarCliente(cliente)){
-                            System.out.println("Cliente con " + cliente.getEmail() + " creado correctamente");
-                        }
-                    } else System.out.println("No se pueden dar de alta más clientes");
+                        Cliente.altaCliente(teclado, planetExpress.listaClientes, planetExpress.maxEnviosPorCliente); //here
+                    } else System.out.println("\t No se pueden dar de alta más clientes");
 
                     break;
                 case 3:     // TODO: Buscar Porte
@@ -224,12 +221,16 @@ public class PlanetExpress {
                                     //Hasta aquí es igual que el altaCliente
                                     porte.ocuparHueco(Envio.altaEnvio(teclado, rand, porte, cliente));
                                     //A partir de aquí es igual al altaCliente
-                            } else System.out.println("No se pueden dar de alta más clientes");
+                            } else System.out.println("\t No se pueden dar de alta más clientes");
                         } else {
                             Cliente cliente = planetExpress.listaClientes.seleccionarCliente(teclado, "Email del cliente:");
                             //
                             if (cliente != null) {
-                                Envio.altaEnvio(teclado, rand, porte, cliente);
+                                if (!cliente.maxEnviosAlcanzado()) {
+                                    Envio.altaEnvio(teclado, rand, porte, cliente);
+                                } else {
+                                    System.out.println("\t Máximo número de envíos alcanzado");
+                                }
                             }
                             //colocar lo mismo que lo que está entre comentarios
                         }
