@@ -82,21 +82,31 @@ public class Cliente {
      * @return src.Cliente
      */
     public static Cliente altaCliente(Scanner teclado, ListaClientes clientes, int maxEnvios) {
-        String nombre, apellidos, email;
+        String nombre = "", apellidos = "", email = "";
+        Cliente cliente;
         do{
             nombre = Utilidades.leerCadena(teclado,"Nombre: ");
         } while(!correctoNomApellidos(nombre, "Por favor, introduzca un nombre correcto"));
 
-        do{
-            apellidos = Utilidades.leerCadena(teclado, "Apellidos: ");
-        } while(!correctoNomApellidos(apellidos, "Por favor, introduzca apellidos correcto"));
+        if(!nombre.equalsIgnoreCase("cancelar")){
+            do{
+                apellidos = Utilidades.leerCadena(teclado, "Apellidos: ");
+            } while(!correctoNomApellidos(apellidos, "Por favor, introduzca apellidos correcto"));
+        }
 
-        do{
-            email = Utilidades.leerCadena(teclado, "Email: ");
-        } while(!correctoEmail(email));
-        Cliente cliente = new Cliente(nombre,apellidos,email,maxEnvios);
-        if (clientes.insertarCliente(cliente)){
-            System.out.println("Cliente con " + cliente.getEmail() + " creado correctamente");
+        if(!nombre.equalsIgnoreCase("cancelar") && !apellidos.equalsIgnoreCase("cancelar")){
+            do{
+                email = Utilidades.leerCadena(teclado, "Email: ");
+            } while(!correctoEmail(email));
+        }
+
+        if(!nombre.equalsIgnoreCase("cancelar") && !apellidos.equalsIgnoreCase("cancelar") && !email.equalsIgnoreCase("cancelar")){
+            cliente = new Cliente(nombre,apellidos,email,maxEnvios);
+            if (clientes.insertarCliente(cliente)){
+                System.out.println("Cliente con " + cliente.getEmail() + " creado correctamente");
+            }
+        } else {
+            cliente = null;
         }
         return cliente;
     }
