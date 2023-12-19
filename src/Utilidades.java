@@ -7,7 +7,7 @@ import java.util.Scanner;
  *
  * @author Paula Cabrero
  * @author Alejandro Fernández
- * @version     1.0
+ * @version     21.0
  */
 public class Utilidades {
 
