@@ -3,9 +3,9 @@ package src;
 /**
  * Description of the class
  *
- * @author
- * @author
- * @version     1.0
+ * @author Paula Cabrero
+ * @author Alejandro Fernández
+ * @version     21.0
  */
 public class Nave {
     private String marca;

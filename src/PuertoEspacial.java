@@ -5,10 +5,10 @@ import static java.lang.Math.*;
 /**
  * Description of the class
  *
- * @author
- * @author
- * @version     1.0
- */
+ * @author Paula Cabrero
+ * @author Alejandro Fernández
+ * @version     21.0
+ *  */
 public class PuertoEspacial {
 
     private String nombre;
