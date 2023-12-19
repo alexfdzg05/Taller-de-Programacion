@@ -335,51 +335,40 @@ public class Porte {
 
             String codigoOrigen = Utilidades.leerCadena(teclado, "Ingrese código de puerto Origen:");
             while (puertosEspaciales.buscarPuertoEspacial(codigoOrigen)==null){
-                System.out.println("\n \t Código de puerto no encontrado.");
+                System.out.println("\t Código de puerto no encontrado.");
                 codigoOrigen = Utilidades.leerCadena(teclado, "Ingrese código de puerto Origen:");
             }
-
-            int muelleOrigen = Utilidades.leerNumero(teclado, "Ingrese el muelle de Origen (1 - 4)", 1,4);
+            PuertoEspacial puertoEspacialOrigen = puertosEspaciales.buscarPuertoEspacial(codigoOrigen);
+            int muelleOrigen = Utilidades.leerNumero(teclado, "Ingrese el muelle de Origen (1 - "+puertoEspacialOrigen.getMuelles()+"): ", 1,puertoEspacialOrigen.getMuelles());
 
             String codigoDestino = Utilidades.leerCadena(teclado, "Ingrese código de puerto Destino: ");
             while (puertosEspaciales.buscarPuertoEspacial(codigoDestino)==null){
-                System.out.println("\n \t Código de puerto no encontrado.");
+                System.out.println("\t Código de puerto no encontrado.");
                 codigoDestino = Utilidades.leerCadena(teclado, "Ingrese código de puerto Origen:");
             }
-            PuertoEspacial puertoEspacialOrigen = puertosEspaciales.buscarPuertoEspacial(codigoOrigen);
             PuertoEspacial puertoEspacialDestino = puertosEspaciales.buscarPuertoEspacial(codigoDestino);
-            int terminalDestino = Utilidades.leerNumero(teclado, "Ingrese Terminal Destino (1 -"+puertoEspacialDestino.getMuelles()+"):", 1, puertoEspacialDestino.getMuelles());
+            int terminalDestino = Utilidades.leerNumero(teclado, "Ingrese Terminal Destino (1 - "+puertoEspacialDestino.getMuelles()+"): ", 1, puertoEspacialDestino.getMuelles());
 
             naves.mostrarNaves();
 
-            String matriculaNave = Utilidades.leerCadena(teclado, "Ingrese matrícula de la nave: ");
-            boolean salir = false;
-            while(!salir){
-                if (naves.buscarNave(matriculaNave)== null) {
-                    System.out.println("\n\t Matrícula de nave no encontrada");
-                    matriculaNave = Utilidades.leerCadena(teclado, "Ingrese matrícula de la nave: ");
-                } else if (naves.buscarNave(matriculaNave).getAlcance() < puertoEspacialOrigen.distancia(puertoEspacialDestino)) {
-                    System.out.println("\t Nave seleccionada con alcance insuficiente");
-                    matriculaNave = Utilidades.leerCadena(teclado, "Ingrese matrícula de la nave: ");
+            Nave nave = naves.seleccionarNave(teclado, "Ingrese matrícula de la nave: ", puertoEspacialOrigen.distancia(puertoEspacialDestino));
+            if (nave != null) {
+                Fecha fechaSalida = Utilidades.leerFechaHora(teclado, "Introduzca la fecha de salida:");
+                Fecha fechaLlegada = Utilidades.leerFechaHora(teclado, "Introduzca la fecha de llegada:");
+                while (fechaLlegada.anterior(fechaSalida)) {
+                    System.out.println("Llegada debe ser posterior a salida");
+                    fechaSalida = Utilidades.leerFechaHora(teclado, "Introduzca la fecha de salida:");
+                    fechaLlegada = Utilidades.leerFechaHora(teclado, "Introduzca la fecha de llegada:");
                 }
-                if (naves.buscarNave(matriculaNave)!= null && naves.buscarNave(matriculaNave).getAlcance() > puertoEspacialOrigen.distancia(puertoEspacialDestino)){
-                    salir = true;
-                }
-            }
-            Nave nave = naves.buscarNave(matriculaNave);
-            Fecha fechaSalida = Utilidades.leerFechaHora(teclado, "Introduzca la fecha de salida:");
-            Fecha fechaLlegada = Utilidades.leerFechaHora(teclado, "Introduzca la fecha de llegada:");
-            while (fechaLlegada.anterior(fechaSalida)){
-                System.out.println("Llegada debe ser posterior a salida");
-                 fechaSalida = Utilidades.leerFechaHora(teclado, "Introduzca la fecha de salida:");
-                 fechaLlegada = Utilidades.leerFechaHora(teclado, "Introduzca la fecha de llegada:");
-            }
-            double precio = Utilidades.leerNumero(teclado, "Ingrese precio de pasaje: ", 0);
-            String id = generarID(rand);
+                double precio = Utilidades.leerNumero(teclado, "Ingrese precio de pasaje: ", 0);
+                String id = generarID(rand);
 
-        Porte porte = new Porte(id, nave,puertoEspacialOrigen, muelleOrigen, fechaSalida, puertoEspacialDestino, terminalDestino, fechaLlegada, precio);
-        portes.insertarPorte(porte);
-        System.out.println("Porte "+porte.getID()+" creado correctamente");
-        return porte;
+                Porte porte = new Porte(id, nave, puertoEspacialOrigen, muelleOrigen, fechaSalida, puertoEspacialDestino, terminalDestino, fechaLlegada, precio);
+                portes.insertarPorte(porte);
+                System.out.println("Porte " + porte.getID() + " creado correctamente");
+                return porte;
+            } else {
+                return null;
+            }
     }
 }

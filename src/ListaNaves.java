@@ -87,8 +87,7 @@ public class ListaNaves {
     public void mostrarNaves() {
     for (int i = 0; i < naves.length; i++){
         if (naves[i]!=null) {
-            System.out.print(naves[i].getMarca() + ";" + naves[i].getModelo() + ";" + naves[i].getMatricula()
-                    + ";" + naves[i].getFilas() + ";" + naves[i].getColumnas());
+            System.out.println(naves[i].toString());
         }
     }
     }
@@ -107,17 +106,22 @@ public class ListaNaves {
      */
     public Nave seleccionarNave(Scanner teclado, String mensaje, double alcance) {
         Nave nave = null;
-        System.out.println(mensaje+":");
-        String matricula = teclado.nextLine();
-        if (!matricula.equalsIgnoreCase("cancelar")) {
-            if (buscarNave(matricula).getAlcance() >= alcance) {
-                System.out.println("Nave seleccionada con alcance suficiente");
-                nave = buscarNave(matricula);
-            } else {
-                System.out.println("Nave seleccionada con alcance insuficiente");
+        String matricula = Utilidades.leerCadena(teclado, mensaje);
+        while (!matricula.equalsIgnoreCase("cancelar") && nave == null) {
+            nave = buscarNave(matricula);
+            if (nave == null){
+                System.out.println("Nave no encontrada");
+                matricula = Utilidades.leerCadena(teclado, mensaje);
+            }else {
+                if (nave.getAlcance() >= alcance){
+                    System.out.println("\t Nave seleccionada con alcance suficiente");
+                } else {
+                    System.out.println("\t Nave seleccionada con alcance insuficiente");
+                    nave = null;
+                    matricula = Utilidades.leerCadena(teclado, mensaje);
+                }
             }
         }
-
         return nave;
     }
 

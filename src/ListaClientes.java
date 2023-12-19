@@ -52,16 +52,16 @@ public class ListaClientes {
     }
     // TODO: Inserta el cliente en la lista de clientes
     public boolean insertarCliente(Cliente cliente) {
-    int i = 0;
-    boolean insertado = false;
-        while ((clientes[i]!=null)&&i< clientes.length){
-            i++;
-        }
-        if (clientes[i]== null){
+        boolean esPosible = false;
+        int i = 0;
+        if (!estaLlena()){
+            while (i<clientes.length && clientes[i]!=null){
+                i++;
+            }
             clientes[i] = cliente;
-            insertado = true;
+            esPosible = true;
         }
-        return insertado;
+        return esPosible;
     }
     // TODO: Devuelve el cliente que coincida con el email, o null en caso de no encontrarlo
     public Cliente buscarClienteEmail(String email) {

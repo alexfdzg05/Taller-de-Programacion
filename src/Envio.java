@@ -148,10 +148,9 @@ public class Envio {
      * @return Envio para el porte y cliente especificados
      */
     public static Envio altaEnvio(Scanner teclado, Random rand, Porte porte, Cliente cliente) {
-        System.out.println("Fila del hueco: ");
         int fila = (int) Utilidades.leerNumero(teclado, "Fila del hueco: ", 0);
         int columna = (int) Utilidades.leerNumero(teclado, "Columna del hueco: ", 0);
-        double precio = Utilidades.leerNumero(teclado, "Precio: ", 0);
+        double precio = Utilidades.leerNumero(teclado, "Precio: ", 0.0);
         String id = generarLocalizador(rand, porte.getID());
         System.out.println("\t Envío "+id+" creado correctamente");
         Envio envio = new Envio(id, porte, cliente, fila, columna, precio);

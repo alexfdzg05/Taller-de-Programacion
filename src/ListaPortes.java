@@ -100,12 +100,14 @@ public class ListaPortes {
         ListaPortes listaPortes = new ListaPortes(portes.length);
         for (int i = 0; i < portes.length; i++){
             if (portes[i]!= null){
-             if (codigoOrigen.equalsIgnoreCase(portes[i].getOrigen().toString())&&
-                    codigoDestino.equalsIgnoreCase(portes[i].getDestino().toString())&&
-                    fecha.coincide(portes[i].getSalida())) {
-                 listaPortes.insertarPorte(portes[i]);
+                if (portes[i].coincide(codigoOrigen,codigoDestino,fecha)) {
+                    listaPortes.insertarPorte(portes[i]);
+                }
             }
-            }
+        }
+        if (listaPortes.getOcupacion() == 0){
+            System.out.println("No hay portes con esos parámetros");
+            listaPortes = null;
         }
         return listaPortes;
     }
@@ -137,15 +139,17 @@ public class ListaPortes {
         listarPortes();
         Porte porte = null;
         String id;
-        do {
-            id = Utilidades.leerCadena(teclado, mensaje);
-            if (!id.equalsIgnoreCase("cancelar")){
-                porte = buscarPorte(id);
-                if (porte == null) {
-                    System.out.println("\t Porte no encontrado.");
+        if (portes != null) {
+            do {
+                id = Utilidades.leerCadena(teclado, mensaje);
+                if (!id.equalsIgnoreCase("cancelar")) {
+                    porte = buscarPorte(id);
+                    if (porte == null) {
+                        System.out.println("\t Porte no encontrado.");
+                    }
                 }
-            }
-        }while (porte == null && (!id.equalsIgnoreCase(cancelar)));
+            } while (porte == null && (!id.equalsIgnoreCase(cancelar)));
+        }
         return porte;
     }
 
