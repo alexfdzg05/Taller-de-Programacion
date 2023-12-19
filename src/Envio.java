@@ -57,9 +57,9 @@ public class Envio {
     public String getHueco() {
         char letraComienzo = 'A';
         char columna = (char) (letraComienzo + getColumna() - 1);
-        char fila = (char) getFila();
-        String hueco = String.valueOf(fila);
-        hueco += String.valueOf(columna);
+        int fila = getFila();
+        String hueco;
+        hueco = fila+String.valueOf(columna);
         return hueco;
     }
     public double getPrecio() {
@@ -107,7 +107,7 @@ public class Envio {
             pw.println("Salida: " + getPorte().getSalida().toString());
             pw.println("Llegada: " + getPorte().getLlegada().toString());
             pw.println("Cliente: " + getCliente().toString());
-            pw.println("Hueco: " + getFila() + getHueco());
+            pw.println("Hueco: "  + getHueco());
             pw.println("Precio: " + getPrecio() + " SSD");
             pw.println();
 
