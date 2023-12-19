@@ -253,9 +253,9 @@ public class Porte {
         PrintWriter pw = null;
         try {
             pw = new PrintWriter(fichero);
-            pw.println("---------------------------------------");
+            pw.println("-------------------------------------------------");
             pw.println("-------- Lista de envíos del porte "+getID()+" --------");
-            pw.println("---------------------------------------");
+            pw.println("-------------------------------------------------");
             pw.println("Hueco\tCliente");
             int i = 0;
             int j = 0;
