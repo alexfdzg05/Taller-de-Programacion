@@ -114,6 +114,10 @@ public class Envio {
             return true;
         } catch (FileNotFoundException e) {
             return false;
+        } finally {
+            if (pw != null){
+                pw.close();
+            }
         }
     }
 
