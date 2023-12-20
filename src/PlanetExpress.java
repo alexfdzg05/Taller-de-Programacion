@@ -253,7 +253,6 @@ public class PlanetExpress {
                     }
                     break;
                 case 5:     // TODO: Lista de envíos de un porte
-                    planetExpress.listaPortes.listarPortes();
                     Porte porte1 = planetExpress.listaPortes.seleccionarPorte(teclado, "Seleccione un porte: ", "cancelar");
                     if (porte1 != null) {
                         String nombreFichero = Utilidades.leerCadena(teclado, "Nombre del fichero: ");
