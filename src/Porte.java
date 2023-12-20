@@ -85,7 +85,7 @@ public class Porte {
         int huecosLibres = 0;
     for (int i = 0; i < huecos.length; i++){
         for (int j = 0; j < huecos.length; j++){
-            if (huecos[i][j]){ //HEREhuecos Colocar lo contrario (!)
+            if (!huecos[i][j]){ //HEREhuecos Colocar lo contrario (!)
                 huecosLibres++;
             }
         }
@@ -144,7 +144,7 @@ public class Porte {
     public boolean ocuparHueco(Envio envio) {
         boolean ocupar = false;
         if(!porteLleno()) {
-            if (huecos[envio.getFila() - 1][envio.getColumna() - 1] && listaEnvios.insertarEnvio(envio)) {
+            if (!huecos[envio.getFila() - 1][envio.getColumna() - 1] && listaEnvios.insertarEnvio(envio)) {
                 huecos[envio.getFila() - 1][envio.getColumna() - 1] = false;
                 ocupar = true;
                 //HERE hay que poner numHuecosLibres++ de alguna forma;
@@ -257,26 +257,28 @@ public class Porte {
             pw.println("-------- Lista de envíos del porte "+getID()+" --------");
             pw.println("-------------------------------------------------");
             pw.println("Hueco\tCliente");
-            int i = 0;
             int j = 0;
             if (listaEnvios != null){
                 if (listaEnvios.getOcupacion()>0) {
                     while (j <= listaEnvios.getOcupacion()) {
-                        if (listaEnvios.getEnvio(i) != null) {
-                            pw.print(listaEnvios.getEnvio(i).getHueco() + "\t");
-                            pw.println(listaEnvios.getEnvio(i).getCliente().toString());
+                        if (listaEnvios.getEnvio(j) != null) {
+                            pw.print(listaEnvios.getEnvio(j).getHueco() + "\t");
+                            pw.println(listaEnvios.getEnvio(j).getCliente().toString());
                             j++;
                         } else {
-                            int h = i;
-                            //Hago un bucle while para buscar desde dicho hueco hasta el próximo (por la izquierda) que tenga cliente
-                            while (listaEnvios.getEnvio(h) == null && h > 0) {
-                                h--;
-                            }
+                            int h = j;
                             //Hago un bucle while para buscar desde dicho hueco hasta el próximo (por la derecha) que tenga cliente
-                            while (listaEnvios.getEnvio(h) == null && h < listaEnvios.getLength()) {
+                            while (listaEnvios.getEnvio(h) == null && h < listaEnvios.getLength() - 1) {
                                 h++;
                             }
-                            int diferencia = i - h;
+                            if (h == listaEnvios.getLength() - 1 && listaEnvios.getEnvio(h)!= null) {
+                                h = j;
+                                //Hago un bucle while para buscar desde dicho hueco hasta el próximo (por la izquierda) que tenga cliente
+                                while (listaEnvios.getEnvio(h) == null && h > 0) {
+                                    h--;
+                                }
+                            }
+                            int diferencia = j - h;
                             Envio envio;
                             String hueco;
                             //Resto lo que yo me he movido en el array menos el número del envio anterior
@@ -293,7 +295,6 @@ public class Porte {
                             hueco += String.valueOf(columna);
                             pw.println(hueco + "\t");
                         }
-                        i++;
                     }
                 }
             }
