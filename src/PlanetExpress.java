@@ -217,7 +217,6 @@ public class PlanetExpress {
                         if (comprarBillete == 'n') {
                             if (!planetExpress.maxClientesAlcanzado()) {
                                 Cliente cliente = Cliente.altaCliente(teclado, planetExpress.listaClientes, planetExpress.maxEnviosPorCliente); //here
-                                    System.out.println("Cliente con " + cliente.getEmail() + " creado correctamente");
                                     //Hasta aquí es igual que el altaCliente
                                     porte.ocuparHueco(Envio.altaEnvio(teclado, rand, porte, cliente));
                                     //A partir de aquí es igual al altaCliente
