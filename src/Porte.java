@@ -371,7 +371,7 @@ public class Porte {
                 Porte porte = new Porte(id, nave, puertoEspacialOrigen, muelleOrigen, fechaSalida, puertoEspacialDestino, terminalDestino, fechaLlegada, precio);
                 portes.insertarPorte(porte);
                 System.out.println("Porte " + porte.getID() + " creado correctamente");
-                return porte;
+                return porte; //HERE Aquí aparece el error con un .toString (aparece usando el debugger)
             } else {
                 return null;
             }
