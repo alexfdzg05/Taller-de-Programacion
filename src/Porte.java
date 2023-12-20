@@ -257,44 +257,19 @@ public class Porte {
             pw.println("-------- Lista de envíos del porte "+getID()+" --------");
             pw.println("-------------------------------------------------");
             pw.println("Hueco\tCliente");
-            int j = 0;
-            if (listaEnvios != null){
-                if (listaEnvios.getOcupacion()>0) {
-                    while (j <= listaEnvios.getOcupacion()) {
-                        if (listaEnvios.getEnvio(j) != null) {
-                            pw.print(listaEnvios.getEnvio(j).getHueco() + "\t");
-                            pw.println(listaEnvios.getEnvio(j).getCliente().toString());
-                            j++;
-                        } else {
-                            int h = j;
-                            //Hago un bucle while para buscar desde dicho hueco hasta el próximo (por la derecha) que tenga cliente
-                            while (listaEnvios.getEnvio(h) == null && h < listaEnvios.getLength() - 1) {
-                                h++;
-                            }
-                            if (h == listaEnvios.getLength() - 1 && listaEnvios.getEnvio(h)!= null) {
-                                h = j;
-                                //Hago un bucle while para buscar desde dicho hueco hasta el próximo (por la izquierda) que tenga cliente
-                                while (listaEnvios.getEnvio(h) == null && h > 0) {
-                                    h--;
-                                }
-                            }
-                            int diferencia = j - h;
-                            Envio envio;
-                            String hueco;
-                            //Resto lo que yo me he movido en el array menos el número del envio anterior
-                            envio = listaEnvios.getEnvio(h);
-                            char fila = (char) envio.getFila();
-                            char letraComienzo = 'A';
-                            char columna;
-                            if (diferencia > 0) {
-                                columna = (char) (letraComienzo + envio.getColumna() - h);
-                            } else {
-                                columna = (char) (letraComienzo + envio.getColumna() + h);
-                            }
-                            hueco = String.valueOf(fila);
-                            hueco += String.valueOf(columna);
-                            pw.println(hueco + "\t");
-                        }
+            for (int i = 0 ; i < nave.getFilas(); i++){
+                for (int j = 0; j < nave.getColumnas(); j++){
+                    if (!huecos[i][j]){
+                        pw.print((i+1));
+                        char letraComienzo = 'A';
+                        char columna = (char) (letraComienzo + j);
+                        pw.println(columna);
+                    } else {
+                        pw.print((i+1));
+                        char letraComienzo = 'A';
+                        char columna = (char) (letraComienzo + j);
+                        pw.print(columna+"\t\t");
+                        pw.println(listaEnvios.getEnvio(i).getCliente().toString());
                     }
                 }
             }
