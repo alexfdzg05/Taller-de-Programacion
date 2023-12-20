@@ -218,7 +218,9 @@ public class PlanetExpress {
                             if (!planetExpress.maxClientesAlcanzado()) {
                                 Cliente cliente = Cliente.altaCliente(teclado, planetExpress.listaClientes, planetExpress.maxEnviosPorCliente); //here
                                     //Hasta aquí es igual que el altaCliente
-                                    porte.ocuparHueco(Envio.altaEnvio(teclado, rand, porte, cliente));
+                                    Envio envio = Envio.altaEnvio(teclado, rand, porte, cliente);
+                                    porte.ocuparHueco(envio);
+                                    cliente.aniadirEnvio(envio);
                                     //A partir de aquí es igual al altaCliente
                             } else System.out.println("\t No se pueden dar de alta más clientes");
                         } else {
