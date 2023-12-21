@@ -166,13 +166,13 @@ public class ListaPortes {
             for(int i = 0; i < getOcupacion(); i++){
                 Porte porte = getPorte(i);
                 pw.print(porte.getID() + ";");
-                pw.print(porte.getNave() + ";");
-                pw.print(porte.getOrigen() + ";");
+                pw.print(porte.getNave().getMatricula() + ";");
+                pw.print(porte.getOrigen().getCodigo() + ";");
                 pw.print(porte.getMuelleOrigen() + ";");
-                pw.print(porte.getSalida() + ";");
-                pw.print(porte.getDestino() + ";");
+                pw.print(porte.getSalida().toString() + ";");
+                pw.print(porte.getDestino().getCodigo() + ";");
                 pw.print(porte.getMuelleDestino() + ";");
-                pw.print(porte.getLlegada() + ";");
+                pw.print(porte.getLlegada().toString() + ";");
                 pw.println(porte.getPrecio());
             }
             pw.close();
