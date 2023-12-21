@@ -3,7 +3,9 @@ package src;
 import java.util.Scanner;
 
 /**
- * Description of the class
+ * La clase Utilidades contiene métodos de utilidad para la entrada y validación de datos.
+ * Incluye funciones para leer números enteros, números largos, números decimales, letras, fechas y fechas con hora.
+ * También ofrece la posibilidad de leer cadenas y realizar selecciones de opciones.
  *
  * @author Paula Cabrero
  * @author Alejandro Fernández
