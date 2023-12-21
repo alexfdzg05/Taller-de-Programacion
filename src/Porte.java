@@ -81,17 +81,20 @@ public class Porte {
     // TODO: Devuelve el número de huecos libres que hay en el porte
 
     public int numHuecosLibres() {
-        //si hay hueco en una posicion de la matriz: huecosLibres++
         int huecosLibres = 0;
-    for (int i = 0; i < huecos.length; i++){
-        for (int j = 0; j < huecos.length; j++){
-            if (!huecos[i][j]){ //HEREhuecos Colocar lo contrario (!)
-                huecosLibres++;
+
+        for (int i = 0; i < huecos.length; i++) {
+            for (int j = 0; j < huecos[i].length; j++) {
+                if (!huecos[i][j]) {
+                    huecosLibres++;
+                }
             }
         }
-    }
         return huecosLibres;
     }
+
+
+
     // TODO: ¿Están llenos todos los huecos?
     public boolean porteLleno() {
         boolean lleno = false;

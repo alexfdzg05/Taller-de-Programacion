@@ -137,6 +137,10 @@ public class Cliente {
         if(!letraValidas || !terminacionValida || !extensionValida){
             correcto = false;
         }
+
+        if(!correcto){
+            System.out.println("El email " + email + " es incorrecto.");
+        }
         return correcto;
     }
 
