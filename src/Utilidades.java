@@ -99,7 +99,7 @@ public class Utilidades {
     public static char leerEleccion(Scanner teclado, String mensaje, char a, char b){
         char letra;
         do {
-            System.out.println(mensaje);
+            System.out.print(mensaje);
             letra = teclado.next().charAt(0);
             if (letra != a  && letra != b){
                 System.out.println("\t El valor de entrada debe ser '"+a+"' o '"+b+"'");
