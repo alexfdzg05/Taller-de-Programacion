@@ -245,6 +245,7 @@ public class PlanetExpress {
                         char accion = Utilidades.leerEleccion(teclado, "¿Cancelar envío (c), o generar factura (f)?", 'c', 'f');
                         if (accion == 'c') {
                             envio.cancelar();
+                            cliente.cancelarEnvio(envio.getLocalizador());
                         } else {
                             String nombreFichero = Utilidades.leerCadena(teclado, "Nombre del fichero: ");
                             if (envio.generarFactura(nombreFichero)) { //HERE no funciona
