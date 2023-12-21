@@ -221,20 +221,21 @@ public class Porte {
      */
     public void imprimirMatrizHuecos() {
         //Primera fila, letras: 		A  B  C  D  E F
+        System.out.print(" ");
         for (int i = 0; i < nave.getColumnas(); i++) {
             char letraComienzo = 'A';
-            System.out.print(" " + (char) (letraComienzo + i));
+            System.out.print("  " + (char) (letraComienzo + i));
         }
         System.out.println();
 
         //Huecos
-        for (int i = 1; i <= (nave.getFilas()); i++) {
-            System.out.print(i);
-            for (int j = 0; j <= (nave.getColumnas()); j++) {
-                if (huecoOcupado(i, j)) {
-                    System.out.print(" [X]");
+        for (int i = 0; i < (nave.getFilas()); i++) {
+            System.out.print((i+1)+" ");
+            for (int j = 0; j < (nave.getColumnas()); j++) {
+                if (!huecoOcupado(i, j)) {
+                    System.out.print("[X]");
                 } else {
-                    System.out.print(" [ ]");
+                    System.out.print("[ ]");
                 }
             }
             System.out.println();
