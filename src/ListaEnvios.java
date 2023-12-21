@@ -123,14 +123,15 @@ public class ListaEnvios {
      */
     public boolean eliminarEnvio(String localizador) {
     boolean cancelado = false;
-        int i = 0;
-        while ((!envios[i].getLocalizador().equalsIgnoreCase(localizador)) && i < envios.length) {
-            i++;
+        for (int i = 0; i < envios.length; i++){
+            if (envios[i]!=null){
+                if (envios[i].getLocalizador().equalsIgnoreCase(localizador)){
+                    envios[i] = null;
+                    cancelado = true;
+                }
+            }
         }
-        if (envios[i].getLocalizador().equalsIgnoreCase(localizador)) {
-            envios[i] = null;
-            cancelado = true;
-        }
+
         return cancelado;
     }
 
