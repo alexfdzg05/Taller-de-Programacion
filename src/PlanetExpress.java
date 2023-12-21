@@ -126,15 +126,13 @@ public class PlanetExpress {
         if (porte != null) {
             Cliente cliente;
             char opcion;
-            opcion = Utilidades.leerEleccion(teclado,  "(1) Contratar el Envío como un Cliente ya registrado +" +
-                    "\n (2) contratar el Envío como un nuevo Cliente", '1','2');
-
+            opcion = Utilidades.leerEleccion(teclado,  "(1) Contratar el Envío como un Cliente ya registrado" +
+                    "\n(2) Contratar el Envío como un nuevo Cliente:", '1','2');
             if (opcion == '1'){
                 cliente = listaClientes.seleccionarCliente(teclado, "Email del cliente: ");
             } else {
                 cliente = Cliente.altaCliente(teclado,listaClientes,maxEnviosPorCliente);
             }
-
             porte.imprimirMatrizHuecos();
             if (cliente != null) {
                 Envio.altaEnvio(teclado, rand, porte, cliente);
@@ -211,38 +209,14 @@ public class PlanetExpress {
                     ListaPortes portes = planetExpress.buscarPorte(teclado);
                     if (portes != null){
                     Porte porte = portes.seleccionarPorte(teclado, "Seleccione un porte: ", "cancelar");
-                    if (porte != null) {
-                        //Comprar billete para un nuevo pasajero (n), o para uno ya existente (e)? El valor de entrada debe ser 'n' o 'e'
-                        char comprarBillete = Utilidades.leerEleccion(teclado, "¿Comprar billete para un nuevo pasajero (n), o para uno ya existente (e)?", 'n', 'e');
-                        if (comprarBillete == 'n') {
-                            if (!planetExpress.maxClientesAlcanzado()) {
-                                Cliente cliente = Cliente.altaCliente(teclado, planetExpress.listaClientes, planetExpress.maxEnviosPorCliente); //here
-                                    //Hasta aquí es igual que el altaCliente
-                                    Envio envio = Envio.altaEnvio(teclado, rand, porte, cliente);
-                                    porte.ocuparHueco(envio);
-                                    cliente.aniadirEnvio(envio);
-                                    //A partir de aquí es igual al altaCliente
-                            } else System.out.println("\t No se pueden dar de alta más clientes");
-                        } else {
-                            Cliente cliente = planetExpress.listaClientes.seleccionarCliente(teclado, "Email del cliente:");
-                            //
-                            if (cliente != null) {
-                                if (!cliente.maxEnviosAlcanzado()) {
-                                    Envio.altaEnvio(teclado, rand, porte, cliente);
-                                } else {
-                                    System.out.println("\t Máximo número de envíos alcanzado");
-                                }
-                            }
-                            //colocar lo mismo que lo que está entre comentarios
-                        }
-                    }
+                    planetExpress.contratarEnvio(teclado, rand, porte);
                     }
                     break;
                 case 4:     // TODO: Listado de envíos de un cliente
                     Cliente cliente = planetExpress.listaClientes.seleccionarCliente(teclado, "Email del cliente: ");
                     Envio envio = cliente.seleccionarEnvio(teclado, "Seleccione un envío: ");
                     if (envio != null) {
-                        char accion = Utilidades.leerEleccion(teclado, "¿Cancelar envío (c), o generar factura (f)?", 'c', 'f');
+                        char accion = Utilidades.leerEleccion(teclado, "¿Cancelar envío (c), o generar factura (f)?:", 'c', 'f');
                         if (accion == 'c') {
                             envio.cancelar();
                             cliente.cancelarEnvio(envio.getLocalizador());
