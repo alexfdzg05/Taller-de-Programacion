@@ -13,11 +13,11 @@ public class Utilidades {
 
     /**
      * TODO: Solicita un número repetidamente hasta que se introduzca uno correcto (dentro de los límites)
-     * @param teclado
-     * @param mensaje
+     * @param teclado Scanner para la entrada de datos
+     * @param mensaje Mensaje de solicitud
      * @param minimo el valor mínimo que se tiene que encontrar el numero
      * @param maximo el valor máximo que se tiene que encontrar el numero
-     * @return int numero
+     * @return int numero introducido por teclado
      */
     public static int leerNumero(Scanner teclado, String mensaje, int minimo, int maximo) {
         int numero;
@@ -30,11 +30,11 @@ public class Utilidades {
 
     /**
      * TODO: Solicita un número repetidamente hasta que se introduzca uno correcto (dentro de los límites)
-     * @param teclado
-     * @param mensaje
+     * @param teclado Scanner para la entrada de datos
+     * @param mensaje Mensaje de solicitud
      * @param minimo  el valor mínimo que se tiene que encontrar el numero
      * @param maximo el valor máximo que se tiene que encontrar el numero
-     * @return long numero
+     * @return long numero introducido por teclado
      */
     public static long leerNumero(Scanner teclado, String mensaje, long minimo, long maximo) {
         System.out.println(mensaje);
@@ -50,11 +50,11 @@ public class Utilidades {
 
     /**
      * TODO: Solicita un número repetidamente hasta que se introduzca uno correcto (dentro de los límites)
-     * @param teclado
-     * @param mensaje
+     * @param teclado Scanner para la entrada de datos
+     * @param mensaje Mensaje de solicitud
      * @param minimo el valor mínimo que se tiene que encontrar el numero
      * @param maximo el valor máximo que se tiene que encontrar el numero
-     * @return double numero
+     * @return double numero introducido por teclado
      */
     public static double leerNumero(Scanner teclado, String mensaje, double minimo, double maximo) {
         System.out.println(mensaje);
@@ -82,11 +82,11 @@ public class Utilidades {
 
     /**
      * TODO: TODO: Solicita una letra repetidamente hasta que se introduzca uno correcto (dentro de los límites)
-     * @param teclado
-     * @param mensaje
+     * @param teclado Scanner para la entrada de datos
+     * @param mensaje Mensaje de solicitud
      * @param minimo el valor mínimo que se tiene que encontrar la letra
      * @param maximo el valor máximo que se tiene que encontrar la letra
-     * @return char letra
+     * @return char letra introducida por teclado
      */
     public static char leerLetra(Scanner teclado, String mensaje, char minimo, char maximo) {
         char letra;
@@ -111,9 +111,9 @@ public class Utilidades {
 
     /**
      * TODO: Solicita una fecha repetidamente hasta que se introduzca una correcta
-     * @param teclado
-     * @param mensaje
-     * @return Fecha
+     * @param teclado Scanner para la entrada de datos
+     * @param mensaje Mensaje de solicitud
+     * @return Fecha introducida por teclado
      */
     public static Fecha leerFecha(Scanner teclado, String mensaje) {
         int dia, mes, anio;
@@ -145,9 +145,9 @@ public class Utilidades {
 
     /**
      * TODO: Solicita una fecha y hora repetidamente hasta que se introduzcan unas correctas
-     * @param teclado
-     * @param mensaje
-     * @return Fecha
+     * @param teclado Scanner para la entrada de datos
+     * @param mensaje Mensaje de solicitud
+     * @return Fecha introducida por teclado
      */
     public static Fecha leerFechaHora(Scanner teclado, String mensaje) {
         int dia, mes, anio, hora, minuto, segundo;
@@ -180,9 +180,9 @@ public class Utilidades {
 
     /**
      * TODO: Imprime por pantalla el String pasado por parámetro
-     * @param teclado
-     * @param s
-     * @return
+     * @param teclado Scanner para la entrada de datos
+     * @param s Mensaje a imprimir
+     * @return String Cadena introducida
      */
     public static String leerCadena(Scanner teclado, String s) {
         System.out.print(s);
