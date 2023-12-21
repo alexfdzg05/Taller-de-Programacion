@@ -161,7 +161,6 @@ public class ListaPortes {
      */
     public boolean escribirPortesCsv(String fichero) {
         PrintWriter pw = null;
-        boolean escrito = false;
         try {
             pw = new PrintWriter(fichero);
             for(int i = 0; i < getOcupacion(); i++){
