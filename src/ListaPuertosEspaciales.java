@@ -6,7 +6,10 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 
 /**
- * Description of the class
+ * La clase ListaPuertosEspaciales modela una colección de puertos espaciales con diversas funcionalidades.
+ *  Permite la inserción, búsqueda y selección de puertos espaciales, así como la escritura y lectura de datos en formato CSV.
+ *  Cada instancia de la clase contiene una lista de PuertosEspaciales con una capacidad determinada, teniendo métodos para
+ *  tener acceso a la ocupación, además de verificar si está llena y realizar operaciones de gestión de puertos espaciales.
  *
  * @author Paula Cabrero
  * @author Alejandro Fernández
@@ -18,7 +21,7 @@ public class ListaPuertosEspaciales {
     /**
      * TODO: Constructor de la clase para inicializar la lista a una capacidad determinada
      *
-     * @param capacidad
+     * @param capacidad Capacidad inicial de la lista
      */
     public ListaPuertosEspaciales(int capacidad) {
         lista = new PuertoEspacial[capacidad];
@@ -57,7 +60,7 @@ public class ListaPuertosEspaciales {
     /**
      * TODO: insertamos un Puerto espacial nuevo en la lista
      *
-     * @param puertoEspacial
+     * @param puertoEspacial Puerto Espacial a insertar
      * @return true en caso de que se añada correctamente, false en caso de lista llena o error
      */
     public boolean insertarPuertoEspacial(PuertoEspacial puertoEspacial) {
@@ -76,7 +79,7 @@ public class ListaPuertosEspaciales {
     /**
      * TODO: Buscamos un Puerto espacial a partir del codigo pasado como parámetro
      *
-     * @param codigo
+     * @param codigo codigo string pasado por param
      * @return Puerto espacial que encontramos o null si no existe
      */
     public PuertoEspacial buscarPuertoEspacial(String codigo) {
@@ -96,8 +99,8 @@ public class ListaPuertosEspaciales {
      *  argumento para la solicitud y siguiendo el orden y los textos mostrados en el enunciado.
      *  La función solicita repetidamente el código hasta que se introduzca uno correcto
      *
-     * @param teclado
-     * @param mensaje
+     * @param teclado Scanner para la entrada de datos
+     * @param mensaje mensaje de cancelacion
      * @return
      */
     public PuertoEspacial seleccionarPuertoEspacial(Scanner teclado, String mensaje) {
@@ -116,8 +119,8 @@ public class ListaPuertosEspaciales {
     /**
      * TODO: Genera un fichero CSV con la lista de puertos espaciales, SOBREESCRIBIENDOLO
      *
-     * @param nombre
-     * @return
+     * @param nombre Nombre del fichero CSV.
+     * @return true si la escritura es exitosa, false en caso de error.
      */
     public boolean escribirPuertosEspacialesCsv(String nombre) {
         PrintWriter pw = null;
@@ -146,9 +149,9 @@ public class ListaPuertosEspaciales {
      * TODO: Genera una lista de PuertosEspaciales a partir del fichero CSV, usando el argumento como capacidad máxima
      *  de la lista
      *
-     * @param fichero
-     * @param capacidad
-     * @return
+     *  @param fichero   Nombre del fichero CSV.
+     *  @param capacidad Capacidad máxima de la lista.
+     *  @return Lista de puertos espaciales cargada desde el fichero o null si hay un error.
      */
     public static ListaPuertosEspaciales leerPuertosEspacialesCsv(String fichero, int capacidad) {
         ListaPuertosEspaciales listaPuertosEspaciales = new ListaPuertosEspaciales(capacidad);
