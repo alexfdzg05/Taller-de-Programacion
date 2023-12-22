@@ -28,6 +28,9 @@ public class ListaPuertosEspaciales {
     }
 
     // TODO: Devuelve el número de puertos espaciales que hay en la lista
+    /**
+     * @return Número de puertos espaciales ocupados en la lista.
+     */
     public int getOcupacion() {
         int ocupacion = 0;
         for (int i = 0; i < lista.length; i++) {
@@ -39,6 +42,9 @@ public class ListaPuertosEspaciales {
     }
 
     // TODO: ¿Está llena la lista?
+    /**
+     * @return true si la lista está llena, false en caso contrario.
+     */
     public boolean estaLlena() {
         boolean llena = true;
         int i = 0;
@@ -53,6 +59,10 @@ public class ListaPuertosEspaciales {
     }
 
     // TODO: Devuelve un puerto espacial dado un indice
+    /**
+     * @param i Índice del puerto espacial en la lista.
+     * @return Objeto PuertoEspacial en la posición i de la lista.
+     */
     public PuertoEspacial getPuertoEspacial(int i) {
         return lista[i];
     }
