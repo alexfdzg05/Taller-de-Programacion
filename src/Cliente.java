@@ -167,7 +167,7 @@ public class Cliente {
         if(!nombre.equalsIgnoreCase("cancelar") && !apellidos.equalsIgnoreCase("cancelar") && !email.equalsIgnoreCase("cancelar")){
             cliente = new Cliente(nombre,apellidos,email,maxEnvios);
             if (clientes.insertarCliente(cliente)){
-                System.out.println("Cliente con " + cliente.getEmail() + " creado correctamente");
+                System.out.println("Cliente con email " + cliente.getEmail() + " creado correctamente");
             }
         } else {
             cliente = null;
