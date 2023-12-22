@@ -150,18 +150,18 @@ public class Cliente {
         Cliente cliente;
         do{
             nombre = Utilidades.leerCadena(teclado,"Nombre: ");
-        } while(!correctoNomApellidos(nombre, "Por favor, introduzca un nombre correcto"));
+        } while(!correctoNomApellidos(nombre, "Por favor, introduzca un nombre correcto") && !nombre.equalsIgnoreCase("cancelar"));
 
         if(!nombre.equalsIgnoreCase("cancelar")){
             do{
                 apellidos = Utilidades.leerCadena(teclado, "Apellidos: ");
-            } while(!correctoNomApellidos(apellidos, "Por favor, introduzca apellidos correcto"));
+            } while(!correctoNomApellidos(apellidos, "Por favor, introduzca apellidos correcto") && !nombre.equalsIgnoreCase("cancelar"));
         }
 
         if(!nombre.equalsIgnoreCase("cancelar") && !apellidos.equalsIgnoreCase("cancelar")){
             do{
                 email = Utilidades.leerCadena(teclado, "Email: ");
-            } while(!correctoEmail(email));
+            } while(!correctoEmail(email) && !nombre.equalsIgnoreCase("cancelar"));
         }
 
         if(!nombre.equalsIgnoreCase("cancelar") && !apellidos.equalsIgnoreCase("cancelar") && !email.equalsIgnoreCase("cancelar")){
@@ -182,28 +182,37 @@ public class Cliente {
      * @return true si el formato es correcto, false de lo contrario
      */
     public static boolean correctoEmail(String email) {
-        String[] partes = email.split("@");
-        String parteNombre = partes[0];
-        String parteEmail = partes[1];
         boolean correcto = true;
+        if(email.contains("@")){
+            String[] partes = email.split("@");
+            String parteNombre = partes[0];
+            String parteEmail = partes[1];
 
-        //Comprobación de que el correo upm no tiene mayúsculas, y solo tiene valores de a-z o "."
-        boolean letraValidas = comprobacionLetrasValidas(parteNombre) && comprobacionLetrasValidas(parteEmail);
+            //Comprobación de que el correo upm no tiene mayúsculas, y solo tiene valores de a-z o "."
+            boolean letraValidas = comprobacionLetrasValidas(parteNombre) && comprobacionLetrasValidas(parteEmail);
 
-        //Comprobación no empiece ni termine por .
-        boolean terminacionValida = comprobacionComienzoTerminacion(parteNombre);
+            //Comprobación no empiece ni termine por .
+            boolean terminacionValida = comprobacionComienzoTerminacion(parteNombre);
 
-        //Comprobación de que termine en alumnos.upm.es o upm.es
-        boolean extensionValida = comprobacionExtension(parteEmail);
+            //Comprobación de que termine en alumnos.upm.es o upm.es
+            boolean extensionValida = comprobacionExtension(parteEmail);
 
-        //Comprueba las verificaciones como conjunto
-        if(!letraValidas || !terminacionValida || !extensionValida){
+            //Comprueba las verificaciones como conjunto
+            if(!letraValidas || !terminacionValida || !extensionValida){
+                correcto = false;
+            }
+
+            if(!correcto){
+                System.out.println("El email " + email + " es incorrecto.");
+            }
+        } else if(email.equalsIgnoreCase("cancelar")){
+
+        } else {
             correcto = false;
-        }
-
-        if(!correcto){
             System.out.println("El email " + email + " es incorrecto.");
         }
+
+
         return correcto;
     }
 
@@ -286,22 +295,30 @@ public class Cliente {
                 }
                 if(!(caracter >= primeraLetra && caracter <= ultimaLetra) && caracter != ' '){
                     correcto = false;
-                    System.out.println("Error: solo puede contener letras y espacios");
+                    if(!palabras.equalsIgnoreCase("cancelar")){
+                        System.out.println("Error: solo puede contener letras y espacios");
+                    }
                 } else{
                     if(caracterAnterior == ' ' && !(caracter >= primeraLetra && caracter <= 'Z')){
                         correcto = false;
-                        System.out.println("Error: debe existir una mayúscula después de un espacio");
+                        if(!palabras.equalsIgnoreCase("cancelar")){
+                            System.out.println("Error: debe existir una mayúscula después de un espacio");
+                        }
+
                     } else{
                         if(caracterAnterior != ' ' && (caracter >= primeraLetra && caracter <= 'Z')){
                             correcto = false;
-                            System.out.println("Error: las mayúsculas solo pueden estar después de los espacios");
+                            if(!palabras.equalsIgnoreCase("cancelar")){
+                                System.out.println("Error: las mayúsculas solo pueden estar después de los espacios");
+                            }
+
                         }
                     }
                 }
                 i++;
             } while(correcto == true && i < palabras.length());
         }
-        if(correcto == false){
+        if(correcto == false && !palabras.equalsIgnoreCase("cancelar")){
             System.out.println(mensaje);
         }
         return correcto;
