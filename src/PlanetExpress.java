@@ -19,7 +19,6 @@ public class PlanetExpress {
     private ListaNaves listaNaves;
     private ListaClientes listaClientes;
     private ListaPortes listaPortes;
-    //HERE Falta envíos
 
 
     /**
@@ -48,11 +47,11 @@ public class PlanetExpress {
     /**
      * TODO: Metodo para leer los datos de los ficheros específicados en el enunciado y los agrega a
      *  la información de PlanetExpress (listaPuertosEspaciales, listaNaves, listaPortes, listaClientes)
-     * @param ficheroPuertos
-     * @param ficheroNaves
-     * @param ficheroPortes
-     * @param ficheroClientes
-     * @param ficheroEnvios
+     * @param ficheroPuertos   Ruta del archivo de puertos espaciales
+     * @param ficheroNaves     Ruta del archivo de naves
+     * @param ficheroPortes    Ruta del archivo de portes
+     * @param ficheroClientes  Ruta del archivo de clientes
+     * @param ficheroEnvios    Ruta del archivo de envíos
      */
     public void cargarDatos(String ficheroPuertos, String ficheroNaves, String ficheroPortes, String ficheroClientes, String ficheroEnvios) {
         listaPuertosEspaciales = ListaPuertosEspaciales.leerPuertosEspacialesCsv(ficheroPuertos, maxPuertosEspaciales);
@@ -66,11 +65,11 @@ public class PlanetExpress {
     /**
      * TODO: Metodo para almacenar los datos de PlanetExpress en los ficheros .csv especificados
      *  en el enunciado de la práctica
-     * @param ficheroPuertos
-     * @param ficheroNaves
-     * @param ficheroPortes
-     * @param ficheroClientes
-     * @param ficheroEnvios
+     * @param ficheroPuertos   Ruta del archivo de puertos espaciales
+     * @param ficheroNaves     Ruta del archivo de naves
+     * @param ficheroPortes    Ruta del archivo de portes
+     * @param ficheroClientes  Ruta del archivo de clientes
+     * @param ficheroEnvios    Ruta del archivo de envíos
      */
     public void guardarDatos(String ficheroPuertos, String ficheroNaves, String ficheroPortes, String ficheroClientes, String ficheroEnvios) {
     listaPuertosEspaciales.escribirPuertosEspacialesCsv(ficheroPuertos);
@@ -79,9 +78,8 @@ public class PlanetExpress {
     listaClientes.escribirClientesCsv(ficheroClientes);
     ListaEnvios listaEnvios = new ListaEnvios(maxClientes*maxEnviosPorCliente);
     listaEnvios.aniadirEnviosCsv(ficheroEnvios);
-
-
     }
+
     public boolean maxPortesAlcanzado() {
         return listaPortes.estaLlena();
     }
@@ -100,8 +98,8 @@ public class PlanetExpress {
      *  Devuelve una lista de los portes entre dos puertos espaciales con una fecha de salida solicitados por teclado
      *  al usuario en el orden y con los textos establecidos (tomar como referencia los ejemplos de ejecución en el
      *  enunciado de la prática)
-     * @param teclado
-     * @return
+     * @param teclado Scanner para la entrada de datos del usuario.
+     * @return Lista de portes que cumplen con los criterios de búsqueda
      */
     public ListaPortes buscarPorte(Scanner teclado) {
     String codigoOrigen, codigoDestino;
@@ -117,9 +115,9 @@ public class PlanetExpress {
      * TODO: Metodo para contratar un envio tal y como se indica en el enunciado de la práctica. Se contrata un envio para un porte
      *  especificado, pidiendo por teclado los datos necesarios al usuario en el orden y con los textos (tomar como referencia los
      *  ejemplos de ejecución en el enunciado de la prática)
-     * @param teclado
-     * @param rand
-     * @param porte
+     * @param teclado Scanner para la entrada de datos del usuario
+     * @param rand    Generador de números aleatorios
+     * @param porte   Porte para el cual se contratará el envío
      */
     public void contratarEnvio(Scanner teclado, Random rand, Porte porte) {
         if (porte != null) {
@@ -139,12 +137,11 @@ public class PlanetExpress {
         }
     }
 
-
     /**
      * TODO Metodo statico con la interfaz del menú de entrada a la App.
      * Tiene que coincidir con las trazas de ejecución que se muestran en el enunciado
-     * @param teclado
-     * @return opción seleccionada
+     * @param teclado Scanner para la entrada de datos del usuario
+     * @return Opción seleccionada
      */
     public static int menu(Scanner teclado) {
         int opcion;
