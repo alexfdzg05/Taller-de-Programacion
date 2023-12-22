@@ -6,7 +6,8 @@ import java.util.Random;
 import java.util.Scanner;
 
 /**
- * Description of the class
+ * Clase que representa un envío. Contiene métodos para obtener y manipular información sobre
+ * el envío, así como para cancelarlo y generar facturas.
  *
  * @author Paula Cabrero
  * @author Alejandro Fernández
@@ -23,12 +24,12 @@ public class Envio {
     /**
      * Constructor of the class
      *
-     * @param localizador
-     * @param porte
-     * @param cliente
-     * @param fila
-     * @param columna
-     * @param precio
+     * @param localizador Identificador único del envío.
+     * @param porte       Porte asociado al envío.
+     * @param cliente     Cliente asociado al envío.
+     * @param fila        Fila del hueco del envío.
+     * @param columna     Columna del hueco del envío.
+     * @param precio      Precio del envío.
      */
     public Envio(String localizador, Porte porte, Cliente cliente, int fila, int columna, double precio) {
         this.localizador = localizador;
@@ -38,22 +39,58 @@ public class Envio {
         this.columna = columna;
         this.precio = precio;
     }
+
+    /**
+     * Obtiene el localizador único del envío
+     *
+     * @return Localizador del envío
+     */
     public String getLocalizador() {
         return localizador;
     }
+
+    /**
+     * Obtiene el porte asociado al envío
+     *
+     * @return Porte del envío
+     */
     public Porte getPorte() {
         return porte;
     }
+
+    /**
+     * Obtiene el cliente asociado al envío
+     *
+     * @return Cliente del envío
+     */
     public Cliente getCliente() {
         return cliente;
     }
+
+    /**
+     * Obtiene la fila del hueco del envío
+     *
+     * @return Fila del hueco
+     */
     public int getFila() {
         return fila;
     }
+
+    /**
+     * Obtiene la columna del hueco del envío
+     *
+     * @return Columna del hueco
+     */
     public int getColumna() {
         return columna;
     }
+
     // TODO: Ejemplos: "1A" para el hueco con fila 1 y columna 1, "3D" para el hueco con fila 3 y columna 4
+    /**
+     * Obtiene la cadena que representa el hueco del envío, por ejemplo, "1A" o "3D"
+     *
+     * @return Cadena que representa el hueco del envío
+     */
     public String getHueco() {
         char letraComienzo = 'A';
         char columna = (char) (letraComienzo + getColumna() - 1);
@@ -62,14 +99,28 @@ public class Envio {
         hueco = fila+String.valueOf(columna);
         return hueco;
     }
+
+    /**
+     * Obtiene el precio del envío
+     *
+     * @return Precio del envío
+     */
     public double getPrecio() {
         return precio;
     }
+
     //TODO: Texto que debe generar: Envío PM1111AAAABBBBC para Porte PM0066 de GGT M5 (01/01/2023 08:15:00) a CID M1 (01/01/2024 11:00:05) en hueco 6C por 13424,56 SSD
+    /**
+     * @return Cadena con información del envío
+     */
     public String toString() {
     return "Envío "+getPorte()+" para "+getPorte().toStringSimple()+" en hueco "+getFila()+" "+getColumna()+" por "+ getPrecio()+"SSD";
     }
+
     // TODO: Cancela este envío, eliminándolo de la lista de envíos del porte y del cliente correspondiente
+    /**
+     * @return True si se cancela correctamente, false en caso contrario
+     */
     public boolean cancelar() {
         String id = getLocalizador();
         porte.desocuparHueco(id);
@@ -80,7 +131,7 @@ public class Envio {
     /**
      * TODO: Método para imprimir la información de este envío en un fichero que respecta el formato descrito en el
      *  enunciado
-     * @param fichero
+     * @param fichero Nombre del fichero para la factura
      * @return Devuelve la información con el siguiente formato como ejemplo ->
      *     -----------------------------------------------------
      *     --------- Factura del envío PM1111AAAABBBBC ---------
@@ -121,15 +172,13 @@ public class Envio {
         }
     }
 
-
-
     /**
      *	TODO: Genera un localizador de envío. Este consistirá en una cadena de 15 caracteres, de los cuales los seis
      *   primeros será el ID del porte asociado y los 9 siguientes serán letras mayúsculas aleatorias. Ejemplo: PM0123ABCD
      *   NOTA: Usar el objeto rand pasado como argumento para la parte aleatoria.
-     * @param rand
-     * @param idPorte
-     * @return
+     * @param rand    Objeto Random para generar caracteres aleatorios
+     * @param idPorte ID del porte asociado al envío
+     * @return Localizador generado
      */
     public static String generarLocalizador(Random rand, String idPorte) {
         StringBuilder localizador = new StringBuilder(idPorte);
@@ -140,15 +189,14 @@ public class Envio {
         return localizador.toString();
     }
 
-
     /**
      * TODO: Método para crear un nuevo envío para un porte y cliente específico, pidiendo por teclado los datos
      *  necesarios al usuario en el orden y con los textos indicados en los ejemplos de ejecución del enunciado
      *  La función solicita repetidamente los parámetros hasta que sean correctos
-     * @param teclado
-     * @param rand
-     * @param porte
-     * @param cliente
+     * @param teclado Scanner para la entrada de texto
+     * @param rand    Objeto Random para la generación aleatoria
+     * @param porte   Porte asociado al envío
+     * @param cliente Cliente asociado al envío
      * @return Envio para el porte y cliente especificados
      */
     public static Envio altaEnvio(Scanner teclado, Random rand, Porte porte, Cliente cliente) {
