@@ -6,7 +6,9 @@ import java.util.Random;
 import java.util.Scanner;
 
 /**
- * Description of the class
+ * La clase Porte contiene un porte con información como identificador, nave, puertos de origen y destino,
+ * fechas de salida y llegada, precio y una matriz de huecos. Contiene métodos para gestionar la ocupación de los
+ * huecos, mostrar información detallada y abreviada del porte, y generar un ID aleatorio, entre otros.
  *
  * @author Paula Cabrero
  * @author Alejandro Fernández
@@ -28,15 +30,15 @@ public class Porte {
     /**
      * TODO: Completa el constructo de la clase
      *
-     * @param id
-     * @param nave
-     * @param origen
-     * @param muelleOrigen
-     * @param salida
-     * @param destino
-     * @param muelleDestino
-     * @param llegada
-     * @param precio
+     * @param id Identificador del porte
+     * @param nave Nave asociada al porte
+     * @param origen Puerto espacial de origen
+     * @param muelleOrigen Número de muelle de origen
+     * @param salida Fechade salida
+     * @param destino Puerto espacial de destino
+     * @param muelleDestino Número de muelle de destino
+     * @param llegada Fecha de llegada
+     * @param precio Precio del coste
      */
     public Porte(String id, Nave nave, PuertoEspacial origen, int muelleOrigen, Fecha salida, PuertoEspacial destino, int muelleDestino, Fecha llegada, double precio) {
     this.id = id;
@@ -51,35 +53,92 @@ public class Porte {
     huecos = new boolean[nave.getFilas()][nave.getColumnas()];
     listaEnvios = new ListaEnvios(nave.getFilas() * nave.getColumnas());
     }
+
+    /**
+     * Obtiene el identificador del porte
+     *
+     * @return Identificador del porte
+     */
     public String getID() {
         return id;
     }
+
+    /**
+     * Obtiene la nave del porte
+     *
+     * @return Nave del porte
+     */
     public Nave getNave(){
         return nave;
     }
+
+    /**
+     * Obtiene el puerto espacial de origen del porte
+     *
+     * @return Puerto espacial de origen del porte
+     */
     public PuertoEspacial getOrigen() {
         return origen;
     }
+
+    /**
+     * Obtiene el muelle de origen del porte
+     *
+     * @return Muelle de origen del porte
+     */
     public int getMuelleOrigen() {
         return muelleOrigen;
     }
+
+    /**
+     * Obtiene la fecha de salida del porte
+     *
+     * @return Fecha de salida del porte
+     */
     public Fecha getSalida(){
         return salida;
     }
+
+    /**
+     * Obtiene el puerto espacial de destino del porte
+     *
+     * @return Puerto espacial de destino del porte
+     */
     public PuertoEspacial getDestino() {
         return destino;
     }
+
+    /**
+     * Obtiene el muelle de destino del porte
+     *
+     * @return Muelle de destino del porte
+     */
     public int getMuelleDestino() {
         return muelleDestino;
     }
+
+    /**
+     * Obtiene la fecha de llegada del porte
+     *
+     * @return Fecha de llegada del porte
+     */
     public Fecha getLlegada() {
         return llegada;
     }
+
+    /**
+     * Obtiene el precio del porte
+     *
+     * @return Precio del porte
+     */
     public double getPrecio() {
         return precio;
     }
-    // TODO: Devuelve el número de huecos libres que hay en el porte
 
+    // TODO: Devuelve el número de huecos libres que hay en el porte
+    /**
+     * @return Numero de huecos libres
+     */
     public int numHuecosLibres() {
         int huecosLibres = 0;
 
@@ -96,6 +155,9 @@ public class Porte {
 
 
     // TODO: ¿Están llenos todos los huecos?
+    /**
+     * @return Si el porte está o no completo
+     */
     public boolean porteLleno() {
         boolean lleno = false;
         if(numHuecosLibres()==0){
@@ -105,10 +167,19 @@ public class Porte {
     }
 
     // TODO: ¿Está ocupado el hueco consultado?  //true si está ocupado, false si no
+    /**
+     * @return Si el hueco (introducido por fila y columna) del porte está o no ocupado
+     */
     public boolean huecoOcupado(int fila, int columna) {
         //Si hay hueco(true), no esta ocupado(false)
         return !huecos[fila][columna]; //HEREhuecos Quitar lo contrario (!)
     }
+
+    /**
+     * Busca si un envío está en la lista de envíoss
+     *
+     * @return Envio encontrado
+     */
     public Envio buscarEnvio(String localizador) {
         return listaEnvios.buscarEnvio(localizador);
     }
@@ -116,8 +187,8 @@ public class Porte {
 
     /**
      * TODO: Devuelve el objeto Envio que corresponde con una fila o columna,
-     * @param fila
-     * @param columna
+     * @param fila Fila del envío
+     * @param columna Columna del envío
      * @return el objeto Envio que corresponde, o null si está libre o se excede en el límite de fila y columna
      */
     public Envio buscarEnvio(int fila, int columna) {
@@ -141,8 +212,8 @@ public class Porte {
     /**
      * TODO: Método que Si está desocupado el hueco que indica el envio, lo pone ocupado y devuelve true,
      *  si no devuelve false
-     * @param envio
-     * @return
+     * @param envio Envío a ocupar
+     * @return true si se encontró un hueco, false al contrario
      */
     public boolean ocuparHueco(Envio envio) {
         boolean ocupar = false;
@@ -150,7 +221,6 @@ public class Porte {
             if (!huecos[envio.getFila() - 1][envio.getColumna() - 1] && listaEnvios.insertarEnvio(envio)) {
                 huecos[envio.getFila() - 1][envio.getColumna() - 1] = true;
                 ocupar = true;
-                //HERE hay que poner numHuecosLibres++ de alguna forma;
             }
         }
         return ocupar;
@@ -160,8 +230,8 @@ public class Porte {
 
     /**
      * TODO: A través del localizador del envio, se desocupará el hueco
-     * @param localizador
-     * @return
+     * @param localizador Localizador del envío a desocupar
+     * @return true si se pudo desocupar el hueco, false en caso contrario
      */
     public boolean desocuparHueco(String localizador) {
         boolean desocupar = false;
@@ -198,10 +268,10 @@ public class Porte {
 
     /**
      * TODO: Devuelve true si el código origen, destino y fecha son los mismos que el porte
-     * @param codigoOrigen
-     * @param codigoDestino
-     * @param fecha
-     * @return
+     * @param codigoOrigen Código puerto de origen
+     * @param codigoDestino Código puerto de destino
+     * @param fecha Fecha
+     * @return si coinciden el código de origen y salida, además de la fecha
      */
     public boolean coincide(String codigoOrigen, String codigoDestino, Fecha fecha) {
         boolean coincidente = false;
@@ -250,8 +320,8 @@ public class Porte {
     /**
      * TODO: Devuelve true si ha podido escribir en un fichero la lista de envíos del porte, siguiendo las indicaciones
      *  del enunciado
-     * @param fichero
-     * @return
+     * @param fichero Nombre del fichero donde se escribirá la lista de envíos
+     * @return true si se pudo escribir en el fichero, false en caso contrario
      */
     public boolean generarListaEnvios(String fichero) {
         PrintWriter pw = null;
@@ -292,7 +362,7 @@ public class Porte {
      * TODO: Genera un ID de porte. Este consistirá en una cadena de 6 caracteres, de los cuales los dos primeros
      *  serán PM y los 4 siguientes serán números aleatorios.
      *  NOTA: Usar el objeto rand pasado como argumento para la parte aleatoria.
-     * @param rand
+     * @param rand Generador de números aleatorios
      * @return ejemplo -> "PM0123"
      */
     public static String generarID(Random rand) {
@@ -305,12 +375,12 @@ public class Porte {
      *  y naves y la restricción de que no puede estar repetido el identificador, siguiendo las indicaciones
      *  del enunciado.
      *  La función solicita repetidamente los parametros hasta que sean correctos
-     * @param teclado
-     * @param rand
-     * @param puertosEspaciales
-     * @param naves
-     * @param portes
-     * @return
+     * @param teclado           Scanner para la entrada de usuario
+     * @param rand              Generador de números aleatorios
+     * @param puertosEspaciales Lista de puertos espaciales disponibles
+     * @param naves             Lista de naves disponibles
+     * @param portes            Lista de portes existentes
+     * @return Objeto Porte creado por el usuario
      */
     public static Porte altaPorte(Scanner teclado, Random rand,
                                   ListaPuertosEspaciales puertosEspaciales,
