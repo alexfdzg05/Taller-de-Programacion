@@ -77,6 +77,12 @@ public class PlanetExpress {
     listaPortes.escribirPortesCsv(ficheroPortes);
     listaClientes.escribirClientesCsv(ficheroClientes);
     ListaEnvios listaEnvios = new ListaEnvios(maxClientes*maxEnviosPorCliente);
+    for (int i = 0; i < listaClientes.getLength(); i++){
+        Cliente cliente = listaClientes.getCliente(i);
+        if (cliente != null) {
+            listaEnvios.insertarEnvio(cliente.getEnvio(i));
+        }
+    }
     listaEnvios.aniadirEnviosCsv(ficheroEnvios);
     }
 
