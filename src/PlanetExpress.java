@@ -80,7 +80,13 @@ public class PlanetExpress {
     for (int i = 0; i < listaClientes.getLength(); i++){
         Cliente cliente = listaClientes.getCliente(i);
         if (cliente != null) {
-            listaEnvios.insertarEnvio(cliente.getEnvio(i));
+            if (cliente.getListaEnvios() != null) {
+                for (int j = 0; j < cliente.getListaEnvios().getLength(); j++) {
+                    if (cliente.getEnvio(j) != null) {
+                        listaEnvios.insertarEnvio(cliente.getEnvio(i));
+                    }
+                }
+            }
         }
     }
     listaEnvios.aniadirEnviosCsv(ficheroEnvios);

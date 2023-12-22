@@ -214,8 +214,6 @@ public class ListaEnvios {
                     pw.print(";");
                     pw.print(envios[i].getPrecio());
                     pw.println();
-                } else {
-                    pw.println();
                 }
             }
             return true;
