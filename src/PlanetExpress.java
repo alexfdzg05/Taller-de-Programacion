@@ -83,7 +83,7 @@ public class PlanetExpress {
             if (cliente.getListaEnvios() != null) {
                 for (int j = 0; j < cliente.getListaEnvios().getLength(); j++) {
                     if (cliente.getEnvio(j) != null) {
-                        listaEnvios.insertarEnvio(cliente.getEnvio(i));
+                        listaEnvios.insertarEnvio(cliente.getEnvio(j));
                     }
                 }
             }
