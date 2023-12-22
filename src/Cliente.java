@@ -155,13 +155,13 @@ public class Cliente {
         if(!nombre.equalsIgnoreCase("cancelar")){
             do{
                 apellidos = Utilidades.leerCadena(teclado, "Apellidos: ");
-            } while(!correctoNomApellidos(apellidos, "Por favor, introduzca apellidos correcto") && !nombre.equalsIgnoreCase("cancelar"));
+            } while(!correctoNomApellidos(apellidos, "Por favor, introduzca apellidos correcto") && !apellidos.equalsIgnoreCase("cancelar"));
         }
 
         if(!nombre.equalsIgnoreCase("cancelar") && !apellidos.equalsIgnoreCase("cancelar")){
             do{
                 email = Utilidades.leerCadena(teclado, "Email: ");
-            } while(!correctoEmail(email) && !nombre.equalsIgnoreCase("cancelar"));
+            } while(!correctoEmail(email) && !email.equalsIgnoreCase("cancelar"));
         }
 
         if(!nombre.equalsIgnoreCase("cancelar") && !apellidos.equalsIgnoreCase("cancelar") && !email.equalsIgnoreCase("cancelar")){
