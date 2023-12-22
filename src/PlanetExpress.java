@@ -114,12 +114,20 @@ public class PlanetExpress {
      * @return Lista de portes que cumplen con los criterios de búsqueda
      */
     public ListaPortes buscarPorte(Scanner teclado) {
-    String codigoOrigen, codigoDestino;
-    Fecha fecha;
-    codigoOrigen = Utilidades.leerCadena(teclado, "Ingrese codigo de puerto Origen:");
-    codigoDestino = Utilidades.leerCadena(teclado, "Ingrese codigo de puerto Destino:");
-    fecha = Utilidades.leerFecha(teclado, "Fecha de salida:");
-        return listaPortes.buscarPortes(codigoOrigen, codigoDestino, fecha);
+        String codigoOrigen, codigoDestino;
+        Fecha fecha;
+        codigoOrigen = Utilidades.leerCadena(teclado, "Ingrese codigo de puerto Origen:");
+        if(!codigoOrigen.equalsIgnoreCase("cancelar")){
+            codigoDestino = Utilidades.leerCadena(teclado, "Ingrese codigo de puerto Destino:");
+            if(!codigoDestino.equalsIgnoreCase("cancelar")){
+                fecha = Utilidades.leerFecha(teclado, "Fecha de salida:");
+                return listaPortes.buscarPortes(codigoOrigen, codigoDestino, fecha);
+            } else{
+                return null;
+            }
+        } else{
+            return null;
+        }
     }
 
 
@@ -133,17 +141,16 @@ public class PlanetExpress {
      */
     public void contratarEnvio(Scanner teclado, Random rand, Porte porte) {
         if (porte != null) {
-            Cliente cliente;
+            Cliente cliente = null;
             char opcion;
-            opcion = Utilidades.leerEleccion(teclado,  "(1) Contratar el Envío como un Cliente ya registrado" +
-                    "\n(2) Contratar el Envío como un nuevo Cliente:", '1','2');
-            if (opcion == '1'){
+            opcion = Utilidades.leerEleccion(teclado, "¿Comprar billete para un nuevo pasajero (n), o para uno ya existente (e)? ", 'n', 'e');
+            if (opcion == 'e'){
                 cliente = listaClientes.seleccionarCliente(teclado, "Email del cliente: ");
-            } else {
+            } else if(opcion =='n') {
                 cliente = Cliente.altaCliente(teclado,listaClientes,maxEnviosPorCliente);
             }
-            porte.imprimirMatrizHuecos();
             if (cliente != null) {
+                porte.imprimirMatrizHuecos();
                 Envio.altaEnvio(teclado, rand, porte, cliente);
             }
         }
@@ -216,25 +223,28 @@ public class PlanetExpress {
                 case 3:     // TODO: Buscar Porte
                     ListaPortes portes = planetExpress.buscarPorte(teclado);
                     if (portes != null){
-                    Porte porte = portes.seleccionarPorte(teclado, "Seleccione un porte: ", "cancelar");
-                    planetExpress.contratarEnvio(teclado, rand, porte);
+                        Porte porte = portes.seleccionarPorte(teclado, "Seleccione un porte: ", "cancelar");
+                        planetExpress.contratarEnvio(teclado, rand, porte);
                     }
                     break;
                 case 4:     // TODO: Listado de envíos de un cliente
                     Cliente cliente = planetExpress.listaClientes.seleccionarCliente(teclado, "Email del cliente: ");
-                    Envio envio = cliente.seleccionarEnvio(teclado, "Seleccione un envío: ");
-                    if (envio != null) {
-                        char accion = Utilidades.leerEleccion(teclado, "¿Cancelar envío (c), o generar factura (f)?:", 'c', 'f');
-                        if (accion == 'c') {
-                            envio.cancelar();
-                            cliente.cancelarEnvio(envio.getLocalizador());
-                        } else if(accion == 'f') {
-                            String nombreFichero = Utilidades.leerCadena(teclado, "Nombre del fichero: ");
-                            if (envio.generarFactura(nombreFichero)) {
-                                System.out.println("\n \t Factura generada correctamente");
+                    if(cliente != null){
+                        Envio envio = cliente.seleccionarEnvio(teclado, "Seleccione un envío: ");
+                        if (envio != null) {
+                            char accion = Utilidades.leerEleccion(teclado, "¿Cancelar envío (c), o generar factura (f)?: ", 'c', 'f');
+                            if (accion == 'c') {
+                                envio.cancelar();
+                                cliente.cancelarEnvio(envio.getLocalizador());
+                            } else if(accion == 'f') {
+                                String nombreFichero = Utilidades.leerCadena(teclado, "Nombre del fichero: ");
+                                if (envio.generarFactura(nombreFichero)) {
+                                    System.out.println("\n \t Factura generada correctamente");
+                                }
                             }
                         }
                     }
+
                     break;
                 case 5:     // TODO: Lista de envíos de un porte
                     Porte porte1 = planetExpress.listaPortes.seleccionarPorte(teclado, "Seleccione un porte: ", "cancelar");
