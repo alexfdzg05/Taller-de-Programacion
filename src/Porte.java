@@ -362,7 +362,7 @@ public class Porte {
      * TODO: Genera un ID de porte. Este consistirá en una cadena de 6 caracteres, de los cuales los dos primeros
      *  serán PM y los 4 siguientes serán números aleatorios.
      *  NOTA: Usar el objeto rand pasado como argumento para la parte aleatoria.
-     * @param rand Generador de números aleatorios
+     * @param rand Objeto Random utilizado para generar números aleatorios
      * @return ejemplo -> "PM0123"
      */
     public static String generarID(Random rand) {
@@ -386,23 +386,42 @@ public class Porte {
                                   ListaPuertosEspaciales puertosEspaciales,
                                   ListaNaves naves,
                                   ListaPortes portes) {
+        String codigoOrigen = "", codigoDestino = "";
+        int muelleOrigen = 0, terminalDestino = 0;
+        boolean cancelar = false;
+        PuertoEspacial puertoEspacialOrigen = null, puertoEspacialDestino = null;
+        Porte porte;
 
-            String codigoOrigen = Utilidades.leerCadena(teclado, "Ingrese código de puerto Origen:");
-            while (puertosEspaciales.buscarPuertoEspacial(codigoOrigen)==null){
+        //codOrigen
+        while(puertosEspaciales.buscarPuertoEspacial(codigoOrigen)==null && !codigoOrigen.equalsIgnoreCase("cancelar")){
+            codigoOrigen = Utilidades.leerCadena(teclado, "Ingrese código de puerto Origen:");
+            if(codigoOrigen.equalsIgnoreCase("cancelar")){
+                cancelar = true;
+            } else if(puertosEspaciales.buscarPuertoEspacial(codigoOrigen)==null){
                 System.out.println("\t Código de puerto no encontrado.");
-                codigoOrigen = Utilidades.leerCadena(teclado, "Ingrese código de puerto Origen:");
             }
-            PuertoEspacial puertoEspacialOrigen = puertosEspaciales.buscarPuertoEspacial(codigoOrigen);
-            int muelleOrigen = Utilidades.leerNumero(teclado, "Ingrese el muelle de Origen (1 - "+puertoEspacialOrigen.getMuelles()+"): ", 1,puertoEspacialOrigen.getMuelles());
+        }
+        if(!cancelar){
+            puertoEspacialOrigen = puertosEspaciales.buscarPuertoEspacial(codigoOrigen);
+            muelleOrigen = Utilidades.leerNumero(teclado, "Ingrese el muelle de Origen (1 - "+puertoEspacialOrigen.getMuelles()+"): ", 1,puertoEspacialOrigen.getMuelles());
 
-            String codigoDestino = Utilidades.leerCadena(teclado, "Ingrese código de puerto Destino: ");
-            while (puertosEspaciales.buscarPuertoEspacial(codigoDestino)==null){
+        }
+
+        //codDestino
+        while(puertosEspaciales.buscarPuertoEspacial(codigoDestino)==null && !cancelar){
+            codigoDestino = Utilidades.leerCadena(teclado, "Ingrese código de puerto Origen:");
+            if(codigoDestino.equalsIgnoreCase("cancelar")){
+                cancelar = true;
+            } else if(puertosEspaciales.buscarPuertoEspacial(codigoDestino)==null){
                 System.out.println("\t Código de puerto no encontrado.");
-                codigoDestino = Utilidades.leerCadena(teclado, "Ingrese código de puerto Origen:");
             }
-            PuertoEspacial puertoEspacialDestino = puertosEspaciales.buscarPuertoEspacial(codigoDestino);
-            int terminalDestino = Utilidades.leerNumero(teclado, "Ingrese Terminal Destino (1 - "+puertoEspacialDestino.getMuelles()+"): ", 1, puertoEspacialDestino.getMuelles());
+        }
+        if(!cancelar){
+            puertoEspacialDestino = puertosEspaciales.buscarPuertoEspacial(codigoDestino);
+            terminalDestino = Utilidades.leerNumero(teclado, "Ingrese Terminal Destino (1 - "+puertoEspacialDestino.getMuelles()+"): ", 1, puertoEspacialDestino.getMuelles());
+        }
 
+        if(!cancelar){
             naves.mostrarNaves();
 
             Nave nave = naves.seleccionarNave(teclado, "Ingrese matrícula de la nave: ", puertoEspacialOrigen.distancia(puertoEspacialDestino));
@@ -417,12 +436,17 @@ public class Porte {
                 double precio = Utilidades.leerNumero(teclado, "Ingrese precio de pasaje: ", 0);
                 String id = generarID(rand);
 
-                Porte porte = new Porte(id, nave, puertoEspacialOrigen, muelleOrigen, fechaSalida, puertoEspacialDestino, terminalDestino, fechaLlegada, precio);
+                porte = new Porte(id, nave, puertoEspacialOrigen, muelleOrigen, fechaSalida, puertoEspacialDestino, terminalDestino, fechaLlegada, precio);
                 portes.insertarPorte(porte);
                 System.out.println("Porte " + porte.getID() + " creado correctamente");
-                return porte; //HERE Aquí aparece el error con un .toString (aparece usando el debugger)
+                return porte;
             } else {
-                return null;
+                porte = null;
             }
+        }
+        else{
+            porte = null;
+        }
+        return porte;
     }
 }
