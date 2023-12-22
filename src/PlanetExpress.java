@@ -228,9 +228,9 @@ public class PlanetExpress {
                         if (accion == 'c') {
                             envio.cancelar();
                             cliente.cancelarEnvio(envio.getLocalizador());
-                        } else {
+                        } else if(accion == 'f') {
                             String nombreFichero = Utilidades.leerCadena(teclado, "Nombre del fichero: ");
-                            if (envio.generarFactura(nombreFichero)) { //HERE no funciona
+                            if (envio.generarFactura(nombreFichero)) {
                                 System.out.println("\n \t Factura generada correctamente");
                             }
                         }
@@ -240,7 +240,7 @@ public class PlanetExpress {
                     Porte porte1 = planetExpress.listaPortes.seleccionarPorte(teclado, "Seleccione un porte: ", "cancelar");
                     if (porte1 != null) {
                         String nombreFichero = Utilidades.leerCadena(teclado, "Nombre del fichero: ");
-                        if (porte1.generarListaEnvios(nombreFichero)) { //HERE no funciona debido a que porte no tiene lista de envíos
+                        if (porte1.generarListaEnvios(nombreFichero)) {
                             System.out.println("\n\t Fichero creado correctamente");
                         }
                     }
