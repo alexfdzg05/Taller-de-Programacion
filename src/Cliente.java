@@ -28,57 +28,121 @@ public class Cliente {
         this.email = email;
         this.listaEnvios = new ListaEnvios(maxEnvios);
     }
+
+    /**
+     * Obtiene el nombre del cliente
+     *
+     * @return Nombre del cliente
+     */
     public String getNombre() {
         return nombre;
     }
+
+    /**
+     * Obtiene los apellidos del cliente
+     *
+     * @return Apellidos del cliente
+     */
     public String getApellidos() {
         return apellidos;
     }
+
+    /**
+     * Obtiene el email del cliente
+     *
+     * @return Email del cliente
+     */
     public String getEmail() {
         return email;
     }
+
     // TODO: Texto que debe generar: Zapp Brannigan, zapp.brannigan@dop.gov
+    /**
+     * @return Cadena que representa al cliente
+     */
     public String toString() {
     return getNombre()+" "+getApellidos()+", "+getEmail();
     }
+
     // TODO: Devuelve un booleano que indica si se ha alcanzado el número máximo de envíos
+    /**
+     * @return true si el número máximo de envíos se ha alcanzado, false en caso contrario
+     */
     public boolean maxEnviosAlcanzado() {
     return listaEnvios.estaLlena();
     }
+
     // TODO: Devuelve un envío en función de su posición
+    /**
+     * @param i Índice de la posición del envío
+     * @return Objeto Envio correspondiente a la posición especificada
+     */
     public Envio getEnvio(int i) {
     return listaEnvios.getEnvio(i);
     }
+
+    /**
+     * Obtiene la lista de envíos asociada al cliente
+     *
+     * @return Lista de envíos del cliente
+     */
     public ListaEnvios getListaEnvios() {
         return listaEnvios;
     }
+
     // TODO: Añade un envío al cliente
+    /**
+     * @param envio Objeto Envio a añadir a la lista
+     * @return true si se añadió correctamente, false si la lista está llena
+     */
     public boolean aniadirEnvio(Envio envio) {
         return listaEnvios.insertarEnvio(envio);
     }
+
+    /**
+     * Busca y devuelve un envío de la lista del cliente dado su localizador
+     *
+     * @param localizador Localizador del envío a buscar
+     * @return Objeto Envio correspondiente al localizador especificado o null si no se encuentra
+     */
     public Envio buscarEnvio(String localizador) {
         return listaEnvios.buscarEnvio(localizador);
     }
+
     // TODO: Elimina el envío de la lista de envíos del pasajero
+    /**
+     * @param localizador Localizador del envío a eliminar
+     * @return true si se eliminó correctamente, false si el envío no se encontró en la lista
+     */
     public boolean cancelarEnvio(String localizador) {
         return listaEnvios.eliminarEnvio(localizador);
     }
+
+    /**
+     * Muestra por pantalla los envíos de la lista, con el formato especificado en el enunciado
+     */
     public void listarEnvios() {
         listaEnvios.listarEnvios();
     }
-    // Encapsula la funcionalidad seleccionarEnvio de ListaEnvios
+
+    /**
+     * Permite seleccionar un envío existente a partir de su localizador
+     *
+     * @param teclado Scanner para la entrada de texto
+     * @param mensaje Mensaje de solicitud para el localizador
+     * @return El envío seleccionado o null si se cancela la operación
+     */
     public Envio seleccionarEnvio(Scanner teclado, String mensaje) {
         return listaEnvios.seleccionarEnvio(teclado, mensaje);
     }
-
 
     /**
      * TODO: Método estático para crear un nuevo cliente "no repetido", se pide por teclado los datos necesarios
      * al usuario en el orden y con los textos indicados en los ejemplos de ejecución del enunciado
      * La función tiene que solicitar repetidamente los parámetros hasta que sean correctos
-     * @param teclado
-     * @param clientes
-     * @param maxEnvios
+     * @param teclado Scanner para entrada estándar
+     * @param clientes Lista de clientes existentes
+     * @param maxEnvios Número máximo de envíos permitidos para el cliente
      * @return src.Cliente
      */
     public static Cliente altaCliente(Scanner teclado, ListaClientes clientes, int maxEnvios) {
@@ -114,11 +178,10 @@ public class Cliente {
 
     /**
      * TODO: Metodo para comprobar que el formato de email introducido sea correcto
-     * @param email
-     * @return
+     * @param email Email a verificar
+     * @return true si el formato es correcto, false de lo contrario
      */
     public static boolean correctoEmail(String email) {
-
         String[] partes = email.split("@");
         String parteNombre = partes[0];
         String parteEmail = partes[1];
@@ -145,6 +208,12 @@ public class Cliente {
     }
 
     //MÉTODOS AÑADIDOS
+    /**
+     * Comprobación de que las letras en la cadena son válidas (solo a-z y '.')
+     *
+     * @param parte Cadena a comprobar
+     * @return true si las letras son válidas, false de lo contrario
+     */
     private static boolean comprobacionLetrasValidas(String parte){
         int primeraLetra = 'a', ultimaLetra = 'z', punto = '.';
         char caracter = ' ';
@@ -164,6 +233,12 @@ public class Cliente {
         return correcto;
     }
 
+    /**
+     * Comprobación de que la cadena no empiece ni termine por '.'
+     *
+     * @param parte Cadena a comprobar
+     * @return true si la cadena es válida, false de lo contrario
+     */
     private static boolean comprobacionComienzoTerminacion(String parte){
         boolean correcto = true;
         if(parte.endsWith(".") || parte.startsWith(".")){
@@ -172,6 +247,12 @@ public class Cliente {
         return correcto;
     }
 
+    /**
+     * Comprobación de que la cadena termine en "alumnos.upm.es" o "upm.es"
+     *
+     * @param parte Cadena a comprobar
+     * @return true si la cadena es válida, false de lo contrario
+     */
     private static boolean comprobacionExtension(String parte){
         String alumnos = "alumnos.upm.es", upm = "upm.es";
         boolean correcto = true;
@@ -181,6 +262,13 @@ public class Cliente {
         return correcto;
     }
 
+    /**
+     * Comprueba que el formato de nombres y apellidos sea correcto
+     *
+     * @param palabras  Cadena a comprobar (nombres o apellidos)
+     * @param mensaje   Mensaje a mostrar si hay un error
+     * @return true si el formato es correcto, false de lo contrario
+     */
     public static boolean correctoNomApellidos(String palabras, String mensaje){
         int primeraLetra = 'A', ultimaLetra = 'z';
         boolean correcto = true;
