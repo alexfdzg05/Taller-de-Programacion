@@ -142,13 +142,15 @@ public class ListaNaves {
                 pw.print(nave.getMatricula() + ";");
                 pw.print(nave.getFilas() + ";");
                 pw.print(nave.getColumnas() + ";");
-                pw.print(nave.getAlcance());
+                pw.println(nave.getAlcance());
             }
             return true;
         } catch (Exception e) {
             return false;
         } finally {
-            pw.close();
+            if (pw != null) {
+                pw.close();
+            }
         }
     }
 

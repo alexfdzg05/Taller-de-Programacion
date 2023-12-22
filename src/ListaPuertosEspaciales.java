@@ -133,14 +133,16 @@ public class ListaPuertosEspaciales {
                 pw.print(puertoEspacial.getRadio() + ";");
                 pw.print(puertoEspacial.getAzimut() + ";");
                 pw.print(puertoEspacial.getPolar() + ";");
-                pw.print(puertoEspacial.getNombre());
+                pw.println(puertoEspacial.getMuelles());
             }
             return true;
         } catch (Exception e) {
             System.out.println("Error de escritura en fichero PuertosEspaciales.");
             return false;
         } finally {
-            pw.close();
+            if (pw != null) {
+                pw.close();
+            }
         }
     }
 
