@@ -1,7 +1,10 @@
 package src;
 
 /**
- * Clase que representa una nave espacial (Nave)
+ * Clase que representa una nave espacial. Contiene información detallada sobre la nave,
+ * como la marca, modelo, matrícula, dimensiones, alcance y otros detalles específicos.
+ * Permite acceder y manipular esta información mediante métodos y proporciona un constructor
+ * para inicializar una nueva nave
  *
  * @author Paula Cabrero
  * @author Alejandro Fernández

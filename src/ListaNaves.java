@@ -6,7 +6,9 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 
 /**
- * Description of the class
+ * Clase que representa una lista de naves espaciales. Permite almacenar, buscar y manipular información
+ * sobre naves, incluyendo la capacidad, ocupación, inserción, búsqueda, visualización y escritura en un
+ * archivo CSV.
  *
  * @author Paula Cabrero
  * @author Alejandro Fernández
@@ -18,7 +20,7 @@ public class ListaNaves {
     /**
      * TODO: Constructor de la clase para inicializar la lista a una capacidad determinada
      *
-     * @param capacidad
+     * @param capacidad Capacidad inicial de la lista de naves
      */
     public ListaNaves(int capacidad) {
     naves = new Nave[capacidad];
@@ -33,7 +35,11 @@ public class ListaNaves {
         }
         return ocupacion;
     }
+
     // TODO: ¿Está llena la lista de naves?
+    /**
+     * @return true si la lista está llena, false si hay espacio disponible
+     */
     public boolean estaLlena() {
         boolean llena = true;
         int i = 0;
@@ -45,14 +51,20 @@ public class ListaNaves {
         }
         return llena;
     }
+
     // TODO: Devuelve nave dado un indice
+
+    /**
+     * @param posicion Índice de la nave en la lista
+     * @return Objeto Nave correspondiente al índice proporcionado
+     */
     public Nave getNave(int posicion) {
         return naves[posicion];
     }
 
     /**
      * TODO: insertamos una nueva nave en la lista
-     * @param nave
+     * @param nave Nueva nave a ser insertada
      * @return true en caso de que se añada correctamente, false en caso de lista llena o error
      */
     public boolean insertarNave(Nave nave) {
@@ -69,8 +81,8 @@ public class ListaNaves {
     }
     /**
      * TODO: Buscamos la nave a partir de la matricula pasada como parámetro
-     * @param matricula
-     * @return la nave que encontramos o null si no existe
+     * @param matricula Matrícula de la nave a buscar
+     * @return La nave que se encuentra o null si no existe
      */
     public Nave buscarNave(String matricula) {
         Nave nave = null;
@@ -85,24 +97,22 @@ public class ListaNaves {
     }
     // TODO: Muestra por pantalla las naves de la lista con el formato indicado en el enunciado
     public void mostrarNaves() {
-    for (int i = 0; i < naves.length; i++){
-        if (naves[i]!=null) {
-            System.out.println(naves[i].toString());
+        for (int i = 0; i < naves.length; i++){
+            if (naves[i]!=null) {
+                System.out.println(naves[i].toString());
+            }
         }
     }
-    }
-
-
 
     /**
      * TODO: Permite seleccionar una nave existente a partir de su matrícula, y comprueba si dispone de un alcance
      *  mayor o igual que el pasado como argumento, usando el mensaje pasado como argumento para la solicitud y
      *  siguiendo el orden y los textos mostrados en el enunciado.
      *  La función solicita repetidamente la matrícula de la nave hasta que se introduzca una con alcance suficiente
-     * @param teclado
-     * @param mensaje
-     * @param alcance
-     * @return
+     * @param teclado  Scanner para leer la entrada del usuario
+     * @param mensaje  Mensaje a mostrar para solicitar la matrícula de la nave
+     * @param alcance  Alcance mínimo requerido
+     * @return La nave seleccionada con alcance suficiente o null si se cancela la operación
      */
     public Nave seleccionarNave(Scanner teclado, String mensaje, double alcance) {
         Nave nave = null;
@@ -128,8 +138,8 @@ public class ListaNaves {
 
     /**
      * TODO: Genera un fichero CSV con la lista de Naves, SOBREESCRIBIÉNDOLO
-     * @param nombre
-     * @return
+     * @param nombre Nombre del fichero CSV a generar
+     * @return true si la operación fue exitosa, false en caso de error
      */
     public boolean escribirNavesCsv(String nombre) {
         PrintWriter pw = null;
@@ -154,12 +164,11 @@ public class ListaNaves {
         }
     }
 
-
     /**
      * TODO: Genera una lista de naves a partir del fichero CSV, usando el argumento como capacidad máxima de la lista
-     * @param fichero
-     * @param capacidad
-     * @return
+     * @param fichero   Ruta y nombre del fichero CSV
+     * @param capacidad Capacidad máxima de la lista de naves
+     * @return Lista de naves generada a partir del archivo CSV o null si hay un error
      */
     public static ListaNaves leerNavesCsv(String fichero, int capacidad) {
         ListaNaves listaNaves = new ListaNaves(capacidad);
