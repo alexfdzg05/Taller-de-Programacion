@@ -198,10 +198,13 @@ public class ListaEnvios {
      */
     public boolean aniadirEnviosCsv (String fichero){
         PrintWriter pw = null;
+        FileWriter fw;
         try {
-            pw = new PrintWriter(fichero);
+            fw = new FileWriter(fichero, true);
+            pw = new PrintWriter(fw);
             for (int i = 0; i < envios.length; i++){
                 if (envios[i]!= null) {
+                    pw.println();
                     pw.print(envios[i].getLocalizador());
                     pw.print(";");
                     pw.print(envios[i].getPorte().getID());
@@ -218,6 +221,8 @@ public class ListaEnvios {
             }
             return true;
         } catch (FileNotFoundException e) {
+            return false;
+        }catch (IOException e){
             return false;
         } finally {
             if (pw != null) {
