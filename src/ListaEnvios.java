@@ -198,10 +198,8 @@ public class ListaEnvios {
      */
     public boolean aniadirEnviosCsv (String fichero){
         PrintWriter pw = null;
-        FileWriter fw;
         try {
             pw = new PrintWriter(fichero);
-            pw.println();
             for (int i = 0; i < envios.length; i++){
                 if (envios[i]!= null) {
                     pw.print(envios[i].getLocalizador());
